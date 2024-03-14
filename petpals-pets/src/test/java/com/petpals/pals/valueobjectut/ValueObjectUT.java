@@ -1,14 +1,12 @@
 package com.petpals.pals.valueobjectut;
 
-import com.petpals.pals.model.pal.PalValueObject;
+import com.petpals.pals.model.pal.Pals;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ValueObjectUT {
 
@@ -16,7 +14,7 @@ public class ValueObjectUT {
     public void checkValueObjectHashCode(){
         LocalDate localDate = LocalDate.of(2014, 9, 11);
         Date date = Date.valueOf(localDate);
-        PalValueObject pal1 = new PalValueObject(
+        Pals pal1 = new Pals(
                 "Ash",
                 date,
                 "Dog",
@@ -34,7 +32,7 @@ public class ValueObjectUT {
                 true,
                 true
         );
-        PalValueObject pal2 = new PalValueObject(
+        Pals pal2 = new Pals(
                 "Ash",
                 date,
                 "Dog",
