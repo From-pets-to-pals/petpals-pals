@@ -9,7 +9,7 @@ import java.util.List;
 
 @Builder
 public class Pal {
-    @Getter private Long technicalId;
+    @Getter @Setter private Long technicalId;
     @Getter private String name;
     @Getter private Date birthDate;
     @Getter private String specie;
@@ -27,6 +27,7 @@ public class Pal {
     @Getter @Setter private Date nextPlannedVetApp;
     @Getter @Setter private boolean isSterilized;
     @Getter @Setter private boolean hasPassport;
+    @Getter @Setter private boolean hasDied;
 
 
 }
