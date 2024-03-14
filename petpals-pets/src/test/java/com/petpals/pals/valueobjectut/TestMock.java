@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TestMock {
@@ -24,8 +26,9 @@ public class TestMock {
     @Test
     public void testThisShit(){
         var toReturn = Pal.builder().name("Ash").build();
-        Mockito.when(fakeRepo.savePal(any(Pal.class))).thenReturn(toReturn);
+        when(fakeRepo.savePal(any(Pal.class))).thenReturn(toReturn);
         var savedPal = palService.savePalToInMemoryDb();
+        verifyNoMoreInteractions(fakeRepo);
         Assertions.assertEquals(savedPal.getName(), "Ash");
     }
 }
