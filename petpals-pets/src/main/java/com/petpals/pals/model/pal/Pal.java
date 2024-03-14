@@ -27,4 +27,6 @@ public class Pal {
     @Getter @Setter private Date nextPlannedVetApp;
     @Getter @Setter private boolean isSterilized;
     @Getter @Setter private boolean hasPassport;
+
+
 }
