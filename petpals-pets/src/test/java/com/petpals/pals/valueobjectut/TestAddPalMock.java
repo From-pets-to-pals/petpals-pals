@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -16,7 +15,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TestMock {
+public class TestAddPalMock {
     @Mock
     private FakeRepo fakeRepo;
 
@@ -24,10 +23,10 @@ public class TestMock {
     private AddPal palService;
 
     @Test
-    public void testThisShit(){
+    public void testSave(){
         var toReturn = Pal.builder().name("Ash").build();
         when(fakeRepo.savePal(any(Pal.class))).thenReturn(toReturn);
-        var savedPal = palService.savePalToInMemoryDb();
+        var savedPal = palService.savePalToInMemoryDb(toReturn);
         verifyNoMoreInteractions(fakeRepo);
         Assertions.assertEquals(savedPal.getName(), "Ash");
     }
