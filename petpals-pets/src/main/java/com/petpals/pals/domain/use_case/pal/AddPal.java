@@ -10,9 +10,8 @@ public class AddPal {
     @Autowired
     private FakeRepo fakeRepo;
 
-    public Pal savePalToInMemoryDb(){
-        Pal newPal = Pal.builder().name("Ash").build();
-        return fakeRepo.savePal(newPal);
+    public Pal savePalToInMemoryDb(Pal pal){
+        return fakeRepo.savePal(pal);
     }
 
 }

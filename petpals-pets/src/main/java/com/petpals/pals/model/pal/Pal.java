@@ -47,6 +47,7 @@ public class Pal {
     @Getter @Setter private Date nextPlannedVetApp;
     @Getter @Setter private boolean isSterilized;
     @Getter @Setter private boolean hasPassport;
+    @Getter @Setter private boolean hasDied;
 
 
 }
