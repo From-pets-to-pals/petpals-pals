@@ -1,8 +1,8 @@
 package com.petpals.pals.valueobjectut;
 
-import com.petpals.pals.domain.use_case.pal.AddPal;
-import com.petpals.pals.domain.use_case.pal.UpdatePal;
 import com.petpals.pals.domain.model.pal.Pal;
+import com.petpals.pals.domain.use_case.pal.AddPalCommand;
+import com.petpals.pals.domain.use_case.pal.UpdatePalCommand;
 import com.petpals.pals.repository.Pals;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,10 +21,10 @@ public class TestUpdatePalMock {
     private Pals palsRepo;
 
     @InjectMocks
-    private AddPal addPalService;
+    private AddPalCommand addPalService;
 
     @InjectMocks
-    private UpdatePal updatePalService;
+    private UpdatePalCommand updatePalService;
 
     @Test
     public void testUpdate(){
