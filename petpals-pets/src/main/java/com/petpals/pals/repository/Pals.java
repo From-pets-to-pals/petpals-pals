@@ -1,8 +1,8 @@
-package com.petpals.pals.demo;
+package com.petpals.pals.repository;
 
 import com.petpals.pals.domain.model.pal.Pal;
 
-public interface FakeRepo {
+public interface Pals {
 
     Pal savePal(Pal pal);
 

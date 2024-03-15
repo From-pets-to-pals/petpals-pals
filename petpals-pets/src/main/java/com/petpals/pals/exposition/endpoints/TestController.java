@@ -1,4 +1,4 @@
-package com.petpals.pals.endpoints;
+package com.petpals.pals.exposition.endpoints;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;

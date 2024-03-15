@@ -1,4 +1,4 @@
-package com.petpals.pals.demo;
+package com.petpals.pals.repository;
 
 import com.petpals.pals.domain.model.pal.Pal;
 import org.springframework.stereotype.Repository;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class FakeRepoImpl implements FakeRepo{
+public class PalsImpl implements Pals {
 
     private static Map<Long, Pal> palsList = new HashMap<>();
     private  Long idToIncrement = 1L;
