@@ -3,6 +3,7 @@ package com.petpals.pals.valueobjectut;
 import com.petpals.pals.demo.FakeRepo;
 import com.petpals.pals.domain.use_case.pal.AddPal;
 import com.petpals.pals.domain.use_case.pal.ArchivePal;
+import com.petpals.pals.domain.use_case.pal.UpdatePal;
 import com.petpals.pals.model.pal.Pal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,28 +17,31 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TestArchivePalMock {
+public class TestUpdatePalMock {
     @Mock
     private FakeRepo fakeRepo;
 
     @InjectMocks
-    private ArchivePal palService;
+    private AddPal addPalService;
+
+    @InjectMocks
+    private UpdatePal updatePalService;
 
     @Test
-    public void testArchive(){
-        var toReturn = Pal.builder().name("Doggi").hasDied(true).build();
-        var toArchive = Pal.builder().name("Doggi").hasDied(false).build();
+    public void testUpdate(){
+        var toReturn = Pal.builder().name("Ashhhhh").build();
+        var toSave = Pal.builder().name("Ash").build();
 
-        Assertions.assertEquals(toArchive.getName(), "Doggi");
-        Assertions.assertFalse(toArchive.isHasDied());
+        Assertions.assertEquals(toSave.getName(), "Ash");
+        when(fakeRepo.savePal(any(Pal.class))).thenReturn(toReturn);
+        var toModify = addPalService.savePalToInMemoryDb(toSave);
 
-        when(fakeRepo.archivePal(any(Pal.class))).thenReturn(toReturn);
+        when(fakeRepo.updatePal(any(Pal.class))).thenReturn(toReturn);
 
-        var savedPal = palService.archivePalToInMemoryDb(toArchive);
+        var updatedPal = updatePalService.updatePalToInMemoryDb(toModify);
         verifyNoMoreInteractions(fakeRepo);
 
-        Assertions.assertEquals(savedPal.getName(), "Doggi");
-        Assertions.assertTrue(savedPal.isHasDied());
+        Assertions.assertEquals(updatedPal.getName(), "Ashhhhh");
 
     }
 }
