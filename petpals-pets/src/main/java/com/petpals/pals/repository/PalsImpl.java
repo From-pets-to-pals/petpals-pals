@@ -13,7 +13,11 @@ public class PalsImpl implements Pals {
     private  Long idToIncrement = 1L;
     @Override
     public Pal savePal(Pal pal) {
-        var toReturn = Pal.builder().technicalId(getIdToIncrement()).name(pal.getName()).build();
+        var toReturn = Pal.builder().technicalId(getIdToIncrement())
+                .palMedicalInformation(null)
+                .palIdentityInformation(pal.getPalIdentityInformation())
+                .palMeasurement(pal.getPalMeasurement())
+                .build();
         setIdToIncrement();
         var newId = getIdToIncrement();
         newId++;

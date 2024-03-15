@@ -16,7 +16,7 @@ public record PalIdentityInformation (
     @NotNull
     boolean isMale,
     @SpecieConstraint(enumClass = Species.class, message = "Invalid specie selected")
-    String specie,
+    Species specie,
     @Size(min=3, max=25, message="")
     String race,
     @Size(min=15, max=15)

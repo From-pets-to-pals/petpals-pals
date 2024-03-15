@@ -20,7 +20,7 @@ public class AddPalCommand {
     }
 
     public Pal savePalToInMemoryDb(Pal pal) throws PalValidationException {
-        Set<ConstraintViolation<Pal>> violations = validator.validate( pal );
+        Set<ConstraintViolation<Pal>> violations = validator.validate(pal);
         if(!violations.isEmpty()){
             throw new PalValidationException();
         }

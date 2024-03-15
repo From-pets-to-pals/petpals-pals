@@ -19,7 +19,6 @@ public class Pal {
     @Pattern(regexp = "^[250(26|22)\\d{10}]{15}$")
     @Getter
     @Setter
-    @NotNull
     private PalMedicalInformation palMedicalInformation;
     @Getter
     @Setter
@@ -28,18 +27,23 @@ public class Pal {
     @Getter
     @Setter
     private Long owner;
+    @Getter
+    @Setter
     private PalMeasurement palMeasurement;
+    @Getter
+    @Setter
+    private boolean hasDied;
 
     public String calculatePalDailyRation(){
         NumberFormat formatter = new DecimalFormat("#00");
         double ration;
         switch (palIdentityInformation.specie()){
-            case "DOG" -> ration = palMeasurement.weight() * 0.015 * 1000;
-            case "CAT" -> ration = palMeasurement.weight() * 40;
-            case "FERRET" -> ration = 50.0;
+            case DOG -> ration = palMeasurement.weight() * 0.015 * 1000;
+            case CAT -> ration = palMeasurement.weight() * 40;
+            case FERRET -> ration = 50.0;
             default -> throw new RuntimeException();
         }
-        return formatter.format(ration);
+        return String.format("%s grammes", formatter.format(ration));
     }
 
     @Override
