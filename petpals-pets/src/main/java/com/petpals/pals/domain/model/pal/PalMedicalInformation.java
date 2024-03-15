@@ -9,23 +9,15 @@ import lombok.Setter;
 import java.sql.Date;
 import java.util.List;
 
-@Builder
-public class PalMedicalInformation {
-    @Getter
-    @Setter
-    private boolean isVaccinated;
-    @Getter
-    @Setter
-    private List<String> medicalHistory;
+public record PalMedicalInformation (
+
+    boolean isVaccinated,
+    List<String> medicalHistory,
     @Future
-    @Getter
-    @Setter
-    private Date nextVaccine;
+    Date nextVaccine,
     @Future
-    @Getter
-    @Setter
-    private Date nextPlannedVetApp;
-    @Getter
-    @Setter
-    private boolean isSterilized;
+    Date nextPlannedVetApp,
+    boolean isSterilized
+){
+
 }
