@@ -25,9 +25,10 @@ public class TestArchivePalCommandMock {
     @Test
     public void testArchive(){
         var toReturn = Pal.builder().name("Doggi").hasDied(true).build();
-        var toArchive = Pal.builder().name("Doggi").build();
+        var toArchive = Pal.builder().name("Doggi").hasDied(false).build();
 
-        Assertions.assertEquals(toReturn.getName(), "Doggi");
+        Assertions.assertEquals(toArchive.getName(), "Doggi");
+        Assertions.assertFalse(toArchive.isHasDied());
 
         when(pals.archivePal(any(Pal.class))).thenReturn(toReturn);
 
