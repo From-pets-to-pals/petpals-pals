@@ -1,5 +1,8 @@
 package com.petpals.pals.valueobjectut;
 
+import com.petpals.pals.domain.model.pal.PalIdentityInformation;
+import com.petpals.pals.domain.model.pal.PalMeasurement;
+import com.petpals.pals.domain.model.pal.Species;
 import com.petpals.pals.domain.use_case.pal.AddPalCommand;
 import com.petpals.pals.domain.use_case.pal.PalValidationException;
 import com.petpals.pals.domain.use_case.pal.UpdatePalCommand;
@@ -34,28 +37,33 @@ public class TestUpdatePalMock {
 
     @Test
     public void testUpdate() throws Exception, PalValidationException {
-        var toReturn = Pal.builder().name("Ashhhhh").birthDate(Date.valueOf(LocalDate.now())).build();
-        var toSave = Pal.builder().name("Ash").birthDate(Date.valueOf(LocalDate.now())).build();
+        PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
+        PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
+        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
 
-        Assertions.assertEquals(toSave.getName(), "Ash");
-        when(palsRepo.savePal(any(Pal.class))).thenReturn(toReturn);
-        var toModify = addPalService.savePalToInMemoryDb(toSave);
+        palIdentityInformation = new PalIdentityInformation("Ashhhhh", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
+        Pal modifiedDoggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
 
-        when(palsRepo.updatePal(any(Pal.class))).thenReturn(toReturn);
+        when(palsRepo.savePal(any(Pal.class))).thenReturn(doggo);
+        when(palsRepo.updatePal(any(Pal.class))).thenReturn(modifiedDoggo);
+
+        var toModify = addPalService.savePalToInMemoryDb(doggo);
 
         var updatedPal = updatePalService.updatePalToInMemoryDb(toModify);
         verifyNoMoreInteractions(palsRepo);
 
-        Assertions.assertEquals(updatedPal.getName(), "Ashhhhh");
+        Assertions.assertEquals(updatedPal.getPalIdentityInformation().name(), "Ashhhhh");
 
     }
 
     @Test
     public void testArchiveFailValidation() {
-        var toUpdate = Pal.builder().name("Doggi").build();
+        PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
+        PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
+        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
 
         ThrowableAssert.ThrowingCallable updatedPal =
-                () -> updatePalService.updatePalToInMemoryDb(toUpdate);
+                () -> updatePalService.updatePalToInMemoryDb(doggo);
 
         assertThatExceptionOfType(Exception.class).isThrownBy(updatedPal);
     }

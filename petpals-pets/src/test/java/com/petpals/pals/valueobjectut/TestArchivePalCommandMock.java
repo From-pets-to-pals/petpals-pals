@@ -1,5 +1,8 @@
 package com.petpals.pals.valueobjectut;
 
+import com.petpals.pals.domain.model.pal.PalIdentityInformation;
+import com.petpals.pals.domain.model.pal.PalMeasurement;
+import com.petpals.pals.domain.model.pal.Species;
 import com.petpals.pals.repository.Pals;
 import com.petpals.pals.domain.use_case.pal.ArchivePalCommand;
 import com.petpals.pals.domain.model.pal.Pal;
@@ -29,28 +32,30 @@ public class TestArchivePalCommandMock {
 
     @Test
     public void testArchive() throws Exception {
-        var toReturn = Pal.builder().name("Doggi").hasDied(true).birthDate(Date.valueOf(LocalDate.now())).build();
-        var toArchive = Pal.builder().name("Doggi").hasDied(false).birthDate(Date.valueOf(LocalDate.now())).build();
+        PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
+        PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
+        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
 
-        Assertions.assertEquals(toArchive.getName(), "Doggi");
-        Assertions.assertFalse(toArchive.isHasDied());
+        Pal deadDoggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).hasDied(true).build();
 
-        when(pals.archivePal(any(Pal.class))).thenReturn(toReturn);
 
-        var savedPal = palService.archivePalToInMemoryDb(toArchive);
+        when(pals.archivePal(any(Pal.class))).thenReturn(deadDoggo);
+
+        var savedPal = palService.archivePalToInMemoryDb(doggo);
         verifyNoMoreInteractions(pals);
 
-        Assertions.assertEquals(savedPal.getName(), "Doggi");
         Assertions.assertTrue(savedPal.isHasDied());
 
     }
 
     @Test
     public void testArchiveFailValidation() {
-        var toArchive = Pal.builder().name("Doggi").hasDied(false).build();
+        PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
+        PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
+        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
 
         ThrowableAssert.ThrowingCallable archivedPal =
-                () -> palService.archivePalToInMemoryDb(toArchive);
+                () -> palService.archivePalToInMemoryDb(doggo);
 
         assertThatExceptionOfType(Exception.class).isThrownBy(archivedPal);
     }
