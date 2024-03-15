@@ -1,6 +1,6 @@
 package com.petpals.pals.valueobjectut;
 
-import com.petpals.pals.model.pal.Pals;
+import com.petpals.pals.domain.model.pal.Pals;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

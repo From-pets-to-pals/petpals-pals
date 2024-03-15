@@ -1,5 +1,6 @@
-package com.petpals.pals.bootstrap;
+package com.petpals.pals.domain.model.pal;
 
+import com.petpals.pals.domain.model.pal.SpecieConstraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

@@ -1,4 +1,4 @@
-package com.petpals.pals.model.pal;
+package com.petpals.pals.domain.model.pal;
 
 
 import java.sql.Date;

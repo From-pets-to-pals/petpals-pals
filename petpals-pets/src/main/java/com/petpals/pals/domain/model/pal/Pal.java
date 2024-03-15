@@ -1,7 +1,5 @@
-package com.petpals.pals.model.pal;
+package com.petpals.pals.domain.model.pal;
 
-import com.petpals.pals.bootstrap.SpecieConstraint;
-import com.petpals.pals.bootstrap.Species;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -49,7 +47,7 @@ public class Pal {
     @Getter
     @Setter
     private Double height;
-    @Pattern(regexp = "^[(250(26|22))[0-9]{10}]{15}$")
+    @Pattern(regexp = "^[250(26|22)\\d{10}]{15}$")
     @Getter
     @Setter
     private String id;

@@ -1,6 +1,6 @@
 package com.petpals.pals.demo;
 
-import com.petpals.pals.model.pal.Pal;
+import com.petpals.pals.domain.model.pal.Pal;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

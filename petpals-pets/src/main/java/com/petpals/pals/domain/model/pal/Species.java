@@ -1,4 +1,4 @@
-package com.petpals.pals.bootstrap;
+package com.petpals.pals.domain.model.pal;
 
 public enum Species {
     DOG,

@@ -1,4 +1,4 @@
-package com.petpals.pals.bootstrap;
+package com.petpals.pals.infra.bootstrap;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

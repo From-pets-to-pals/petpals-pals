@@ -1,6 +1,6 @@
 package com.petpals.pals;
 
-import com.petpals.pals.bootstrap.PetpalsPetsApplication;
+import com.petpals.pals.infra.bootstrap.PetpalsPetsApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
