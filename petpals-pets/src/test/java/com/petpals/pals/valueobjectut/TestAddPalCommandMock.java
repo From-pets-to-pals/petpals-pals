@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -24,7 +27,7 @@ public class TestAddPalCommandMock {
 
     @Test
     public void testSave() throws Exception {
-        var toReturn = Pal.builder().name("Ash").build();
+        var toReturn = Pal.builder().name("Ash").birthDate(Date.valueOf(LocalDate.now())).build();
         when(pals.savePal(any(Pal.class))).thenReturn(toReturn);
         var savedPal = palService.savePalToInMemoryDb(toReturn);
         verifyNoMoreInteractions(pals);

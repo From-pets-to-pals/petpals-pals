@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -24,8 +27,8 @@ public class TestArchivePalCommandMock {
 
     @Test
     public void testArchive(){
-        var toReturn = Pal.builder().name("Doggi").hasDied(true).build();
-        var toArchive = Pal.builder().name("Doggi").hasDied(false).build();
+        var toReturn = Pal.builder().name("Doggi").hasDied(true).birthDate(Date.valueOf(LocalDate.now())).build();
+        var toArchive = Pal.builder().name("Doggi").hasDied(false).birthDate(Date.valueOf(LocalDate.now())).build();
 
         Assertions.assertEquals(toArchive.getName(), "Doggi");
         Assertions.assertFalse(toArchive.isHasDied());
