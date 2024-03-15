@@ -45,7 +45,7 @@ public class Pal {
     @Pattern(regexp = "^[250(26|22)\\d{10}]{15}$")
     @Getter
     @Setter
-    private String id;
+    private String idICAD;
     @Getter
     @Setter
     private List<String> medicalHistory;
@@ -77,7 +77,8 @@ public class Pal {
             case FERRET -> ration = 50.0;
             default -> throw new RuntimeException();
         }
-        System.out.println(ration);
         return formatter.format(ration);
     }
+
+
 }
