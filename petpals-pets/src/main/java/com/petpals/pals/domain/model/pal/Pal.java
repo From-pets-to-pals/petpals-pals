@@ -22,7 +22,7 @@ public class Pal {
     private Date birthDate;
     @Getter
     @SpecieConstraint(enumClass = Species.class, message = "Invalid specie selected")
-    private String specie;
+    private Species specie;
     @Getter
     @Size(min=3, max=25, message="")
     private String race;
@@ -39,14 +39,7 @@ public class Pal {
     @NotNull
     @Getter
     private boolean isMale;
-    @DecimalMin(value = "0.0", inclusive = false)
-    @Getter
-    @Setter
-    private Double weight;
-    @Min(value = 0)
-    @Getter
-    @Setter
-    private Double height;
+    private PalMeasurement palMeasurement;
     @Pattern(regexp = "^[250(26|22)\\d{10}]{15}$")
     @Getter
     @Setter
@@ -72,5 +65,19 @@ public class Pal {
     @Setter
     private boolean hasDied;
 
+    private Double calculatePalDailyRation(){
+        switch (specie){
+            case DOG -> {
+                return palMeasurement.weight() * 0.015;
+            }
+            case CAT -> {
+                return palMeasurement.weight() * 0.04;
+            }
+            case Furet -> {
+                return 50.0;
+            }
+            default -> throw new RuntimeException();
+        }
+    }
 
 }
