@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 @Builder
@@ -65,19 +67,17 @@ public class Pal {
     @Setter
     private boolean hasDied;
 
-    private Double calculatePalDailyRation(){
+    public String calculatePalDailyRation(){
+        NumberFormat formatter = new DecimalFormat("#00");
+        double ration;
         switch (specie){
-            case DOG -> {
-                return palMeasurement.weight() * 0.015;
-            }
-            case CAT -> {
-                return palMeasurement.weight() * 0.04;
-            }
-            case Furet -> {
-                return 50.0;
-            }
+            case DOG -> ration = palMeasurement.weight() * 0.015 * 1000;
+
+            case CAT -> ration = palMeasurement.weight() * 40;
+            case FERRET -> ration = 50.0;
             default -> throw new RuntimeException();
         }
+        System.out.println(ration);
+        return formatter.format(ration);
     }
-
 }
