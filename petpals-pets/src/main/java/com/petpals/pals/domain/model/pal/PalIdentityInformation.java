@@ -2,6 +2,7 @@ package com.petpals.pals.domain.model.pal;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
@@ -19,7 +20,7 @@ public record PalIdentityInformation (
     Species specie,
     @Size(min=3, max=25, message="")
     String race,
-    @Size(min=15, max=15)
+    @Pattern(regexp = "^[250(26|22)\\d{10}]{15}$")
     String icadIdentifier,
     @NotNull
     boolean hasPassport
