@@ -1,8 +1,8 @@
 package com.petpals.pals.valueobjectut;
 
-import com.petpals.pals.demo.FakeRepo;
+import com.petpals.pals.repository.Pals;
 import com.petpals.pals.domain.use_case.pal.AddPal;
-import com.petpals.pals.model.pal.Pal;
+import com.petpals.pals.domain.model.pal.Pal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TestAddPalMock {
     @Mock
-    private FakeRepo fakeRepo;
+    private Pals pals;
 
     @InjectMocks
     private AddPal palService;
@@ -25,9 +25,9 @@ public class TestAddPalMock {
     @Test
     public void testSave(){
         var toReturn = Pal.builder().name("Ash").build();
-        when(fakeRepo.savePal(any(Pal.class))).thenReturn(toReturn);
+        when(pals.savePal(any(Pal.class))).thenReturn(toReturn);
         var savedPal = palService.savePalToInMemoryDb(toReturn);
-        verifyNoMoreInteractions(fakeRepo);
+        verifyNoMoreInteractions(pals);
         Assertions.assertEquals(savedPal.getName(), "Ash");
     }
 }
