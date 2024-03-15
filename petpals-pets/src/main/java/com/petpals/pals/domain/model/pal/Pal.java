@@ -10,71 +10,39 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 
+
 @Builder
 public class Pal {
     @Getter
     private Long technicalId;
-    @NotNull
-    @Size(min = 2, max=25, message = "Taille du nom de l'animal incorrecte")
-    @Getter
-    private String name;
-    @Past(message = "La date doit être passée")
-    @NotNull
-    @Getter
-    private Date birthDate;
-    @Getter
-    @SpecieConstraint(enumClass = Species.class, message = "Invalid specie selected")
-    private Species specie;
-    @Getter
-    @Size(min=3, max=25, message="")
-    private String race;
-    @Getter
-    @Setter
-    private Long owner;
-    @Getter
-    @Size(min=15, max=15)
-    private String icadIdentifier;
-    @NotNull
-    @Getter
-    @Setter
-    private boolean isVaccinated;
-    @NotNull
-    @Getter
-    private boolean isMale;
-    private PalMeasurement palMeasurement;
     @Pattern(regexp = "^[250(26|22)\\d{10}]{15}$")
     @Getter
     @Setter
     private String idICAD;
     @Getter
     @Setter
-    private List<String> medicalHistory;
-    @Future
+    @NotNull
+    private PalMedicalInformation palMedicalInformation;
+
     @Getter
     @Setter
-    private Date nextVaccine;
-    @Future
+    @NotNull
+    private PalIdentityInformation palIdentityInformation;
+
     @Getter
     @Setter
-    private Date nextPlannedVetApp;
-    @Getter
-    @Setter
-    private boolean isSterilized;
-    @Getter
-    @Setter
-    private boolean hasPassport;
-    @Getter
-    @Setter
-    private boolean hasDied;
+    private Long owner;
+
+    private PalMeasurement palMeasurement;
+
 
     public String calculatePalDailyRation(){
         NumberFormat formatter = new DecimalFormat("#00");
         double ration;
-        switch (specie){
-            case DOG -> ration = palMeasurement.weight() * 0.015 * 1000;
-
-            case CAT -> ration = palMeasurement.weight() * 40;
-            case FERRET -> ration = 50.0;
+        switch (palIdentityInformation.specie()){
+            case "DOG" -> ration = palMeasurement.weight() * 0.015 * 1000;
+            case "CAT" -> ration = palMeasurement.weight() * 40;
+            case "FERRET" -> ration = 50.0;
             default -> throw new RuntimeException();
         }
         return formatter.format(ration);
