@@ -1,6 +1,7 @@
 package com.petpals.pals.valueobjectut;
 
 import com.petpals.pals.domain.use_case.pal.AddPalCommand;
+import com.petpals.pals.domain.use_case.pal.PalValidationException;
 import com.petpals.pals.domain.use_case.pal.UpdatePalCommand;
 import com.petpals.pals.domain.model.pal.Pal;
 import com.petpals.pals.repository.Pals;
@@ -32,7 +33,7 @@ public class TestUpdatePalMock {
     private UpdatePalCommand updatePalService;
 
     @Test
-    public void testUpdate() throws Exception {
+    public void testUpdate() throws Exception, PalValidationException {
         var toReturn = Pal.builder().name("Ashhhhh").birthDate(Date.valueOf(LocalDate.now())).build();
         var toSave = Pal.builder().name("Ash").birthDate(Date.valueOf(LocalDate.now())).build();
 

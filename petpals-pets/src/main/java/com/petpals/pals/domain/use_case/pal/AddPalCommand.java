@@ -16,11 +16,10 @@ public class AddPalCommand {
     private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();;
 
 
-    public Pal savePalToInMemoryDb(Pal pal) {
-        try{
+    public Pal savePalToInMemoryDb(Pal pal) throws PalValidationException {
             Set<ConstraintViolation<Pal>> violations = validator.validate( pal );
             System.out.println(violations);
-        } catch (ConstraintViolationException palValidationException){
+        if(!violations.isEmpty()){
             throw new PalValidationException();
         }
         return pals.savePal(pal);

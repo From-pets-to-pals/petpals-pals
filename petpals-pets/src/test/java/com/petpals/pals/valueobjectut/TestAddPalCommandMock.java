@@ -1,5 +1,6 @@
 package com.petpals.pals.valueobjectut;
 
+import com.petpals.pals.domain.use_case.pal.PalValidationException;
 import com.petpals.pals.repository.Pals;
 import com.petpals.pals.domain.use_case.pal.AddPalCommand;
 import com.petpals.pals.domain.model.pal.Pal;
@@ -29,7 +30,7 @@ public class TestAddPalCommandMock {
     private AddPalCommand palService;
 
     @Test
-    public void testSave() throws Exception {
+    public void testSave() throws PalValidationException {
         var toReturn = Pal.builder().name("Ash").birthDate(Date.valueOf(LocalDate.now())).build();
         when(pals.savePal(any(Pal.class))).thenReturn(toReturn);
         var savedPal = palService.savePalToInMemoryDb(toReturn);
@@ -40,9 +41,10 @@ public class TestAddPalCommandMock {
     @Test
     public void testSaveFailValidation() {
         var toReturn = Pal.builder().name("Ash").build();
+
         ThrowableAssert.ThrowingCallable savedPal =
                 () -> palService.savePalToInMemoryDb(toReturn);
 
-        assertThatExceptionOfType(Exception.class).isThrownBy(savedPal);
+        assertThatExceptionOfType(PalValidationException.class).isThrownBy(savedPal);
     }
 }
