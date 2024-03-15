@@ -4,6 +4,7 @@ import com.petpals.pals.domain.use_case.pal.AddPalCommand;
 import com.petpals.pals.domain.use_case.pal.UpdatePalCommand;
 import com.petpals.pals.domain.model.pal.Pal;
 import com.petpals.pals.repository.Pals;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -45,5 +47,15 @@ public class TestUpdatePalMock {
 
         Assertions.assertEquals(updatedPal.getName(), "Ashhhhh");
 
+    }
+
+    @Test
+    public void testArchiveFailValidation() {
+        var toUpdate = Pal.builder().name("Doggi").height(40d).build();
+
+        ThrowableAssert.ThrowingCallable updatedPal =
+                () -> updatePalService.updatePalToInMemoryDb(toUpdate);
+
+        assertThatExceptionOfType(Exception.class).isThrownBy(updatedPal);
     }
 }
