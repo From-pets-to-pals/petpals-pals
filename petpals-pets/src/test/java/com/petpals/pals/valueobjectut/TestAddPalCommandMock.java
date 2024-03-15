@@ -1,9 +1,9 @@
 package com.petpals.pals.valueobjectut;
 
+import com.petpals.pals.domain.model.pal.*;
 import com.petpals.pals.domain.use_case.pal.PalValidationException;
 import com.petpals.pals.repository.Pals;
 import com.petpals.pals.domain.use_case.pal.AddPalCommand;
-import com.petpals.pals.domain.model.pal.Pal;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -31,19 +32,34 @@ public class TestAddPalCommandMock {
 
     @Test
     public void testSave() throws PalValidationException {
-        var toReturn = Pal.builder().name("Ash").birthDate(Date.valueOf(LocalDate.now())).build();
-        when(pals.savePal(any(Pal.class))).thenReturn(toReturn);
-        var savedPal = palService.savePalToInMemoryDb(toReturn);
+        PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
+        PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
+        PalMedicalInformation palMedicalInformation = new PalMedicalInformation(true, new ArrayList<>(),Date.valueOf(LocalDate.of(2024,05, 20)),Date.valueOf(LocalDate.of(2024,05, 20)),false);
+        Pal doggo = Pal.builder()
+                .palIdentityInformation(palIdentityInformation)
+                .palMeasurement(palMeasurement)
+                .palMedicalInformation(palMedicalInformation)
+                .hasDied(false)
+                .owner(1L)
+                .build();
+
+        when(pals.savePal(any(Pal.class))).thenReturn(doggo);
+        var savedPal = palService.savePalToInMemoryDb(doggo);
         verifyNoMoreInteractions(pals);
-        Assertions.assertEquals(savedPal.getName(), "Ash");
+        Assertions.assertEquals(savedPal.getPalIdentityInformation().name(), "Ash");
     }
 
     @Test
     public void testSaveFailValidation() {
-        var toReturn = Pal.builder().name("Ash").build();
+        PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
+        Pal doggo = Pal.builder()
+                .palMeasurement(palMeasurement)
+                .hasDied(false)
+                .owner(1L)
+                .build();
 
         ThrowableAssert.ThrowingCallable savedPal =
-                () -> palService.savePalToInMemoryDb(toReturn);
+                () -> palService.savePalToInMemoryDb(doggo);
 
         assertThatExceptionOfType(PalValidationException.class).isThrownBy(savedPal);
     }

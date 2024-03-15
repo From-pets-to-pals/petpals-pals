@@ -15,7 +15,6 @@ public class TestDailyRation {
     public void testDogDailyRation(){
         PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
         PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true,Species.DOG,"Husky","2562200000000", true);
-
         Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
         String doggoPalDailyRation = doggo.calculatePalDailyRation();
         Assertions.assertEquals("300 grammes", doggoPalDailyRation);

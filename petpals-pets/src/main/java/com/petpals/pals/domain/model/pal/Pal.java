@@ -15,8 +15,8 @@ import java.util.Objects;
 @Builder
 public class Pal {
     @Getter
+    @Setter
     private Long technicalId;
-    @Pattern(regexp = "^[250(26|22)\\d{10}]{15}$")
     @Getter
     @Setter
     private PalMedicalInformation palMedicalInformation;
@@ -26,10 +26,11 @@ public class Pal {
     private PalIdentityInformation palIdentityInformation;
     @Getter
     @Setter
-    private Long owner;
+    private PalMeasurement palMeasurement;
     @Getter
     @Setter
-    private PalMeasurement palMeasurement;
+    @NotNull
+    private Long owner;
     @Getter
     @Setter
     private boolean hasDied;
