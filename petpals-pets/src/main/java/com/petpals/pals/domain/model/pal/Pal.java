@@ -13,10 +13,10 @@ public class Pal {
     @Getter
     private Long technicalId;
     @NotNull
-    @Size(min = 2, max=25)
+    @Size(min = 2, max=25, message = "Taille du nom de l'animal incorrecte")
     @Getter
     private String name;
-    @Past
+    @Past(message = "La date doit être passée")
     @NotNull
     @Getter
     private Date birthDate;
@@ -24,7 +24,7 @@ public class Pal {
     @SpecieConstraint(enumClass = Species.class, message = "Invalid specie selected")
     private String specie;
     @Getter
-    @Size(min=3, max=25)
+    @Size(min=3, max=25, message="")
     private String race;
     @Getter
     @Setter

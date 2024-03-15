@@ -1,7 +1,7 @@
 package com.petpals.pals.valueobjectut;
 
 import com.petpals.pals.repository.Pals;
-import com.petpals.pals.domain.use_case.pal.AddPal;
+import com.petpals.pals.domain.use_case.pal.AddPalCommand;
 import com.petpals.pals.domain.model.pal.Pal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,15 +15,15 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TestAddPalMock {
+public class TestAddPalCommandMock {
     @Mock
     private Pals pals;
 
     @InjectMocks
-    private AddPal palService;
+    private AddPalCommand palService;
 
     @Test
-    public void testSave(){
+    public void testSave() throws Exception {
         var toReturn = Pal.builder().name("Ash").build();
         when(pals.savePal(any(Pal.class))).thenReturn(toReturn);
         var savedPal = palService.savePalToInMemoryDb(toReturn);

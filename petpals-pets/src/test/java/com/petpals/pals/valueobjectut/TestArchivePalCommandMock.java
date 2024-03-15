@@ -1,7 +1,7 @@
 package com.petpals.pals.valueobjectut;
 
 import com.petpals.pals.repository.Pals;
-import com.petpals.pals.domain.use_case.pal.ArchivePal;
+import com.petpals.pals.domain.use_case.pal.ArchivePalCommand;
 import com.petpals.pals.domain.model.pal.Pal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,12 +15,12 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TestArchivePalMock {
+public class TestArchivePalCommandMock {
     @Mock
     private Pals pals;
 
     @InjectMocks
-    private ArchivePal palService;
+    private ArchivePalCommand palService;
 
     @Test
     public void testArchive(){
