@@ -10,11 +10,14 @@ import java.util.Set;
 
 @Service
 public class AddPalCommand {
-    @Autowired
-    private Pals pals;
+    private final Pals pals;
 
     private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();;
 
+    @Autowired
+    public AddPalCommand(Pals pals){
+        this.pals = pals;
+    }
 
     public Pal savePalToInMemoryDb(Pal pal) throws PalValidationException {
         Set<ConstraintViolation<Pal>> violations = validator.validate( pal );
