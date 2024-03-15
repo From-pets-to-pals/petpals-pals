@@ -52,7 +52,7 @@ public class TestUpdatePalMock {
 
     @Test
     public void testArchiveFailValidation() {
-        var toUpdate = Pal.builder().name("Doggi").height(40d).build();
+        var toUpdate = Pal.builder().name("Doggi").build();
 
         ThrowableAssert.ThrowingCallable updatedPal =
                 () -> updatePalService.updatePalToInMemoryDb(toUpdate);
