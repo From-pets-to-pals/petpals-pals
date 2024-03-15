@@ -34,9 +34,9 @@ public class TestArchivePalCommandMock {
     public void testArchive() throws Exception {
         PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
         PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
-        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
+        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).owner(1L).build();
 
-        Pal deadDoggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).hasDied(true).build();
+        Pal deadDoggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).owner(1L).hasDied(true).build();
 
 
         when(pals.archivePal(any(Pal.class))).thenReturn(deadDoggo);

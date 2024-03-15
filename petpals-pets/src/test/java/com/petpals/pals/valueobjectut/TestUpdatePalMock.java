@@ -39,10 +39,10 @@ public class TestUpdatePalMock {
     public void testUpdate() throws Exception, PalValidationException {
         PalMeasurement palMeasurement = new PalMeasurement(20.0, 50.0);
         PalIdentityInformation palIdentityInformation = new PalIdentityInformation("Ash", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
-        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
+        Pal doggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).owner(1L).build();
 
         palIdentityInformation = new PalIdentityInformation("Ashhhhh", Date.valueOf(LocalDate.of(2023, 02, 20)),true, Species.DOG,"Husky","2562200000000", true);
-        Pal modifiedDoggo = Pal.builder().palIdentityInformation(palIdentityInformation).palMeasurement(palMeasurement).build();
+        Pal modifiedDoggo = Pal.builder().palIdentityInformation(palIdentityInformation).owner(1L).palMeasurement(palMeasurement).build();
 
         when(palsRepo.savePal(any(Pal.class))).thenReturn(doggo);
         when(palsRepo.updatePal(any(Pal.class))).thenReturn(modifiedDoggo);
