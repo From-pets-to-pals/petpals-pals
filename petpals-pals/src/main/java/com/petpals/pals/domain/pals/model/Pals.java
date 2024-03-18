@@ -1,7 +1,6 @@
 package com.petpals.pals.domain.pals.model;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +8,12 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Objects;
 
-@Builder
 public class Pals {
     @Getter
     @Setter
     private Long technicalId;
+    @Getter
+    private String functionalId;
     @Getter
     @Setter
     private PalMedicalInformation palMedicalInformation;
@@ -31,6 +31,16 @@ public class Pals {
     @Getter
     @Setter
     private boolean hasDied;
+
+    public Pals(Long technicalId, String functionalId, PalMedicalInformation palMedicalInformation, PalIdentityInformation palIdentityInformation, PalMeasurement palMeasurement, Long owner, boolean hasDied) {
+        this.technicalId = technicalId;
+        this.functionalId = functionalId;
+        this.palMedicalInformation = palMedicalInformation;
+        this.palIdentityInformation = palIdentityInformation;
+        this.palMeasurement = palMeasurement;
+        this.owner = owner;
+        this.hasDied = hasDied;
+    }
 
     public String calculatePalDailyRation(){
         NumberFormat formatter = new DecimalFormat("#00");

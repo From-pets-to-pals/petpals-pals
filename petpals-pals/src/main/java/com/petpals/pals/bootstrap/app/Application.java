@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.info.License;
                 version = "0.1",
                 description = "Petpals app for handling pals",
                 license = @License(name = "Apache 2.0", url = "https://foo.bar"),
-                contact = @Contact(name = "Fred", email = "sa.bennaceur@gmail.com")
+                contact = @Contact(name = "Sid", email = "sa.bennaceur@gmail.com")
         )
 )
 public class Application {
