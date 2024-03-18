@@ -71,6 +71,19 @@ public class Pals {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Pals{" +
+                "technicalId=" + technicalId +
+                ", functionalId='" + functionalId + '\'' +
+                ", palMedicalInformation=" + palMedicalInformation +
+                ", palIdentityInformation=" + palIdentityInformation +
+                ", palMeasurement=" + palMeasurement +
+                ", owner=" + owner +
+                ", hasDied=" + hasDied +
+                '}';
+    }
+
     public Long getTechnicalId() {
         return technicalId;
     }

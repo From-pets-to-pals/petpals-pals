@@ -1,4 +1,4 @@
-package com.petpals.pals.domain.pals.services;
+package com.petpals.pals.domain.pals.services.exceptions;
 
 import io.micronaut.http.HttpStatus;
 

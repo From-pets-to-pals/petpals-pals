@@ -6,6 +6,6 @@ import com.petpals.pals.domain.pals.outputs.PalsCreatorService;
 public class PalsCreator implements PalsCreatorService {
     @Override
     public Long createPalWithOwner(Pals palWithOwner) {
-        return null;
+        return FakeDB.addToDb(palWithOwner);
     }
 }

@@ -6,6 +6,8 @@ import com.petpals.pals.domain.pals.model.Owner;
 import com.petpals.pals.domain.pals.model.Pals;
 import com.petpals.pals.domain.pals.outputs.PalsCreatorService;
 import com.petpals.pals.domain.pals.outputs.PalsFinderService;
+import com.petpals.pals.domain.pals.services.exceptions.ExceptionsEnum;
+import com.petpals.pals.domain.pals.services.exceptions.PalsException;
 import com.petpals.pals.domain.pals.utils.uuid.UUIDFormatter;
 import com.petpals.pals.domain.pals.utils.uuid.UUIDGenerator;
 import jakarta.validation.constraints.NotBlank;
@@ -26,20 +28,22 @@ public class SavePals implements SavePalsService {
         this.palsCreatorService = palsCreatorService;
     }
     @Override
-    public String SavePal(Pals newPal) {
+    public Pals SavePal(Pals newPal) {
         logger.info(newPal.toString());
-        if(ownersFinderService.doOwnerExist(newPal.getOwner().email())){
-            logger.warn("Existing owner attempting to create account");
-            throw new SavePalException(ExceptionsEnum.OWNER_EXISTS);
+        if(newPal.getOwner().functionalId() != null){
+            if(ownersFinderService.doOwnerExist(newPal.getOwner().email())){
+                logger.warn("Existing owner attempting to create account");
+                throw new PalsException(ExceptionsEnum.OWNER_EXISTS);
+            }
         }
         if(palsFinderService.doICADIdentifierExist(newPal.getPalIdentityInformation().icadIdentifier())){
             logger.warn("Pet registration attempt with existing ICAD Identifier :" + newPal.getPalIdentityInformation().icadIdentifier());
-            throw new RuntimeException("User already exist, check account recovery method");
+            throw new PalsException(ExceptionsEnum.PET_EXISTS);
         }
         setReferenceForNewPalAndOwner(newPal);
         logger.info("Creating new pal");
         palsCreatorService.createPalWithOwner(newPal);
-        return "Hello world, and " + newPal.getPalIdentityInformation().name();
+        return newPal;
     }
 
     private static void setReferenceForNewPalAndOwner(Pals newPal) {

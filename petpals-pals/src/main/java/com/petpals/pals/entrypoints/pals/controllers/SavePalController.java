@@ -27,7 +27,7 @@ public class SavePalController {
     }
 
     @Post(produces = MediaType.TEXT_PLAIN, consumes =  MediaType.APPLICATION_JSON) // (2)
-    public String createFirstPalWithOwner(@Valid AddFirstPal newPal) {
+    public Pals createFirstPalWithOwner(@Valid AddFirstPal newPal) {
         logger.info("Calling createFirstPalWithOwner");
         logger.info("Received new payload for newPal :" + newPal);
         PalIdentityInformation palIdentityInformation = new PalIdentityInformation(

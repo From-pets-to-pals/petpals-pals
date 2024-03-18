@@ -9,8 +9,7 @@ public class OwnersFinder implements OwnersFinderService {
 
     @Override
     public boolean doOwnerExist(String email) {
-        logger.info("sasasasa");
-        logger.info(String.valueOf(email.contentEquals("sa.bennaceur@gmail.com")));
-        return email.contentEquals("sa.bennaceur@gmail.com");
+        logger.info("Do owner Exist");
+        return FakeDB.doOwnerExist(email);
     }
 }

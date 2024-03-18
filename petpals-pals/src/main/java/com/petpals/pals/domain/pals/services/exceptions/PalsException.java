@@ -1,12 +1,15 @@
-package com.petpals.pals.domain.pals.services;
+package com.petpals.pals.domain.pals.services.exceptions;
 
-public class SavePalException extends RuntimeException{
+import com.petpals.pals.domain.pals.services.exceptions.ErrorBodyResponse;
+import com.petpals.pals.domain.pals.services.exceptions.ExceptionsEnum;
+
+public class PalsException extends RuntimeException{
     private final ErrorBodyResponse exceptionEnum;
     public ErrorBodyResponse getResponse() {
         return exceptionEnum;
     }
 
-    public SavePalException(ExceptionsEnum exception) {
+    public PalsException(ExceptionsEnum exception) {
         super(exception.getUserMessageToDisplay());
         exceptionEnum = new ErrorBodyResponse(exception.getHttpResponseStatus(), exception.getUserMessageToDisplay(), "Domain");
     }
