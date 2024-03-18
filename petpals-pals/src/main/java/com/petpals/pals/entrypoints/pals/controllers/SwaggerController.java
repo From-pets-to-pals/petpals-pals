@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 import java.net.URI;
 
 @Controller
-class HomeController {
+class SwaggerController {
 
     private final static URI SWAGGER_UI = UriBuilder.of("/swagger-ui").path("index.html").build();
 

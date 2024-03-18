@@ -27,12 +27,12 @@ public class Pals {
     @Getter
     @Setter
     @NotNull
-    private Long owner;
+    private Owner owner;
     @Getter
     @Setter
     private boolean hasDied;
 
-    public Pals(Long technicalId, String functionalId, PalMedicalInformation palMedicalInformation, PalIdentityInformation palIdentityInformation, PalMeasurement palMeasurement, Long owner, boolean hasDied) {
+    public Pals(Long technicalId, String functionalId, PalMedicalInformation palMedicalInformation, PalIdentityInformation palIdentityInformation, PalMeasurement palMeasurement, Owner owner, boolean hasDied) {
         this.technicalId = technicalId;
         this.functionalId = functionalId;
         this.palMedicalInformation = palMedicalInformation;

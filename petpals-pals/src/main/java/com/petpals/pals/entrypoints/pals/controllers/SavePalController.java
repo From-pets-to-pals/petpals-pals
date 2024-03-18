@@ -1,6 +1,7 @@
 package com.petpals.pals.entrypoints.pals.controllers;
 
-import com.petpals.pals.entrypoints.pals.dto.AddPal;
+import com.petpals.pals.domain.pals.model.*;
+import com.petpals.pals.entrypoints.pals.dto.AddFirstPal;
 import com.petpals.pals.domain.pals.inputs.SavePalsService;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
@@ -13,6 +14,8 @@ import jakarta.validation.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+
 
 @Controller(value = "/pals")
 public class SavePalController {
@@ -24,10 +27,36 @@ public class SavePalController {
     }
 
     @Post(produces = MediaType.TEXT_PLAIN, consumes =  MediaType.APPLICATION_JSON) // (2)
-    public String createFirstPalWithOwner(@Valid AddPal addPalThis) {
+    public String createFirstPalWithOwner(@Valid AddFirstPal newPal) {
         logger.info("Calling createFirstPalWithOwner");
-        logger.info("Received new payload for addPal :" + addPalThis);
-        return  palService.SavePal(addPalThis); // (3)
+        logger.info("Received new payload for newPal :" + newPal);
+        PalIdentityInformation palIdentityInformation = new PalIdentityInformation(
+                newPal.name(),
+                newPal.birthDate(),
+                newPal.isMale(),
+                newPal.specie(),
+                newPal.race(),
+                newPal.icadIdentifier(),
+                newPal.hasPassport()
+        );
+
+        PalMeasurement palMeasurement = new PalMeasurement(newPal.weight(), newPal.weight());
+        PalMedicalInformation palMedicalInformation = new PalMedicalInformation(
+                newPal.isVaccinated(),
+                new ArrayList<>(),
+                null,
+                null,
+                newPal.isSterilized());
+        Owner palOwner = new Owner(newPal.owner().email(), newPal.owner().functionalId(), newPal.owner().deviceId(), newPal.owner().location());
+        Pals palToRegister = new Pals(
+                null,
+                null,
+                palMedicalInformation,
+                palIdentityInformation,
+                palMeasurement,
+                palOwner,
+                false);
+        return  palService.SavePal(palToRegister); // (3)
     }
 
     @Get(produces = MediaType.TEXT_PLAIN, consumes = MediaType.TEXT_PLAIN, value = "/{helloPal}")

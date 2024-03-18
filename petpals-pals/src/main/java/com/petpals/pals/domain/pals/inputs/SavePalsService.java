@@ -1,8 +1,8 @@
 package com.petpals.pals.domain.pals.inputs;
 
-import com.petpals.pals.entrypoints.pals.dto.AddPal;
+import com.petpals.pals.domain.pals.model.Pals;
 
 public interface SavePalsService {
-    String SavePal(AddPal palName);
+    String SavePal(Pals palName);
     String helloPal(String pal);
 }
