@@ -61,6 +61,7 @@ public class SavePalController {
 
     @Get(produces = MediaType.TEXT_PLAIN, consumes = MediaType.TEXT_PLAIN, value = "/{helloPal}")
     public String helloPal(@NotBlank @PathVariable("helloPal") String pal){
+        logger.info("Calling Hello");
         return palService.helloPal(pal);
     }
 }

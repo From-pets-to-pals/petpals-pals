@@ -1,4 +1,4 @@
-package com.petpals.pals;
+package com.petpals.pals.boostrap.swagger;
 
 import io.micronaut.http.client.BlockingHttpClient;
 import io.micronaut.http.client.HttpClient;

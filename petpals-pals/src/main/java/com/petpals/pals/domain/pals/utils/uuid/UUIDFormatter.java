@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class UUIDFormatter {
     private static final Logger LOGGER = LoggerFactory.getLogger(UUIDFormatter.class.getName());
-    public static String formatUUIDSequence(UUID uuidToFormat, boolean withUnionTrailRemoval,@NotNull CharSequence joiner){
+    public static String formatUUIDSequence(UUID uuidToFormat, boolean withUnionTrailRemoval,@NotNull String joiner){
         if(uuidToFormat == null){
             throw new IllegalArgumentException("UUID can not be null");
         }

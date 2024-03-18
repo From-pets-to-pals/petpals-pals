@@ -1,38 +1,28 @@
 package com.petpals.pals.domain.pals.model;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Objects;
 
 public class Pals {
-    @Getter
-    @Setter
     private Long technicalId;
-    @Getter
     private String functionalId;
-    @Getter
-    @Setter
     private PalMedicalInformation palMedicalInformation;
-    @Getter
-    @Setter
-    @NotNull
     private PalIdentityInformation palIdentityInformation;
-    @Getter
-    @Setter
     private PalMeasurement palMeasurement;
-    @Getter
-    @Setter
-    @NotNull
     private Owner owner;
-    @Getter
-    @Setter
     private boolean hasDied;
 
-    public Pals(Long technicalId, String functionalId, PalMedicalInformation palMedicalInformation, PalIdentityInformation palIdentityInformation, PalMeasurement palMeasurement, Owner owner, boolean hasDied) {
+    public Pals(
+            Long technicalId,
+            String functionalId,
+            PalMedicalInformation palMedicalInformation,
+            PalIdentityInformation palIdentityInformation,
+            PalMeasurement palMeasurement,
+            Owner owner,
+            boolean hasDied) {
         this.technicalId = technicalId;
         this.functionalId = functionalId;
         this.palMedicalInformation = palMedicalInformation;
@@ -76,5 +66,61 @@ public class Pals {
         result = 31 * result + owner.hashCode();
         result = 31 * result + palMeasurement.hashCode();
         return result;
+    }
+
+    public Long getTechnicalId() {
+        return technicalId;
+    }
+
+    public void setTechnicalId(Long technicalId) {
+        this.technicalId = technicalId;
+    }
+
+    public String getFunctionalId() {
+        return functionalId;
+    }
+
+    public void setFunctionalId(String functionalId) {
+        this.functionalId = functionalId;
+    }
+
+    public PalMedicalInformation getPalMedicalInformation() {
+        return palMedicalInformation;
+    }
+
+    public void setPalMedicalInformation(@NotNull PalMedicalInformation palMedicalInformation) {
+        this.palMedicalInformation = palMedicalInformation;
+    }
+
+    public PalIdentityInformation getPalIdentityInformation() {
+        return palIdentityInformation;
+    }
+
+    public void setPalIdentityInformation(@NotNull PalIdentityInformation palIdentityInformation) {
+        this.palIdentityInformation = palIdentityInformation;
+    }
+
+    public PalMeasurement getPalMeasurement() {
+        return palMeasurement;
+    }
+
+    public void setPalMeasurement(@NotNull PalMeasurement palMeasurement) {
+        this.palMeasurement = palMeasurement;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public boolean isHasDied() {
+        return hasDied;
+    }
+
+    public void setHasDied(@NotNull boolean hasDied) {
+        this.hasDied = hasDied;
     }
 }
