@@ -15,6 +15,9 @@ public class Pals {
     private Owner owner;
     private boolean hasDied;
 
+    public Pals() {
+    }
+
     public Pals(
             Long technicalId,
             String functionalId,

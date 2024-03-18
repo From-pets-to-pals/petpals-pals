@@ -1,6 +1,6 @@
 package com.petpals.pals.bootstrap.di;
 
-import com.petpals.pals.domain.owners.outputs.OwnersFinderService;
+import com.petpals.pals.domain.pals.outputs.OwnersFinderService;
 import com.petpals.pals.domain.pals.outputs.PalsFinderService;
 import com.petpals.pals.domain.pals.services.SavePals;
 import com.petpals.pals.domain.pals.outputs.PalsCreatorService;
@@ -8,23 +8,24 @@ import com.petpals.pals.domain.pals.inputs.SavePalsService;
 import com.petpals.pals.persistence.OwnersFinder;
 import com.petpals.pals.persistence.PalsCreator;
 import com.petpals.pals.persistence.PalsFinder;
+import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
 import jakarta.inject.Singleton;
 
 @Factory
 public class BeanFactory {
 
-    @Singleton
+    @Bean
     PalsFinderService palsFInderService(){
         return new PalsFinder();
     }
 
-    @Singleton
+    @Bean
     PalsCreatorService palsCreatorService(){
         return new PalsCreator();
     }
 
-    @Singleton
+    @Bean
     OwnersFinderService ownersFinderService(){
         return new OwnersFinder();
     }

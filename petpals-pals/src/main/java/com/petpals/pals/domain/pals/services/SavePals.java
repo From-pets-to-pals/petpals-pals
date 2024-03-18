@@ -1,6 +1,6 @@
 package com.petpals.pals.domain.pals.services;
 
-import com.petpals.pals.domain.owners.outputs.OwnersFinderService;
+import com.petpals.pals.domain.pals.outputs.OwnersFinderService;
 import com.petpals.pals.domain.pals.inputs.SavePalsService;
 import com.petpals.pals.domain.pals.model.Owner;
 import com.petpals.pals.domain.pals.model.Pals;
@@ -27,9 +27,10 @@ public class SavePals implements SavePalsService {
     }
     @Override
     public String SavePal(Pals newPal) {
+        logger.info(newPal.toString());
         if(ownersFinderService.doOwnerExist(newPal.getOwner().email())){
             logger.warn("Existing owner attempting to create account");
-            throw new RuntimeException("User already exist, check account recovery method");
+            throw new SavePalException(ExceptionsEnum.OWNER_EXISTS);
         }
         if(palsFinderService.doICADIdentifierExist(newPal.getPalIdentityInformation().icadIdentifier())){
             logger.warn("Pet registration attempt with existing ICAD Identifier :" + newPal.getPalIdentityInformation().icadIdentifier());
