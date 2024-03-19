@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@MicronautTest
+@MicronautTest(startApplication = false)
 public class OwnersRepositoryTest {
     private static final Logger logger = LoggerFactory.getLogger(OwnersRepositoryTest.class);
 

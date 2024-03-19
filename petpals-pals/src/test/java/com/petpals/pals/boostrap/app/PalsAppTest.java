@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 @MicronautTest
 class PalsAppTest {
 
+
     @Inject
     EmbeddedApplication<?> application;
 

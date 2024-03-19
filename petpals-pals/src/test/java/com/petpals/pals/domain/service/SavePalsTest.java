@@ -17,10 +17,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-@MicronautTest
+@MicronautTest(startApplication = false)
 public class SavePalsTest {
     @MockBean(PalsCreator.class)
     PalsCreatorService palsCreatorService(){

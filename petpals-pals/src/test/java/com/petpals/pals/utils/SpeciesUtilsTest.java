@@ -1,18 +1,12 @@
 package com.petpals.pals.utils;
 
 
-import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import jakarta.inject.Inject;
-import jakarta.validation.Validator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 
-@MicronautTest(startApplication = false)
 public class SpeciesUtilsTest {
 
-    @Inject
-    Validator validator;
     @ParameterizedTest
     @ValueSource(strings = {
             "DOG",
