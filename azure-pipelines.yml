@@ -6,8 +6,11 @@
 trigger:
 - main
 
+
 pool:
-  vmImage: ubuntu-latest
+   name: Default
+   demands: 
+   - Agent.Name -equals siddesktop
 
 steps:
 - task: Maven@3
