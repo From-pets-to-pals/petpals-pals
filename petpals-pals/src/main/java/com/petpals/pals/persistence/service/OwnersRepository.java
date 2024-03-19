@@ -1,7 +1,7 @@
-package com.petpals.pals.persistence.repositories;
+package com.petpals.pals.persistence.service;
 
 import com.petpals.pals.persistence.entities.Owners;
-import com.petpals.pals.persistence.service.OwnersRepositoryService;
+import com.petpals.pals.persistence.repositories.OwnersRepositorySpecs;
 import io.micronaut.runtime.ApplicationConfiguration;
 import io.micronaut.transaction.annotation.ReadOnly;
 import io.micronaut.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
-public class OwnersRepository implements OwnersRepositoryService {
+public class OwnersRepository implements OwnersRepositorySpecs {
 
     private final EntityManager entityManager;
     private final ApplicationConfiguration applicationConfiguration;

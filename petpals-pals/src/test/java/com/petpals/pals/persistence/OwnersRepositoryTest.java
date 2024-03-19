@@ -1,6 +1,6 @@
 package com.petpals.pals.persistence;
 
-import com.petpals.pals.persistence.service.OwnersRepositoryService;
+import com.petpals.pals.persistence.repositories.OwnersRepositorySpecs;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ public class OwnersRepositoryTest {
     private static final Logger logger = LoggerFactory.getLogger(OwnersRepositoryTest.class);
 
     @Inject
-    OwnersRepositoryService ownersRepository;
+    OwnersRepositorySpecs ownersRepository;
 
     @Test
     public void shouldFindOneOwner(){

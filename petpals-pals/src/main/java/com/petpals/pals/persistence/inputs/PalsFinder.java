@@ -1,4 +1,4 @@
-package com.petpals.pals.persistence;
+package com.petpals.pals.persistence.inputs;
 
 import com.petpals.pals.domain.pals.outputs.PalsFinderService;
 

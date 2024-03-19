@@ -1,4 +1,4 @@
-package com.petpals.pals.persistence.service;
+package com.petpals.pals.persistence.repositories;
 
 import com.petpals.pals.persistence.entities.Owners;
 import io.micronaut.data.annotation.Query;
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Optional;
 
-public interface OwnersRepositoryService {
+public interface OwnersRepositorySpecs {
     Optional<Owners> findById(long id);
     Optional<Owners> findByEmail(String email);
 

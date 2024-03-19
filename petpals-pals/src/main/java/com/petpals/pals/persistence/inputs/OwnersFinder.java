@@ -1,7 +1,7 @@
-package com.petpals.pals.persistence;
+package com.petpals.pals.persistence.inputs;
 
 import com.petpals.pals.domain.pals.outputs.OwnersFinderService;
-import com.petpals.pals.persistence.repositories.OwnersRepository;
+import com.petpals.pals.persistence.service.OwnersRepository;
 import jakarta.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +14,7 @@ public class OwnersFinder implements OwnersFinderService {
     @Override
     public boolean doOwnerExist(String email) {
         logger.info("Do owner Exist");
-        return FakeDB.doOwnerExist(email);
+        var dbResponse = ownersRepository.findByEmail(email);
+        return dbResponse.isPresent();
     }
 }
