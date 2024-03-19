@@ -39,6 +39,7 @@ public class OwnersRepository implements OwnersRepositorySpecs {
     }
 
     @Override
+    @Transactional
     public void deleteById(long id) {
         findById(id).ifPresent(entityManager::remove);
     }
@@ -51,6 +52,7 @@ public class OwnersRepository implements OwnersRepositorySpecs {
     }
 
     @Override
+    @Transactional
     public int update(long id, @NotBlank String deviceName) {
         return entityManager.createQuery("UPDATE Owners o SET device = :name where id = :id")
                 .setParameter("name", deviceName)
@@ -59,6 +61,7 @@ public class OwnersRepository implements OwnersRepositorySpecs {
     }
 
     @Override
+    @ReadOnly
     public Optional<Owners> findByEmail(String email) {
         var owner = entityManager.find(Owners.class, email);
         return  Optional.ofNullable(owner);

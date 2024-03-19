@@ -8,7 +8,6 @@ import com.petpals.pals.domain.pals.inputs.SavePalsService;
 import com.petpals.pals.persistence.inputs.OwnersFinder;
 import com.petpals.pals.persistence.inputs.PalsCreator;
 import com.petpals.pals.persistence.inputs.PalsFinder;
-import com.petpals.pals.persistence.service.OwnersRepository;
 import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
 import jakarta.inject.Singleton;

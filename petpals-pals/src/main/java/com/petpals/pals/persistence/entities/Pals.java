@@ -31,7 +31,7 @@ public class Pals {
     @Column(name = "ICADIdentifier", nullable = false)
     private String ICADIdentifier;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Owners owner;
 
     @Column(name = "birthdate")
