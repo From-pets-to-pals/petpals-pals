@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Singleton
 public class OwnersRepository implements OwnersRepositorySpecs {
-    private String test = "6";
     private final EntityManager entityManager;
     private final ApplicationConfiguration applicationConfiguration;
 
