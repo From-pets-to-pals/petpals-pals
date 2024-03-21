@@ -1,15 +1,34 @@
-## Micronaut 4.3.6 Documentation
+<style>
+r { color: Red }
+o { color: Orange }
+g { color: Green }
+b {color: #ff6e7f}
+c { color: #DA22FF}
+p {color:#bfe9ff}
+</style>
 
+## <c>Prerequisites</c>
+> - Java 17
+> - Maven 3.9.6
+> - Intellij Ultimate
+> - local sonarqube server (not mandatory)
+
+## <g>Launch App</g>
+
+- run "mvn clean install"
+- create application configuration ![Drag Racing](md_content/application_run_settings_intellij.png)
+
+
+## <b>Micronaut 4.3.6 Documentation</b>
 - [User Guide](https://docs.micronaut.io/4.3.6/guide/index.html)
 - [API Reference](https://docs.micronaut.io/4.3.6/api/index.html)
 - [Configuration Reference](https://docs.micronaut.io/4.3.6/guide/configurationreference.html)
 - [Micronaut Guides](https://guides.micronaut.io/index.html)
 
----
 
 - [Micronaut Maven Plugin documentation](https://micronaut-projects.github.io/micronaut-maven-plugin/latest/)
 
-## Feature maven-enforcer-plugin documentation
+## <b>Feature maven-enforcer-plugin documentation
 
 - [https://maven.apache.org/enforcer/maven-enforcer-plugin/](https://maven.apache.org/enforcer/maven-enforcer-plugin/)
 
@@ -40,5 +59,5 @@
 ## Feature micronaut-aot documentation
 
 - [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
-
+</b>
 
