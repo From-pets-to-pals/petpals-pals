@@ -14,9 +14,10 @@
     </parent>
     <properties>
         <jacoco.version>0.8.11</jacoco.version>
-        <sonar.host.url>9000</sonar.host.url>
-        <sonar.login>sqp_44956e6c1777a10520fb9378ee96d2f0329b8b94</sonar.login>
-        <sonar.projectKey>petpals_petpals_AY5UZinl_pfgoJ_08fex</sonar.projectKey>
+        <sonar.host.url>${url.sonar}</sonar.host.url>
+        <sonar.projectKey>${project.key.sonar}</sonar.projectKey>
+        <sonar.projectName>${project.name.sonar}</sonar.projectName>
+        <sonar.token>${token.sonar}</sonar.token>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
@@ -168,10 +169,33 @@
             <artifactId>micronaut-data-model</artifactId>
             <version>4.6.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.2.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>petpals-pals</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>maven.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
