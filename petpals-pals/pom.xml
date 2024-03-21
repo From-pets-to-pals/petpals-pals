@@ -14,9 +14,13 @@
     </parent>
     <properties>
         <jacoco.version>0.8.11</jacoco.version>
+        <!--suppress UnresolvedMavenProperty -->
         <sonar.host.url>${url.sonar}</sonar.host.url>
+        <!--suppress UnresolvedMavenProperty -->
         <sonar.projectKey>${project.key.sonar}</sonar.projectKey>
+        <!--suppress UnresolvedMavenProperty -->
         <sonar.projectName>${project.name.sonar}</sonar.projectName>
+        <!--suppress UnresolvedMavenProperty -->
         <sonar.token>${token.sonar}</sonar.token>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <packaging>jar</packaging>
