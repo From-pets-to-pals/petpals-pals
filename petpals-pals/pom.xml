@@ -6,7 +6,7 @@
     <artifactId>petpals-pals</artifactId>
     <version>0.1</version>
     <packaging>${packaging}</packaging>
-
+<!-- lol -->
     <parent>
         <groupId>io.micronaut.platform</groupId>
         <artifactId>micronaut-parent</artifactId>
