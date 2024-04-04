@@ -5,7 +5,7 @@ trigger:
 
 pool:
   demands:
-    - agent.name -equals siddesktop
+    - agent.name -equals Default
 
 steps:
 #- task: JavaToolInstaller@0
