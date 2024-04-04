@@ -10,6 +10,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'LocalDirectory'
+    jdkFile: 'C:\jdk-17.0.10.zip'
+    cleanDestinationDirectory: false
 - task: Maven@3
   inputs:
     mavenPomFile: 'petpals-pals/pom.xml'
