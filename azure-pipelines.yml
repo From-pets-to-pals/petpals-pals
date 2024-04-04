@@ -4,14 +4,15 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  demands:
+    - agent.name -equals siddesktop
 
 steps:
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '17'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+#- task: JavaToolInstaller@0
+#  inputs:
+#    versionSpec: '17'
+#    jdkArchitectureOption: 'x64'
+#    jdkSourceOption: 'PreInstalled'
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
