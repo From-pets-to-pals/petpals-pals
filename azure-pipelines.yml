@@ -13,8 +13,6 @@ steps:
 - task: Maven@3
   inputs:
     mavenPomFile: 'petpals-pals/pom.xml'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
     codeCoverageToolOption: 'JaCoCo'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
