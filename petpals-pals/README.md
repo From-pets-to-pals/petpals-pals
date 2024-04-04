@@ -16,7 +16,12 @@ p {color:#bfe9ff}
 ## <g>Launch App</g>
 
 - run "mvn clean install"
-- create application configuration ![Drag Racing](md_content/application_run_settings_intellij.png)
+- create application configuration
+  ![img.png](readme-resources/appllication_run_settings_intellij_ultimate.png)
+
+
+## Intellij Run config
+
 
 
 ## <b>Micronaut 4.3.6 Documentation</b>
@@ -61,3 +66,28 @@ p {color:#bfe9ff}
 - [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
 </b>
 
+Le programme :
+Vous êtes séquestré par des geeks en maths et ils refusent de vous libérer tant que vous n'aurez pas résolu le problème. Vous devez sauvez votre peau en résolvant le problème.
+
+Ils vous donnent deux entiers N et K. Vous devez trouver le plus petit et le plus grand entier positif qu'il est possible de construire avec N chiffres avant exactement K chiffres différents entre 0 et 9.
+
+Par exemple: 99987 possède 3 chiffres distincts 9, 8 and 7.
+
+Évidemment, les 0 en début ne sont pas autorisés. Par exemple, 0145 n'est pas autorisé. L'entrée donnée possède toujours une réponse correcte.
+
+ENTRÉE :
+Ligne 1 : Le nombre de chiffres N et le nombre de chiffres distincts K
+
+SORTIE :
+Ligne 1: Le plus petit et le plus grand nombre, séparés par un espace.
+
+CONTRAINTES :
+1 ≤ N ≤ 18
+1 ≤ K ≤ 10
+
+EXEMPLE :
+Entrée
+3 3
+Sortie
+102 987
+ 
