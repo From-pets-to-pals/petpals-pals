@@ -37,12 +37,13 @@ steps:
     ArtifactName: '$(APP_NAME)-$(Build.BuildId)'
     publishLocation: 'Container'
 - task: AzureRmWebAppDeployment@4
+  displayName: Deploy to app service 
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
     appType: 'webAppLinux'
     WebAppName: 'petpals-caregivers-dev'
-    packageForLinux: '$(Build.SourcesDirectory)/$(APP_NAME)/target/petpals-pals.jar'
+    packageForLinux: '$(Build.SourcesDirectory)/$(APP_NAME)/target/$(APP_NAME).jar'
     RuntimeStack: 'JAVA|17-java17'
     StartupCommand: 'java -jar'
   
