@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.petpals.pals</groupId>
     <artifactId>petpals-pals</artifactId>
-    <version>0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>${packaging}</packaging>
 <!-- lol -->
     <parent>
