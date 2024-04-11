@@ -1,0 +1,42 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Deploy
+  displayName: Deploy to petpals-pals
+  jobs:
+  - job: Deploy
+    steps:
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'specific'
+        project: '12e6b272-e75b-4b73-aebc-da22ad6551a2'
+        pipeline: '7'
+        specificBuildWithTriggering: true
+        buildVersionToDownload: 'latest'
+        downloadType: 'single'
+        artifactName: 'petpals-pals'
+        itemPattern: '**/*.jar'
+        downloadPath: '$(System.ArtifactsDirectory)'
+        checkDownloadedFiles: true
+    - task: CopyFiles@2
+      displayName: 'Copy Files from artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.ArtifactsDirectory)/$(APP_NAME)'
+        Contents: '$(APP_NAME).jar'
+        TargetFolder: $(System.DefaultWorkingDirectory)
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
+        appType: 'webAppLinux'
+        appName: 'petpals-pals'
+        package: '$(System.DefaultWorkingDirectory)/$(APP_NAME).jar'
+        runtimeStack: 'JAVA|17-java17'
+        startUpCommand: 'java -jar /home/site/wwwroot/$(APP_NAME).jar --server.port=80'
+        appSettings: '-WEBSITES_PORT 80'
+        configurationStrings: '-PORT 80'
