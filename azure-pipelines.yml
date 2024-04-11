@@ -66,4 +66,4 @@ stages:
         package: '$(System.DefaultWorkingDirectory)/$(APP_NAME).jar'
         runtimeStack: 'JAVA|17-java17'
         startUpCommand: 'java -jar'
-        appSettings: 'WEBSITES_PORT 8080'
+        appSettings: 'SERVER_PORT 8080'
