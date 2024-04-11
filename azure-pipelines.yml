@@ -24,31 +24,37 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'clean package'
-    - task: ArchiveFiles@2
-      displayName: Archive build artifact
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)/$(APP_NAME)/target'
-        includeRootFolder: true
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(APP_NAME)-$(Build.BuildId).zip'
-        replaceExistingArchive: false
+        SourceFolder: '$(System.DefaultWorkingDirectory)/$(APP_NAME)/target'
+        Contents: '**/target/$(APP_NAME).jar'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
     - task: PublishBuildArtifacts@1
-      displayName: Publish build artifact
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(APP_NAME)-$(Build.BuildId).zip'
-        ArtifactName: '$(APP_NAME)-$(Build.BuildId)'
-        publishLocation: 'Container' 
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'petpals-pals'
+        publishLocation: 'Container'
+
 - stage: Deploy
   displayName: Deploy to petpals-pals
   jobs:
   - job: Deploy
     steps:
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'petpals-pals'
+        itemPattern: '*.jar'
+        downloadPath: '$(System.ArtifactsDirectory)'
+        extractTars: true
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
         appType: 'webAppLinux'
         appName: 'petpals-pals'
-        package: '$(Build.SourcesDirectory)/$(APP_NAME)/target/$(APP_NAME).jar'
+        package: '$(System.ArtifactsDirectory)/$(APP_NAME).jar'
         runtimeStack: 'JAVA|17-java17'
         startUpCommand: 'java -jar'
         appSettings: 'WEBSITES_PORT 8080'
