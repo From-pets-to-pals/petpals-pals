@@ -65,4 +65,3 @@ stages:
         startUpCommand: 'java -jar $(APP_NAME).jar'
         appSettings: |
           -SERVER_PORT 8080
-          -WEBSITES_PORT 8080
