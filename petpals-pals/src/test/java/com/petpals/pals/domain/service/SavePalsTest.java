@@ -19,7 +19,7 @@ import java.util.Date;
 
 import static org.mockito.Mockito.mock;
 
-@MicronautTest(startApplication = false)
+@MicronautTest
 public class SavePalsTest {
     @MockBean(PalsCreator.class)
     PalsCreatorService palsCreatorService(){
