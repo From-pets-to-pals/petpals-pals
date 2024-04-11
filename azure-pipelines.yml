@@ -49,12 +49,18 @@ stages:
         itemPattern: '**/*.jar'
         downloadPath: '$(System.ArtifactsDirectory)'
         checkDownloadedFiles: true
+    - task: CopyFiles@2
+      displayName: 'Copy Files from artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.ArtifactsDirectory)/$(APP_NAME)'
+        Contents: '$(APP_NAME).jar'
+        TargetFolder: $(System.DefaultWorkingDirectory)
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
         appType: 'webAppLinux'
         appName: 'petpals-pals'
-        package: '$(System.ArtifactsDirectory)/petpals-pals/*.jar'
+        package: '$(System.DefaultWorkingDirectory)/petpals-pals/*.jar'
         runtimeStack: 'JAVA|17-java17'
         startUpCommand: 'java -jar'
         appSettings: 'WEBSITES_PORT 8080'
