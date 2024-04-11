@@ -54,7 +54,7 @@ stages:
         azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
         appType: 'webAppLinux'
         appName: 'petpals-pals'
-        package: '$(System.DefaultWorkingDirectory)/*.jar'
+        package: '$(System.ArtifactsDirectory)/petpals-pals/*.jar'
         runtimeStack: 'JAVA|17-java17'
         startUpCommand: 'java -jar'
         appSettings: 'WEBSITES_PORT 8080'
