@@ -64,5 +64,4 @@ stages:
         runtimeStack: 'JAVA|17-java17'
         startUpCommand: 'java -jar'
         appSettings: |
-          -name: 'SERVER_PORT'
-          -value:'8080'
+          -SERVER_PORT 8080
