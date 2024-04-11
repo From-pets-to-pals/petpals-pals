@@ -44,4 +44,3 @@ steps:
     package: '$(Build.SourcesDirectory)/$(APP_NAME)/target/$(APP_NAME).jar'
     runtimeStack: 'JAVA|17-java17'
     startUpCommand: 'java -jar'
-    appSettings: '--application.port=80'
