@@ -62,7 +62,7 @@ stages:
         appName: 'petpals-pals'
         package: '$(System.DefaultWorkingDirectory)/$(APP_NAME).jar'
         runtimeStack: 'JAVA|17-java17'
-        startUpCommand: 'java -jar'
+        startUpCommand: 'java -jar $(APP_NAME).jar'
         appSettings: |
           -SERVER_PORT 8080
           -WEBSITES_PORT 8080
