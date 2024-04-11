@@ -10,7 +10,7 @@ stages:
 - stage: Build
   displayName: Build stage
   jobs:
-  - job: MavenPackageAndPublishArtifacts
+  - job: PackageAndBuild
     steps:
     - task: JavaToolInstaller@0
       inputs:
@@ -46,7 +46,7 @@ stages:
         buildType: 'current'
         downloadType: 'single'
         artifactName: 'petpals-pals'
-        itemPattern: '*.jar'
+        itemPattern: '**/*.jar'
         downloadPath: '$(System.ArtifactsDirectory)'
         extractTars: true
     - task: AzureWebApp@1
