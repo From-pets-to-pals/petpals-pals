@@ -12,6 +12,12 @@ stages:
   jobs:
   - job: PackageAndBuild
     steps:
+    - script: 'wget http://www-eu.apache.org/dist/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.zip'
+
+    - task: ExtractFiles@1
+      inputs:
+        archiveFilePatterns: 'apache-maven-3.9.6-bin.zip'
+        destinationFolder: '$(System.DefaultWorkingDirectory)/maven'
     - task: JavaToolInstaller@0
       inputs:
         versionSpec: '17'
@@ -26,7 +32,9 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         codeCoverageToolOption: 'JaCoCo'
         javaHomeOption: 'JDKVersion'
-        mavenVersionOption: 'Default'
+        mavenVersionOption: 'Path'
+        mavenDirectory: '$(build.sourcesdirectory)/maven/apache-maven-3.9.6'
+        mavenSetM2Home: true
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
