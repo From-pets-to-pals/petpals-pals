@@ -15,7 +15,7 @@ class SwaggerUiAndOpenAPITest {
 
     @Test
     void buildGeneratesOpenApi(ResourceLoader resourceLoader) {
-        assertTrue(resourceLoader.getResource("templates/index.html").isPresent());
+        assertTrue(resourceLoader.getResource("META-INF/swagger/views/swagger-ui/index.html").isPresent());
     }
     @Test
     void openApi(@Client("/") HttpClient httpClient) {
