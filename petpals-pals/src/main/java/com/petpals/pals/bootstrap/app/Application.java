@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.info.License;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Petpals pals",
-                version = "0.1",
+                version = "0.0.1",
                 description = "Petpals app for handling pals",
                 license = @License(name = "Apache 2.0", url = "https://foo.bar"),
                 contact = @Contact(name = "Sid", email = "sa.bennaceur@gmail.com")
