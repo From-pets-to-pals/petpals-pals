@@ -17,8 +17,33 @@ steps:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 - task: Maven@3
   inputs:
-    mavenPomFile: 'petpals-pals/pom.xml'
+    mavenPomFile: '$(APP_NAME)/pom.xml'
     codeCoverageToolOption: 'JaCoCo'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean install'
+    goals: 'clean package'
+- task: ArchiveFiles@2
+  displayName: Archive build artifact
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/$(APP_NAME)/target'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(APP_NAME)-$(Build.BuildId).zip'
+    replaceExistingArchive: false
+- task: PublishBuildArtifacts@1
+  displayName: Publish build artifact
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(APP_NAME)-$(Build.BuildId).zip'
+    ArtifactName: '$(APP_NAME)-$(Build.BuildId)'
+    publishLocation: 'Container'
+- task: AzureRmWebAppDeployment@4
+  displayName: Deploy to app service 
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
+    appType: 'webAppLinux'
+    WebAppName: 'petpals-caregivers-dev'
+    packageForLinux: '$(Build.SourcesDirectory)/$(APP_NAME)/target/$(APP_NAME).jar'
+    RuntimeStack: 'JAVA|17-java17'
+    StartupCommand: 'java -jar'
+  
