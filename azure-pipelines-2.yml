@@ -36,8 +36,10 @@ stages:
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
-        appType: 'webApp'
-        appName: 'petpals-pals-windows'
+        appType: 'webAppLinux'
+        appName: 'petpals-pals'
         package: '$(System.DefaultWorkingDirectory)/$(APP_NAME).jar'
-        appSettings: '-WEBSITES_PORT 8080'
-        configurationStrings: '-PORT 8080'
+        runtimeStack: 'JAVA|17-java17'
+        startUpCommand: 'java -jar /home/site/wwwroot/$(APP_NAME).jar --server.port=80'
+        appSettings: '-WEBSITES_PORT 80'
+        configurationStrings: '-PORT 80'
