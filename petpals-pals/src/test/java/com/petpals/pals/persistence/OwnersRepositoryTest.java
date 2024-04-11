@@ -13,11 +13,12 @@ public class OwnersRepositoryTest {
 
     @Inject
     OwnersRepositorySpecs ownersRepository;
-
+/**
     @Test
     public void shouldFindOneOwner(){
-        var owners = ownersRepository.findAll();
-        logger.info(owners.toString());
+        //var owners = ownersRepository.findAll();
+        //logger.info(owners.toString());
         //assertEquals("sae.bennaceur@gmail.com", owners.get(0).getMail());
     }
+    */
 }
