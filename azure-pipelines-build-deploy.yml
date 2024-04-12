@@ -36,7 +36,6 @@ stages:
         SourceFolder: '$(System.DefaultWorkingDirectory)/$(APP_NAME)/target'
         Contents: |
           $(APP_NAME).jar
-          target/**/*.*
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - task: PublishBuildArtifacts@1
       inputs:
@@ -61,9 +60,7 @@ stages:
       displayName: 'Copy Files from artifact staging directory'
       inputs:
         SourceFolder: '$(System.ArtifactsDirectory)/$(APP_NAME)'
-        Contents: |
-          $(APP_NAME).jar
-          target/**/*.*
+        Contents: $(APP_NAME).jar
         TargetFolder: '$(System.DefaultWorkingDirectory)'
     - task: AzureWebApp@1
       inputs:
