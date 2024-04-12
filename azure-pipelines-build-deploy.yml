@@ -34,8 +34,10 @@ stages:
       displayName: 'Copy Files to artifact staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/$(APP_NAME)/target'
-        Contents: '$(APP_NAME).jar'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+        Contents: |
+          $(APP_NAME).jar
+          target/**/*.*
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
@@ -59,8 +61,10 @@ stages:
       displayName: 'Copy Files from artifact staging directory'
       inputs:
         SourceFolder: '$(System.ArtifactsDirectory)/$(APP_NAME)'
-        Contents: '$(APP_NAME).jar'
-        TargetFolder: $(System.DefaultWorkingDirectory)
+        Contents: |
+          $(APP_NAME).jar
+          target/**/*.*
+        TargetFolder: '$(System.DefaultWorkingDirectory)'
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
