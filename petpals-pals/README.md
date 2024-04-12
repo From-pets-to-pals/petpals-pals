@@ -15,10 +15,13 @@ p {color:#bfe9ff}
 
 ## <g>Launch App</g>
 
-- run "mvn clean install"
-- create application configuration
-  ![img.png](readme-resources/appllication_run_settings_intellij_ultimate.png)
+- run "mvn clean install -Dserver.port=80 -Dserver.host=127.0.0.1"
 
+![img.png](readme-resources/clean_install_settings.png)
+
+- create application configuration
+
+![img.png](readme-resources/app_run_settings_intellij.png)
 
 ## Intellij Run config
 
