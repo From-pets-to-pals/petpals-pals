@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.petpals.pals</groupId>
     <artifactId>petpals-pals</artifactId>
+    <name>petpals-pals</name>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>${packaging}</packaging>
     <parent>
@@ -162,6 +163,11 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>io.micronaut.discovery</groupId>
+            <artifactId>micronaut-discovery-client</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>io.micronaut.sql</groupId>
             <artifactId>micronaut-jdbc-hikari</artifactId>
             <scope>compile</scope>
@@ -169,6 +175,11 @@
         <dependency>
             <groupId>io.micronaut.views</groupId>
             <artifactId>micronaut-views-velocity</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.azure</groupId>
+            <artifactId>micronaut-azure-secret-manager</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -190,8 +201,9 @@
             <version>1.2.1</version>
         </dependency>
     </dependencies>
+    <!-- Build plugins -->
     <build>
-        <finalName>petpals-pals</finalName>
+        <finalName>${name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
