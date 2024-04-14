@@ -1,5 +1,6 @@
 trigger:
 - main
+name: $(APP-NAME)-$(Build.BuildId)
 
 pool:
   vmImage: ubuntu-latest
