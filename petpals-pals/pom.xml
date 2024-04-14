@@ -6,7 +6,7 @@
     <name>petpals-pals</name>
     <version>0.1.2-SNAPSHOT</version>
     <contributors>
-        <contributor>Me</contributor></contributors>
+        <contributor><name>Me</name></contributor></contributors>
     <packaging>${packaging}</packaging>
     <parent>
         <groupId>io.micronaut.platform</groupId>
