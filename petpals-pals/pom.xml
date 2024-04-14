@@ -5,6 +5,7 @@
     <artifactId>petpals-pals</artifactId>
     <name>petpals-pals</name>
     <version>0.1.2-SNAPSHOT</version>
+    <contributors>Me</contributors>
     <packaging>${packaging}</packaging>
     <parent>
         <groupId>io.micronaut.platform</groupId>
