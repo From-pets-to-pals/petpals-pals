@@ -19,7 +19,7 @@ stages:
       inputs:
         mavenPomFile: '$(APP_NAME)/pom.xml'
         goals: 'clean package'
-        options: '-Dserver.port=8080 -Dserver.host=127.0.0.1 -DTENANT-ID=$(TENANT-ID) -DSECRET=$(SECRET) -DCLIENT-ID=$(CLIENT-ID)'
+        options: '-DTENANT-ID=$(TENANT-ID) -DSECRET=$(SECRET) -DCLIENT-ID=$(CLIENT-ID)'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         codeCoverageToolOption: 'JaCoCo'
@@ -68,6 +68,6 @@ stages:
         appName: '$(APP_NAME)'
         package: '$(System.DefaultWorkingDirectory)/$(APP_NAME).jar'
         runtimeStack: 'JAVA|17-java17'
-        startUpCommand: 'java --TENANT-ID=$(TENANT-ID) --SECRET=$(SECRET) --CLIENT-ID=$(CLIENT-ID) -jar /home/site/wwwroot/$(APP_NAME).jar --server.port=80'
+        startUpCommand: 'java --TENANT-ID=$(TENANT-ID) --SECRET=$(SECRET) --CLIENT-ID=$(CLIENT-ID) -jar /home/site/wwwroot/$(APP_NAME).jar'
         appSettings: '-WEBSITES_PORT 80'
         configurationStrings: '-PORT 80'
