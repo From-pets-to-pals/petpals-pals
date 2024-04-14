@@ -127,12 +127,6 @@
         </dependency>
         <dependency>
             <groupId>io.micronaut.openapi</groupId>
-            <artifactId>micronaut-openapi</artifactId>
-            <version>6.6.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.openapi</groupId>
             <artifactId>micronaut-openapi-annotations</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -302,13 +296,23 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
             <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.2.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <!-- Uncomment to enable incremental compilation -->
-                    <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-
                     <annotationProcessorPaths combine.children="append">
+
                         <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-http-validation</artifactId>

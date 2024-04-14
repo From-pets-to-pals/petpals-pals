@@ -45,27 +45,25 @@
 									}
 								}
 							};
-						},
-						ui = SwaggerUIBundle({
-							url: contextPath + '/swagger/petpals-pals-0.0.1.yml',
-							dom_id: '#swagger-ui',
-							presets: [
-								SwaggerUIBundle.presets.apis,
-								SwaggerUIStandalonePreset
-							],
-							plugins: [
-								SwaggerUIBundle.plugins.DownloadUrl,
-								f
-							],
+						};
+				window.ui = SwaggerUIBundle({
+					url: contextPath + '/swagger/petpals-pals-0.1.0.yml',
+					dom_id: '#swagger-ui',
+					presets: [
+						SwaggerUIBundle.presets.apis,
+						SwaggerUIStandalonePreset
+					],
+					plugins: [
+						SwaggerUIBundle.plugins.DownloadUrl,
+						f
+					],
 
 
-							deepLinking: true,
-							layout: "StandaloneLayout",
-							tagsSorter: "alpha",
-							validatorUrl: null
-						});
-
-				window.ui = ui;
+					deepLinking: true,
+					layout: "StandaloneLayout",
+					tagsSorter: "alpha",
+					validatorUrl: null
+				});
 
 			};
 		</script>
