@@ -19,7 +19,7 @@ stages:
       inputs:
         mavenPomFile: '$(APP_NAME)/pom.xml'
         goals: 'clean package'
-        options: '-DTENANT-ID=$(TENANT-ID) -DSECRET=$(SECRET) -DCLIENT-ID=$(CLIENT-ID)'
+        options: '-Dserver.port=8080 -Dserver.host=127.0.0.1 -DTENANT-ID=$(TENANT-ID) -DSECRET=$(SECRET) -DCLIENT-ID=$(CLIENT-ID)'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         codeCoverageToolOption: 'JaCoCo'
