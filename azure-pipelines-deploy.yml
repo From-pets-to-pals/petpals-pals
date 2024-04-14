@@ -5,7 +5,7 @@
 
 pool:
   vmImage: ubuntu-latest
-
+name: $(Build.BuildId)
 stages:
 - stage: Deploy
   displayName: Deploy to petpals-pals
