@@ -23,7 +23,7 @@ class CreateOwnerResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     fun createOwnerWithFirstPal(
         newPal: @Valid AddFirstPal
     ): String {

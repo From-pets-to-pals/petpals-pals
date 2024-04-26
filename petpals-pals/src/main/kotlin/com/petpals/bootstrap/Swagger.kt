@@ -14,7 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes
     info = Info(
         title = "petpals-pals",
         version = "0.1.0",
-        description = "Petpals app for handling pals and their needs",
+        description = "Pals API",
         license = License(name = "Apache 2.0", url = "https://foo.bar"),
         contact = Contact(name = "Sid", email = "sa.bennaceur@gmail.com")
     )
