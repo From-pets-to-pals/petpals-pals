@@ -1,9 +1,7 @@
 trigger:
 - main
-name: pals-$(Build.BuildId)
 
-pool:
-  vmImage: ubuntu-latest
+name: caregivers-$(Build.BuildId)
 
 stages:
 - stage: Build
@@ -11,6 +9,23 @@ stages:
   jobs:
   - job: PackageAndBuild
     steps:
+    - checkout: self
+      persistCredentials: true
+    - task: CmdLine@2
+      inputs:
+        script: |
+          git clone https://$(GIT_USER):$(PAT)@github.com/From-pets-to-pals/petpals-common.git
+          git clone https://$(GIT_USER):$(PAT)@github.com/From-pets-to-pals/petpals-conf.git
+          ls
+          cp -r petpals-conf/dev/caregivers/resources petpals-caregivers/src/main
+          ls petpals-caregivers/src/main/resources
+    - task: CmdLine@2
+      inputs:
+        script: 'wget https://archive.apache.org/dist/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.zip'
+    - task: ExtractFiles@1
+      inputs:
+        archiveFilePatterns: 'apache-maven-3.9.6-bin.zip'
+        destinationFolder: '$(Build.SourcesDirectory)/maven'
     - task: JavaToolInstaller@0
       inputs:
         versionSpec: '17'
@@ -18,24 +33,40 @@ stages:
         jdkSourceOption: 'PreInstalled'
     - task: Maven@3
       inputs:
-        mavenPomFile: '$(APP_NAME)/pom.xml'
-        goals: 'clean package'
-        options: '-Dserver.port=8080 -Dserver.host=127.0.0.1 -DTENANT-ID=$(TENANT-ID) -DSECRET=$(SECRET) -DCLIENT-ID=$(CLIENT-ID)'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        codeCoverageToolOption: 'JaCoCo'
+        mavenPomFile: '$(Build.SourcesDirectory)/petpals-common/petpals-common/pom.xml'
+        goals: 'clean install'
+        publishJUnitResults: false
         javaHomeOption: 'JDKVersion'
-        mavenVersionOption: 'Default'
+        mavenVersionOption: 'Path'
+        mavenDirectory: '$(Build.SourcesDirectory)/maven/apache-maven-3.9.6'
+        mavenSetM2Home: true
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
+    - task: Maven@3
+      inputs:
+        mavenPomFile: '$(Build.SourcesDirectory)/$(APP_NAME)/pom.xml'
+        goals: 'clean package'
+        options: '-DSECRET=$(SECRET) -DTENANT-ID=$(TENANT-ID) -DCLIENT-ID=$(CLIENT-ID) -DVAULT=${VAULT}'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Path'
+        mavenDirectory: '$(Build.SourcesDirectory)/maven/apache-maven-3.9.6'
+        mavenSetM2Home: true
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
+    - task: PublishCodeCoverageResults@2
+      inputs:
+        summaryFileLocation: '$(Build.SourcesDirectory)/$(APP_NAME)/target/jacoco-report/jacoco.xml'
+        failIfCoverageEmpty: false
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/$(APP_NAME)/target'
-        Contents: |
-          $(APP_NAME).jar
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        Contents: '$(APP_NAME)-runner.jar'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
