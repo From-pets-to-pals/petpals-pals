@@ -5,7 +5,7 @@
 
 pool:
   vmImage: ubuntu-latest
-
+name: $(Build.BuildId)
 stages:
 - stage: Deploy
   displayName: Deploy to petpals-pals
@@ -34,9 +34,9 @@ stages:
       inputs:
         azureSubscription: 'Azure subscription 1(f1248dd5-2384-4478-bf73-b940c14b63dc)'
         appType: 'webAppLinux'
-        appName: 'petpals-pals'
+        appName: '$(APP_NAME)'
         package: '$(System.DefaultWorkingDirectory)/$(APP_NAME).jar'
         runtimeStack: 'JAVA|17-java17'
-        startUpCommand: 'java -jar /home/site/wwwroot/$(APP_NAME).jar --server.port=80'
+        startUpCommand: 'java -DTENANT-ID=$(TENANT-ID) -DSECRET=$(SECRET) -DCLIENT-ID=$(CLIENT-ID) -jar /home/site/wwwroot/$(APP_NAME).jar'
         appSettings: '-WEBSITES_PORT 80'
         configurationStrings: '-PORT 80'
