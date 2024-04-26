@@ -1,96 +1,90 @@
-<style>
-r { color: Red }
-o { color: Orange }
-g { color: Green }
-b {color: #ff6e7f}
-c { color: #DA22FF}
-p {color:#bfe9ff}
-</style>
+# petpals-pals
 
-## <c>Prerequisites</c>
-> - Java 17
-> - Maven 3.9.6
-> - Intellij Ultimate
-> - local sonarqube server (not mandatory)
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-## <g>Launch App</g>
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-- run "mvn clean install -Dserver.port=80 -Dserver.host=127.0.0.1"
+## Running the application in dev mode
 
-![img.png](readme-resources/clean_install_settings.png)
+You can run your application in dev mode that enables live coding using:
 
-- create application configuration
+```shell script
+./mvnw compile quarkus:dev
+```
 
-![img.png](readme-resources/app_run_settings_intellij.png)
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
-## Intellij Run config
+## Packaging and running the application
 
+The application can be packaged using:
 
+```shell script
+./mvnw package
+```
 
-## <b>Micronaut 4.3.6 Documentation</b>
-- [User Guide](https://docs.micronaut.io/4.3.6/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.3.6/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.3.6/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
 
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
-- [Micronaut Maven Plugin documentation](https://micronaut-projects.github.io/micronaut-maven-plugin/latest/)
+If you want to build an _über-jar_, execute the following command:
 
-## <b>Feature maven-enforcer-plugin documentation
+```shell script
+./mvnw package -Dquarkus.package.type=uber-jar
+```
 
-- [https://maven.apache.org/enforcer/maven-enforcer-plugin/](https://maven.apache.org/enforcer/maven-enforcer-plugin/)
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-## Feature jax-rs documentation
+## Creating a native executable
 
-- [Micronaut JAX-RS support documentation](https://micronaut-projects.github.io/micronaut-jaxrs/latest/guide/index.html)
+You can create a native executable using:
 
-## Feature junit-platform-suite-engine documentation
+```shell script
+./mvnw package -Dnative
+```
 
-- [https://junit.org/junit5/docs/current/user-guide/#junit-platform-suite-engine-setup](https://junit.org/junit5/docs/current/user-guide/#junit-platform-suite-engine-setup)
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
 
-## Feature undertow-server documentation
+```shell script
+./mvnw package -Dnative -Dquarkus.native.container-build=true
+```
 
-- [Micronaut Undertow Server documentation](https://micronaut-projects.github.io/micronaut-servlet/1.0.x/guide/index.html#undertow)
+You can then execute your native executable with: `./target/petpals-pals-1.0-SNAPSHOT-runner`
 
-## Feature serialization-jackson documentation
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
+## Related Guides
 
-## Feature http-client documentation
+- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and
+  Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on
+  it.
+- Hibernate ORM with Panache and Kotlin ([guide](https://quarkus.io/guides/hibernate-orm-panache-kotlin)): Define your
+  persistent model in Hibernate ORM with Panache
+- REST Qute ([guide](https://quarkus.io/guides/qute-reference#rest_integration)): Qute integration for Quarkus REST.
+  This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
+- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus
+  REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
+- Kotlin ([guide](https://quarkus.io/guides/kotlin)): Write your services in Kotlin
+- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
 
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#nettyHttpClient)
+## Provided Code
 
-## Feature validation documentation
+### Hibernate ORM
 
-- [Micronaut Validation documentation](https://micronaut-projects.github.io/micronaut-validation/latest/guide/)
+Create your first JPA entity
 
-## Feature micronaut-aot documentation
+[Related guide section...](https://quarkus.io/guides/hibernate-orm)
 
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
-</b>
+[Related Hibernate with Panache in Kotlin section...](https://quarkus.io/guides/hibernate-orm-panache-kotlin)
 
-Le programme :
-Vous êtes séquestré par des geeks en maths et ils refusent de vous libérer tant que vous n'aurez pas résolu le problème. Vous devez sauvez votre peau en résolvant le problème.
+### REST
 
-Ils vous donnent deux entiers N et K. Vous devez trouver le plus petit et le plus grand entier positif qu'il est possible de construire avec N chiffres avant exactement K chiffres différents entre 0 et 9.
+Easily start your REST Web Services
 
-Par exemple: 99987 possède 3 chiffres distincts 9, 8 and 7.
+[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
 
-Évidemment, les 0 en début ne sont pas autorisés. Par exemple, 0145 n'est pas autorisé. L'entrée donnée possède toujours une réponse correcte.
+### REST Qute
 
-ENTRÉE :
-Ligne 1 : Le nombre de chiffres N et le nombre de chiffres distincts K
+Create your web page using Quarkus REST and Qute
 
-SORTIE :
-Ligne 1: Le plus petit et le plus grand nombre, séparés par un espace.
-
-CONTRAINTES :
-1 ≤ N ≤ 18
-1 ≤ K ≤ 10
-
-EXEMPLE :
-Entrée
-3 3
-Sortie
-102 987
- 
+[Related guide section...](https://quarkus.io/guides/qute#type-safe-templates)
