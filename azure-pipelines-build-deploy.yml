@@ -47,7 +47,7 @@ stages:
       inputs:
         mavenPomFile: '$(Build.SourcesDirectory)/$(APP_NAME)/pom.xml'
         goals: 'clean package'
-        options: '-DSECRET=$(SECRET) -DTENANT-ID=$(TENANT-ID) -DCLIENT-ID=$(CLIENT-ID) -DVAULT=${VAULT}'
+        options: '-DSECRET=$(SECRET) -DTENANT-ID=$(TENANT-ID) -DCLIENT-ID=$(CLIENT-ID) -DVAULT=$(VAULT)'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         javaHomeOption: 'JDKVersion'
