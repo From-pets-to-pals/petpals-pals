@@ -34,7 +34,6 @@ class AzureConfigSourceFactory : ConfigSourceFactory {
                 )
                 .buildClient()
             conf[PALS_API_KEY] = secretClient.getSecret("PALS-API-KEY").value
-            logger.info(conf.toString())
             return listOf<ConfigSource>(PropertiesConfigSource(conf, null, priority.asInt))
         }
         conf[PALS_API_KEY] = caregiversApiKey.value

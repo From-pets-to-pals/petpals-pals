@@ -1,8 +1,8 @@
 package com.petpals.domain.model
 
-data class Owner(
-    val email: String,
-    val functionalId: String,
-    val deviceId: String,
-    val location: String
+class Owner(
+    private val email: String,
+    private val functionalId: String,
+    private val deviceId: String,
+    private var location: String
 )

@@ -27,8 +27,8 @@ class CreateOwnerResource {
     fun createOwnerWithFirstPal(
         newPal: @Valid AddFirstPal
     ): String {
-        logger.info("Calling createFirstPalWithOwner")
-        logger.info("Received new payload for newPal :$newPal")
+        logger.info("Calling createOwnerWithFirstPal")
+        logger.info("Received new payload for newOwner :$newPal")
         val palIdentityInformation = PalIdentityInformation(
             newPal.name,
             newPal.birthDate,
