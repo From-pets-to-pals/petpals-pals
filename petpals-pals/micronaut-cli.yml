@@ -1,6 +1,0 @@
-applicationType: default
-defaultPackage: com.petpals.pals
-testFramework: junit
-sourceLanguage: java
-buildTool: maven
-features: [ app-name, http-client, java, java-application, jax-rs, junit, junit-platform-suite-engine, logback, maven, maven-enforcer-plugin, micronaut-aot, micronaut-http-validation, properties, readme, serialization-jackson, shade, static-resources, undertow-server, validation ]
