@@ -6,9 +6,9 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 
 @Path("/hello")
 @SecurityRequirement(name = "api_key")
-class ExampleResource {
+class HealthCheckResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    fun hello() = "Hello from Quarkus REST"
+    fun hello() = "Hello from pals"
 }
