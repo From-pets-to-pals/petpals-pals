@@ -28,7 +28,7 @@ stages:
       displayName: 'Copy Files from artifact staging directory'
       inputs:
         SourceFolder: '$(System.ArtifactsDirectory)/$(APP_NAME)'
-        Contents: '$(APP_NAME).jar'
+        Contents: '$(APP_NAME)-runner.jar'
         TargetFolder: $(System.DefaultWorkingDirectory)
     - task: AzureWebApp@1
       inputs:
