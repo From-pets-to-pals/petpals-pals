@@ -6,5 +6,6 @@ data class NewOwner(
     @Email val email: String  ,
     val functionalId: String,
     val deviceId: String,
+    @Email val reference: String ,
     val location: String
 )

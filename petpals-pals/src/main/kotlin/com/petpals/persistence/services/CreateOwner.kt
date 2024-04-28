@@ -1,7 +1,6 @@
-package com.petpals.domain.services
+package com.petpals.persistence.services
 
-import com.petpals.domain.model.Pals
-import com.petpals.domain.ports.`in`.CreateOwnerIn
+import com.petpals.persistence.ports.`in`.CreateOwnerIn
 import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
