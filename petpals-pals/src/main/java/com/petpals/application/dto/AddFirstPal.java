@@ -7,7 +7,6 @@ import java.util.Date;
 
 public record AddFirstPal(
 		boolean isVaccinated,
-		@NotNull NewOwner owner,
 		@NotBlank String reference,
 		@NotBlank String name,
 		@NotBlank String shortName,

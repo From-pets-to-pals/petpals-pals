@@ -1,6 +1,7 @@
 package com.petpals.application.entrypoints;
 
 import com.petpals.application.dto.AddFirstPal;
+import com.petpals.application.dto.NewOwner;
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
@@ -14,6 +15,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.jboss.logging.Logger;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 @Path("/pals")
 @SecurityRequirement(name = "api_key")
@@ -29,32 +31,39 @@ public class CreateOwnerResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String createOwner(@Valid AddFirstPal addFirstPal) {
+	public String createOwner(@Valid NewOwner newOwner) {
 		
 		LOGGER.info("Calling createFirstPalWithOwner");
 		LOGGER.info("Received new payload for newPal :$newPal");
 		var owner = new Owners(
-				addFirstPal.owner().email(),
-				addFirstPal.owner().deviceId(),
-				addFirstPal.owner().reference(),
-				addFirstPal.owner().location()
+				newOwner.email(),
+				newOwner.deviceId(),
+				newOwner.reference(),
+				newOwner.location()
 		);
-		var palToRegister = new Pals(
-				addFirstPal.name(),
-				addFirstPal.shortName(),
-				addFirstPal.icadIdentifier(),
-				owner,
-				new Date(addFirstPal.birthDate().getTime()),
-				addFirstPal.specie().name(),
-				addFirstPal.breed(),
-				addFirstPal.hasPassport(),
-				addFirstPal.isMale(),
-				addFirstPal.isSterilized(),
-				addFirstPal.isVaccinated(),
-				null,
-				null,
-				addFirstPal.reference()
-		);
-		return createOwnerIn.createOwnerWithFirstPal(palToRegister);// (3)
+		var palToRegister = new ArrayList<Pals>();
+		for(AddFirstPal pal : newOwner.pals()){
+			palToRegister.add(
+				new Pals(
+						pal.name(),
+						pal.shortName(),
+						pal.icadIdentifier(),
+						owner,
+						new Date(pal.birthDate().getTime()),
+						pal.specie().name(),
+						pal.breed(),
+						pal.hasPassport(),
+						pal.isMale(),
+						pal.isSterilized(),
+						pal.isVaccinated(),
+						null,
+						null,
+						pal.reference()
+				)
+				
+			);
+			owner.setPalsList(palToRegister);
+		}
+		return createOwnerIn.createOwnerWithFirstPal(owner);// (3)
 	}
 }

@@ -1,5 +1,6 @@
 package com.petpals.persistence.services;
 
+import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.persistence.repositories.OwnersRepository;
@@ -24,10 +25,12 @@ public class CreateOwner implements CreateOwnerIn {
 	
 	@Transactional(rollbackOn = {PetPalsExceptions.class}, value = Transactional.TxType.REQUIRED)
 	@Override
-	public String createOwnerWithFirstPal(Pals pal) {
+	public String createOwnerWithFirstPal(Owners owner) {
 		LOG.info("Creating owner with first pal");
-		ownersRepository.persist(pal.getOwner());
-		palsRepository.persistAndFlush(pal);
+		ownersRepository.persist(owner);
+		owner.getPalsList().forEach(palsRepository::persist);
+		palsRepository.flush();
+		ownersRepository.flush();
 		return "Ok";
 	}
 }
