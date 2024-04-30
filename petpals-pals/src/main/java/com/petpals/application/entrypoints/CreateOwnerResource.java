@@ -31,7 +31,7 @@ public class CreateOwnerResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String createOwner(@Valid NewOwner newOwner) {
+	public void createOwner(@Valid NewOwner newOwner) {
 		
 		LOGGER.info("Calling createFirstPalWithOwner");
 		LOGGER.info("Received new payload for newPal :$newPal");
@@ -64,6 +64,6 @@ public class CreateOwnerResource {
 			);
 			owner.setPalsList(palToRegister);
 		}
-		return createOwnerIn.createOwnerWithFirstPal(owner);// (3)
+		createOwnerIn.createOwnerWithFirstPal(owner);// (3)
 	}
 }

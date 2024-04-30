@@ -7,4 +7,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class OwnersRepository implements PanacheRepository<Owners> {
+
+    public Long save(Owners owners){
+        persistAndFlush(owners);
+        return find("reference", owners.getReference()).firstResult().getId();
+    }
 }

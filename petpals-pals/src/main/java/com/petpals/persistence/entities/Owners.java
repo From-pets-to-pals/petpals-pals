@@ -25,7 +25,7 @@ public class Owners {
 
     @Column(name = "location", nullable = false)
     private String location;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "owner_id")
     private List<Pals> palsList;
 

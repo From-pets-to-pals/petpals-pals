@@ -83,6 +83,8 @@ public class DatasourceConfigurator implements TenantConnectionResolver {
                 .jdbcUrl("jdbc:postgresql://"+url)
                 .credential(new NamePrincipal((secretClient.getSecret("DB-ADMIN").getValue())))
                 .credential(new SimplePassword((secretClient.getSecret("DB-PASSWORD").getValue())));
+        LOG.info(secretClient.getSecret("DB-ADMIN").getValue());
+        LOG.info(secretClient.getSecret("DB-PASSWORD").getValue());
     try{
         LOG.info("Building Datasource from secrets");
         return AgroalDataSource.from(dataSourceConfiguration.get());

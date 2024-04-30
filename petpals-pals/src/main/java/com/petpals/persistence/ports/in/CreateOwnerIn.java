@@ -5,5 +5,5 @@ import com.petpals.persistence.entities.Pals;
 
 
 public interface CreateOwnerIn {
-    String createOwnerWithFirstPal(Owners pal);
+    Long createOwnerWithFirstPal(Owners pal);
 }
