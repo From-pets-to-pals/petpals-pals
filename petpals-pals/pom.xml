@@ -138,6 +138,7 @@
     </dependencies>
     <build>
         <finalName>${name}</finalName>
+
         <plugins>
 
             <plugin>

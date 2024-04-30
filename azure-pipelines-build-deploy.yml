@@ -1,7 +1,7 @@
 trigger:
 - main
 
-name: caregivers-$(Build.BuildId)
+name: $(APP_NAME)-$(Build.BuildId)
 
 stages:
 - stage: Build
@@ -47,7 +47,7 @@ stages:
       inputs:
         mavenPomFile: '$(Build.SourcesDirectory)/$(APP_NAME)/pom.xml'
         goals: 'clean package'
-        options: '-DSECRET=$(SECRET) -DTENANT-ID=$(TENANT-ID) -DCLIENT-ID=$(CLIENT-ID) -DVAULT=${VAULT}'
+        options: '-DSECRET=$(SECRET) -DTENANT-ID=$(TENANT-ID) -DCLIENT-ID=$(CLIENT-ID) -DVAULT=$(VAULT)'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         javaHomeOption: 'JDKVersion'
@@ -61,6 +61,20 @@ stages:
       inputs:
         summaryFileLocation: '$(Build.SourcesDirectory)/$(APP_NAME)/target/jacoco-report/jacoco.xml'
         failIfCoverageEmpty: false
+    - task: Maven@4
+      displayName: SonarQube analysis 
+      inputs:
+        mavenPomFile: '$(Build.SourcesDirectory)/$(APP_NAME)/pom.xml'
+        goals: 'sonar:sonar'
+        options: '-Dsonar.token=$(SONAR_TOKEN) -Dsonar.qualitygate.wait=true'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Path'
+        mavenDirectory: '$(Build.SourcesDirectory)/maven/apache-maven-3.9.6'
+        mavenSetM2Home: true
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
