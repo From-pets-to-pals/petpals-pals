@@ -80,7 +80,7 @@ public class DatasourceConfigurator implements TenantConnectionResolver {
         AgroalConnectionFactoryConfigurationSupplier connectionFactoryConfiguration = poolConfiguration.connectionFactoryConfiguration();
 
         connectionFactoryConfiguration
-                .jdbcUrl("jdbc:postgresql://"+url)
+                .jdbcUrl(String.format("jdbc:postgresql://%s",url))
                 .credential(new NamePrincipal((secretClient.getSecret("DB-ADMIN").getValue())))
                 .credential(new SimplePassword((secretClient.getSecret("DB-PASSWORD").getValue())));
     try{
