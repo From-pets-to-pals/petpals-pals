@@ -10,10 +10,6 @@ public class OwnersRepository implements PanacheRepository<Owners> {
 
     public Long save(Owners owners){
         persistAndFlush(owners);
-        return findBy("reference", owners.getReference()).getId();
-    }
-
-    public Owners findBy(String parameterName, String parameterValue){
-        return find(parameterName, parameterValue).firstResult();
+        return owners.getId();
     }
 }

@@ -100,20 +100,19 @@ public class Pals {
     @Override
     public String toString() {
         return "Pals{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", ICADIdentifier='" + getICADIdentifier() + '\'' +
-                ", owner=" + getOwner() +
-                ", birthDate=" + getBirthDate() +
-                ", specie='" + getSpecie() + '\'' +
-                ", breed='" + getBreed() + '\'' +
-                ", hasPassport=" + isHasPassport() +
-                ", isMale=" + isMale() +
-                ", isSterilized=" + isSterilized() +
-                ", isVaccinated=" + isVaccinated() +
-                ", nextVaccine=" + getNextVaccine() +
-                ", nextPlannedApp=" + getNextPlannedApp() +
-                ", palReference='" + getPalReference() + '\'' +
+                "id=" + this.id +
+                ", name='" + this.name + '\'' +
+                ", ICADIdentifier='" + this.icadidentifier + '\'' +
+                ", birthDate=" + this.birthDate +
+                ", specie='" + this.specie + '\'' +
+                ", breed='" + this.breed + '\'' +
+                ", hasPassport=" + this.hasPassport +
+                ", isMale=" + this.isMale +
+                ", isSterilized=" + this.isSterilized +
+                ", isVaccinated=" + this.isVaccinated +
+                ", nextVaccine=" + this.nextVaccine +
+                ", nextPlannedApp=" + this.nextPlannedApp +
+                ", palReference='" + this.palReference + '\'' +
                 '}';
     }
 

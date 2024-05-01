@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 class HealthCheckResourceTest {
 
     @Test
-    public void testHelloEndpoint() {
+    void testHelloEndpoint() {
         given()
             .when().get("/hello")
             .then()

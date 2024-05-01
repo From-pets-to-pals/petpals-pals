@@ -17,12 +17,12 @@ import org.jboss.logging.Logger;
 import java.sql.Date;
 import java.util.ArrayList;
 
-@Path("/pals")
+@Path("/owners")
 @SecurityRequirement(name = "api_key")
 public class CreateOwnerResource {
 	private static final Logger LOGGER = Logger.getLogger(CreateOwnerResource.class);
 	
-	private CreateOwnerIn createOwnerIn;
+	private final CreateOwnerIn createOwnerIn;
 	
 	public CreateOwnerResource(CreateOwnerIn createOwnerIn) {
 		this.createOwnerIn = createOwnerIn;
@@ -31,7 +31,7 @@ public class CreateOwnerResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public void createOwner(@Valid NewOwner newOwner) {
+	public Long createOwner(@Valid NewOwner newOwner) {
 		
 		LOGGER.info("Calling createFirstPalWithOwner");
 		LOGGER.info("Received new payload for newPal :$newPal");
@@ -64,6 +64,6 @@ public class CreateOwnerResource {
 			);
 			owner.setPalsList(palToRegister);
 		}
-		createOwnerIn.createOwnerWithFirstPal(owner);// (3)
+		return createOwnerIn.createOwnerWithFirstPal(owner);// (3)
 	}
 }

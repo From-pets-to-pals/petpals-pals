@@ -16,12 +16,10 @@ import org.jboss.logging.Logger;
 public class CreateOwner implements CreateOwnerIn {
 	private final Logger LOG = Logger.getLogger(CreateOwner.class);
 
-	private final PalsRepository palsRepository;
 
 	private final OwnersRepository ownersRepository;
 
-	public CreateOwner(PalsRepository palsRepository, OwnersRepository ownersRepository) {
-		this.palsRepository = palsRepository;
+	public CreateOwner(OwnersRepository ownersRepository) {
 		this.ownersRepository = ownersRepository;
 	}
 
@@ -31,11 +29,8 @@ public class CreateOwner implements CreateOwnerIn {
 		LOG.info("Creating owner with first pal");
 		try {
 			return ownersRepository.save(owner);
-			//owner.getPalsList().forEach(palsRepository::persist);
 		} catch (ConstraintViolationException e){
 			throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_KEY_OWNER_MAIL_CONSTRAINT_VIOLATION);
 		}
-		//palsRepository.flush();
-		//ownersRepository.flush();
 	}
 }

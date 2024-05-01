@@ -25,7 +25,7 @@ public class Owners {
 
     @Column(name = "location", nullable = false)
     private String location;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private List<Pals> palsList;
 
@@ -42,12 +42,12 @@ public class Owners {
     @Override
     public String toString() {
         return "Owners{" +
-                       "id=" + id +
-                       ", mail='" + mail + '\'' +
-                       ", device='" + device + '\'' +
-                       ", reference='" + reference + '\'' +
+                       "id=" + this.id +
+                       ", mail='" + this.mail + '\'' +
+                       ", device='" + this.device + '\'' +
+                       ", reference='" + this.reference + '\'' +
                        ", location='" + location + '\'' +
-                       ", palsList=" + palsList +
+                       ", palsList=" + this.palsList +
                        '}';
     }
     

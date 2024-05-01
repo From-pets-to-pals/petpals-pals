@@ -4,15 +4,12 @@ import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.persistence.repositories.OwnersRepository;
-import com.petpals.persistence.repositories.PalsRepository;
-import com.petpals.persistence.services.CreateOwner;
 import com.petpals.shared.entities.uuid.UUIDFormatter;
 import com.petpals.shared.entities.uuid.UUIDGenerator;
 import com.petpals.shared.errorhandling.PetPalsExceptions;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
-import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
@@ -26,7 +23,7 @@ import java.time.Instant;
 import java.util.List;
 
 @QuarkusTest
-class PalsRepositoryTest {
+class CreateOwnersServiceTest {
 
     @InjectMock
     public OwnersRepository ownersRepository;
@@ -51,17 +48,20 @@ class PalsRepositoryTest {
     }
     @Test
     @TestTransaction
-    public void testAddOwnerWithPals() {
-        Mockito.when(ownersRepository.save(owners)).thenReturn(1L);
+    void testAddOwnerWithPals() {
+        var toReturn = owners;
+        toReturn.setId(1L);
+        Mockito.when(ownersRepository.save(owners)).thenCallRealMethod();
+        Mockito.doNothing().when(ownersRepository).persistAndFlush(owners);
         var res = createOwnerIn.createOwnerWithFirstPal(owners);
-        Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
-        Assertions.assertEquals(1L, res);
+        Mockito.verify(ownersRepository).persistAndFlush(ownersArgumentCaptor.capture());
+        Assertions.assertEquals(toReturn.getId(), res);
         Assertions.assertEquals(owners.getReference(),ownersArgumentCaptor.getValue().getReference());
     }
 
     @Test
     @TestTransaction
-    public void testAddOwnerShouldThrowPetPalsException() {
+    void testAddOwnerShouldThrowPetPalsException() {
         Mockito.when(ownersRepository.save(owners)).thenThrow(ConstraintViolationException.class);
         Assertions.assertThrows(PetPalsExceptions.class, () -> createOwnerIn.createOwnerWithFirstPal(owners));
         Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
