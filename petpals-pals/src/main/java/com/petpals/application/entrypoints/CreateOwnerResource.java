@@ -1,7 +1,8 @@
 package com.petpals.application.entrypoints;
 
-import com.petpals.application.dto.AddFirstPal;
-import com.petpals.application.dto.NewOwner;
+import com.petpals.application.dto.AddPalRequest;
+import com.petpals.application.dto.NewOwnerRequest;
+import com.petpals.application.mappers.NewOwnerRequestMapper;
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
@@ -23,47 +24,19 @@ public class CreateOwnerResource {
 	private static final Logger LOGGER = Logger.getLogger(CreateOwnerResource.class);
 	
 	private final CreateOwnerIn createOwnerIn;
+	private final NewOwnerRequestMapper newOwnerRequestMapper;
 	
-	public CreateOwnerResource(CreateOwnerIn createOwnerIn) {
+	public CreateOwnerResource(CreateOwnerIn createOwnerIn, NewOwnerRequestMapper newOwnerRequestMapper) {
 		this.createOwnerIn = createOwnerIn;
+		this.newOwnerRequestMapper = newOwnerRequestMapper;
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Long createOwner(@Valid NewOwner newOwner) {
-		
+	public Long createOwner(@Valid NewOwnerRequest newOwnerRequest) {
 		LOGGER.info("Calling createFirstPalWithOwner");
-		LOGGER.info("Received new payload for newPal :$newPal");
-		var owner = new Owners(
-				newOwner.email(),
-				newOwner.deviceId(),
-				newOwner.reference(),
-				newOwner.location()
-		);
-		var palToRegister = new ArrayList<Pals>();
-		for(AddFirstPal pal : newOwner.pals()){
-			palToRegister.add(
-				new Pals(
-						pal.name(),
-						pal.shortName(),
-						pal.icadIdentifier(),
-						owner,
-						new Date(pal.birthDate().getTime()),
-						pal.specie().name(),
-						pal.breed(),
-						pal.hasPassport(),
-						pal.isMale(),
-						pal.isSterilized(),
-						pal.isVaccinated(),
-						null,
-						null,
-						pal.reference()
-				)
-				
-			);
-			owner.setPalsList(palToRegister);
-		}
-		return createOwnerIn.createOwnerWithFirstPal(owner);// (3)
+		LOGGER.info("Received new payload for newPal : $newPal");
+		return createOwnerIn.createOwnerWithFirstPal(newOwnerRequestMapper.toEntity(newOwnerRequest));// (3)
 	}
 }

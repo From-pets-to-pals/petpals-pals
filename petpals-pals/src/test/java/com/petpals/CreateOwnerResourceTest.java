@@ -2,8 +2,8 @@ package com.petpals;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.petpals.application.dto.AddFirstPal;
-import com.petpals.application.dto.NewOwner;
+import com.petpals.application.dto.AddPalRequest;
+import com.petpals.application.dto.NewOwnerRequest;
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.shared.enums.Species;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,11 +30,15 @@ class CreateOwnerResourceTest {
 	void testHelloEndpoint() throws JsonProcessingException {
 		Mockito.when(createOwnerIn.createOwnerWithFirstPal(Mockito.any(Owners.class))).thenReturn(1L);
 		ObjectMapper mapper = new ObjectMapper();
-		var owner = new NewOwner("sa.bennaceur@gmail.com","OPPO C9","19819189189189119818919181981981", "FRANCE",
-								 List.of(
-										 new AddFirstPal(true, "1234567656755765656757655657", "Ashe", "Ashe", new Date()
-												 , true, Species.DOG,"Husky","250229090909090", true, false, 29.0,
-														 53.0)
+		var owner = new NewOwnerRequest("sa.bennaceur@gmail.com", "Sidou","OPPO C9",
+										"19819189189189119818919181981981", "FRANCE",
+										List.of(
+										 new AddPalRequest("Ashe", "Ashe", "250221212121212", new Date(),
+														   Species.DOG, "Husky",
+														   true
+												 , true, false, true, null, null, "123456789456123456789456124596",
+														   29.0,
+														   53.0)
 								 ));
 		var json = mapper.writeValueAsString(owner);
 		given()
@@ -48,7 +51,24 @@ class CreateOwnerResourceTest {
 				.body(is("1"));
 		Mockito.verify(createOwnerIn, Mockito.times(1)).createOwnerWithFirstPal(ownerCaptor.capture());
 		Assertions.assertEquals(owner.reference(),ownerCaptor.getValue().getReference());
-		Assertions.assertEquals(owner.pals().get(0).name(),ownerCaptor.getValue().getPalsList().get(0).getName());
-		
+		Assertions.assertEquals(owner.email(),ownerCaptor.getValue().getEmail());
+		Assertions.assertEquals(owner.username(),ownerCaptor.getValue().getUsername());
+		Assertions.assertEquals(owner.location(),ownerCaptor.getValue().getLocation());
+		Assertions.assertEquals(owner.deviceId(),ownerCaptor.getValue().getDeviceId());
+		Assertions.assertEquals(owner.pals().get(0).name(),ownerCaptor.getValue().getPals().get(0).getName());
+		Assertions.assertEquals(owner.pals().get(0).shortname(),ownerCaptor.getValue().getPals().get(0).getShortname());
+		Assertions.assertEquals(owner.pals().get(0).reference(),ownerCaptor.getValue().getPals().get(0).getReference());
+		Assertions.assertEquals(owner.pals().get(0).breed(),ownerCaptor.getValue().getPals().get(0).getBreed());
+		Assertions.assertEquals(owner.pals().get(0).specie().name(),ownerCaptor.getValue().getPals().get(0).getSpecie());
+		Assertions.assertEquals(owner.pals().get(0).birthDate(),ownerCaptor.getValue().getPals().get(0).getBirthDate());
+		Assertions.assertEquals(owner.pals().get(0).weight(),ownerCaptor.getValue().getPals().get(0).getWeight());
+		Assertions.assertEquals(owner.pals().get(0).height(),ownerCaptor.getValue().getPals().get(0).getHeight());
+		Assertions.assertEquals(owner.pals().get(0).hasPassport(),ownerCaptor.getValue().getPals().get(0).isHasPassport());
+		Assertions.assertEquals(owner.pals().get(0).isMale(),ownerCaptor.getValue().getPals().get(0).isMale());
+		Assertions.assertEquals(owner.pals().get(0).isVaccinated(),ownerCaptor.getValue().getPals().get(0).isVaccinated());
+		Assertions.assertEquals(owner.pals().get(0).isSterilized(),ownerCaptor.getValue().getPals().get(0).isSterilized());
+		Assertions.assertEquals(owner.pals().get(0).nextVaccine(),ownerCaptor.getValue().getPals().get(0).getNextVaccine());
+		Assertions.assertEquals(owner.pals().get(0).nextPlannedApp(),ownerCaptor.getValue().getPals().get(0).getNextPlannedApp());
+		Mockito.verifyNoMoreInteractions(createOwnerIn);
 	}
 }

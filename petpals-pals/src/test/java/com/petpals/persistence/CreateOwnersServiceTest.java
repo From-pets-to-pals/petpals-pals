@@ -39,12 +39,12 @@ class CreateOwnersServiceTest {
         var ownerUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
         var palUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
 
-        owners = new Owners("sa.bennaceur@gmail.com", "OPPO XC9" , ownerUUID, "FRANCE");
+        owners = new Owners("sa.bennaceur@gmail.com", "OPPO XC9" , ownerUUID, "FRANCE", "sidou");
         Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), "DOG", "Berger " +
                 "Américain", true,
                 true,
                 true, true, null, null, palUUID);
-        owners.setPalsList(List.of(pals));
+        owners.setPals(List.of(pals));
     }
     @Test
     @TestTransaction
