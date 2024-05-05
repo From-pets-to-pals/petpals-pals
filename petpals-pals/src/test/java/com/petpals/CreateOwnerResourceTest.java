@@ -36,7 +36,7 @@ class CreateOwnerResourceTest {
 										UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(), true, ""),
 										 "FRANCE",
 										List.of(
-										 new AddPalRequest("Ashe", "Ashe", "250221212121212", new Date(),
+										 new AddPalRequest("Ashe", "Ashe", "250221212121212", "2022-04-28",
 														   Species.DOG, "Husky",
 														   true
 												 , true, false, true, null, null,
@@ -64,14 +64,17 @@ class CreateOwnerResourceTest {
 		Assertions.assertEquals(owner.pals().get(0).reference(),ownerCaptor.getValue().getPals().get(0).getReference());
 		Assertions.assertEquals(owner.pals().get(0).breed(),ownerCaptor.getValue().getPals().get(0).getBreed());
 		Assertions.assertEquals(owner.pals().get(0).specie().name(),ownerCaptor.getValue().getPals().get(0).getSpecie());
-		Assertions.assertEquals(owner.pals().get(0).birthDate(),ownerCaptor.getValue().getPals().get(0).getBirthDate());
+		Assertions.assertEquals(owner.pals().get(0).birthDate(),
+								ownerCaptor.getValue().getPals().get(0).getBirthDate().toString());
 		Assertions.assertEquals(owner.pals().get(0).icadIdentifier(),ownerCaptor.getValue().getPals().get(0).getIcadIdentifier());
 		Assertions.assertEquals(owner.pals().get(0).isMale(),ownerCaptor.getValue().getPals().get(0).isMale());
 		Assertions.assertEquals(owner.pals().get(0).hasPassport(),ownerCaptor.getValue().getPals().get(0).isHasPassport());
 		Assertions.assertEquals(owner.pals().get(0).isVaccinated(),ownerCaptor.getValue().getPals().get(0).isVaccinated());
 		Assertions.assertEquals(owner.pals().get(0).isSterilized(),ownerCaptor.getValue().getPals().get(0).isSterilized());
-		Assertions.assertEquals(owner.pals().get(0).nextVaccine(),ownerCaptor.getValue().getPals().get(0).getNextVaccine());
-		Assertions.assertEquals(owner.pals().get(0).nextPlannedApp(),ownerCaptor.getValue().getPals().get(0).getNextPlannedApp());
+		Assertions.assertNull(owner.pals().get(0).nextVaccine());
+		Assertions.assertNull(ownerCaptor.getValue().getPals().get(0).getNextVaccine());
+		Assertions.assertNull(owner.pals().get(0).nextPlannedApp());
+		Assertions.assertNull(ownerCaptor.getValue().getPals().get(0).getNextPlannedApp());
 		Assertions.assertEquals(owner.pals().get(0).weight(),ownerCaptor.getValue().getPals().get(0).getWeight());
 		Assertions.assertEquals(owner.pals().get(0).height(),ownerCaptor.getValue().getPals().get(0).getHeight());
 		Mockito.verifyNoMoreInteractions(createOwnerIn);
