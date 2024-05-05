@@ -20,7 +20,6 @@ public record AddPalRequest(
 		Date nextVaccine,
 		Date nextPlannedApp,
 		@NotBlank @Length(min = 36, max = 36) String reference,
-		
 		@DecimalMin(value = "0.1") @DecimalMax(value = "50.0") double weight,
 		@DecimalMin(value = "0.1") @DecimalMax(value = "150.0") double height) {
 }
