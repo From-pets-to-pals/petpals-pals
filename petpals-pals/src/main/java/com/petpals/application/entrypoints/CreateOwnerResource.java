@@ -12,6 +12,8 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.jboss.logging.Logger;
 
+import java.text.ParseException;
+
 
 @Path("/owners")
 @SecurityRequirement(name = "api_key")
@@ -29,7 +31,7 @@ public class CreateOwnerResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Long createOwner(@Valid NewOwnerRequest newOwnerRequest) {
+	public Long createOwner(@Valid NewOwnerRequest newOwnerRequest) throws ParseException {
 		LOGGER.info("Calling createFirstPalWithOwner");
 		LOGGER.info("Received new payload for newPal : $newPal");
 		return createOwnerIn.createOwnerWithFirstPal(newOwnerRequestMapper.toEntity(newOwnerRequest));// (3)

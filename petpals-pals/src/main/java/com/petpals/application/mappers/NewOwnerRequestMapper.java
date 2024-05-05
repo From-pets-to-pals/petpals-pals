@@ -6,8 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
+import java.text.ParseException;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA, uses = {AddPalRequestMapper.class})
 public interface NewOwnerRequestMapper {
 	@Mapping(target = "id", ignore = true)
-	Owners toEntity(NewOwnerRequest request);
+	Owners toEntity(NewOwnerRequest request) throws ParseException;
 }

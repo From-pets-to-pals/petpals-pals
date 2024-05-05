@@ -29,7 +29,7 @@ public class Owners {
 
     @Column(name = "location", nullable = false)
     private String location;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private List<Pals> pals;
 
