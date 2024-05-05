@@ -107,11 +107,11 @@ public class Pals {
         this.name = name;
     }
 
-    public String getICADIdentifier() {
+    public String getIcadIdentifier() {
         return icadIdentifier;
     }
 
-    public void setICADIdentifier(String ICADIdentifier) {
+    public void setIcadIdentifier(String ICADIdentifier) {
         this.icadIdentifier = ICADIdentifier;
     }
 
@@ -211,14 +211,6 @@ public class Pals {
 
     public void setReference(String palReference) {
         this.reference = palReference;
-    }
-    
-    public String getIcadIdentifier() {
-        return icadIdentifier;
-    }
-    
-    public void setIcadIdentifier(String icadidentifier) {
-        this.icadIdentifier = icadidentifier;
     }
     
     public double getWeight() {

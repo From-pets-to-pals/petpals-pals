@@ -137,7 +137,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>${name}</finalName>
+        <finalName>${project.name}</finalName>
 
         <plugins>
 
@@ -169,7 +169,7 @@
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
-                            <version>${org.mapstruct.version}</version>
+                            <version>1.5.5.Final</version>
                         </path>
                         <!-- other annotation processors -->
                     </annotationProcessorPaths>

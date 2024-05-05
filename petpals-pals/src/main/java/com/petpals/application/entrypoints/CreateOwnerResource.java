@@ -3,8 +3,6 @@ package com.petpals.application.entrypoints;
 import com.petpals.application.dto.AddPalRequest;
 import com.petpals.application.dto.NewOwnerRequest;
 import com.petpals.application.mappers.NewOwnerRequestMapper;
-import com.petpals.persistence.entities.Owners;
-import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -15,8 +13,6 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.jboss.logging.Logger;
 
-import java.sql.Date;
-import java.util.ArrayList;
 
 @Path("/owners")
 @SecurityRequirement(name = "api_key")

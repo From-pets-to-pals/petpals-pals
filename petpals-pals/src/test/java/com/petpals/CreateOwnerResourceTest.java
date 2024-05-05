@@ -6,6 +6,8 @@ import com.petpals.application.dto.AddPalRequest;
 import com.petpals.application.dto.NewOwnerRequest;
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
+import com.petpals.shared.entities.uuid.UUIDFormatter;
+import com.petpals.shared.entities.uuid.UUIDGenerator;
 import com.petpals.shared.enums.Species;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
@@ -30,13 +32,15 @@ class CreateOwnerResourceTest {
 	void testHelloEndpoint() throws JsonProcessingException {
 		Mockito.when(createOwnerIn.createOwnerWithFirstPal(Mockito.any(Owners.class))).thenReturn(1L);
 		ObjectMapper mapper = new ObjectMapper();
-		var owner = new NewOwnerRequest("sa.bennaceur@gmail.com", "Sidou","OPPO C9",
-										"19819189189189119818919181981981", "FRANCE",
+		var owner = new NewOwnerRequest("sa.bennaceur@gmail.com", "Sidou", "OPPO C9",
+										UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(), true, ""),
+										 "FRANCE",
 										List.of(
 										 new AddPalRequest("Ashe", "Ashe", "250221212121212", new Date(),
 														   Species.DOG, "Husky",
 														   true
-												 , true, false, true, null, null, "123456789456123456789456124596",
+												 , true, false, true, null, null,
+														   UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,""),
 														   29.0,
 														   53.0)
 								 ));
@@ -61,14 +65,15 @@ class CreateOwnerResourceTest {
 		Assertions.assertEquals(owner.pals().get(0).breed(),ownerCaptor.getValue().getPals().get(0).getBreed());
 		Assertions.assertEquals(owner.pals().get(0).specie().name(),ownerCaptor.getValue().getPals().get(0).getSpecie());
 		Assertions.assertEquals(owner.pals().get(0).birthDate(),ownerCaptor.getValue().getPals().get(0).getBirthDate());
-		Assertions.assertEquals(owner.pals().get(0).weight(),ownerCaptor.getValue().getPals().get(0).getWeight());
-		Assertions.assertEquals(owner.pals().get(0).height(),ownerCaptor.getValue().getPals().get(0).getHeight());
-		Assertions.assertEquals(owner.pals().get(0).hasPassport(),ownerCaptor.getValue().getPals().get(0).isHasPassport());
+		Assertions.assertEquals(owner.pals().get(0).icadIdentifier(),ownerCaptor.getValue().getPals().get(0).getIcadIdentifier());
 		Assertions.assertEquals(owner.pals().get(0).isMale(),ownerCaptor.getValue().getPals().get(0).isMale());
+		Assertions.assertEquals(owner.pals().get(0).hasPassport(),ownerCaptor.getValue().getPals().get(0).isHasPassport());
 		Assertions.assertEquals(owner.pals().get(0).isVaccinated(),ownerCaptor.getValue().getPals().get(0).isVaccinated());
 		Assertions.assertEquals(owner.pals().get(0).isSterilized(),ownerCaptor.getValue().getPals().get(0).isSterilized());
 		Assertions.assertEquals(owner.pals().get(0).nextVaccine(),ownerCaptor.getValue().getPals().get(0).getNextVaccine());
 		Assertions.assertEquals(owner.pals().get(0).nextPlannedApp(),ownerCaptor.getValue().getPals().get(0).getNextPlannedApp());
+		Assertions.assertEquals(owner.pals().get(0).weight(),ownerCaptor.getValue().getPals().get(0).getWeight());
+		Assertions.assertEquals(owner.pals().get(0).height(),ownerCaptor.getValue().getPals().get(0).getHeight());
 		Mockito.verifyNoMoreInteractions(createOwnerIn);
 	}
 }
