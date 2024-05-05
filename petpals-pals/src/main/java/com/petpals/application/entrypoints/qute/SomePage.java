@@ -12,8 +12,11 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/some-page")
 public class SomePage {
     
-    @Inject
     Template page;
+    
+    public SomePage(Template page) {
+        this.page = page;
+    }
     
     @GET
     @Produces(MediaType.TEXT_PLAIN)

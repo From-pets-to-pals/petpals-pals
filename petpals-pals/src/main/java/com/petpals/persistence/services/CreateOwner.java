@@ -1,10 +1,8 @@
 package com.petpals.persistence.services;
 
 import com.petpals.persistence.entities.Owners;
-import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.persistence.repositories.OwnersRepository;
-import com.petpals.persistence.repositories.PalsRepository;
 import com.petpals.shared.errorhandling.ExceptionsEnum;
 import com.petpals.shared.errorhandling.PetPalsExceptions;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -14,7 +12,7 @@ import org.jboss.logging.Logger;
 
 @ApplicationScoped
 public class CreateOwner implements CreateOwnerIn {
-	private final Logger LOG = Logger.getLogger(CreateOwner.class);
+	private static final Logger LOG = Logger.getLogger(CreateOwner.class);
 
 
 	private final OwnersRepository ownersRepository;

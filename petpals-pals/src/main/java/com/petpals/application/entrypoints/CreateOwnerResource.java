@@ -1,6 +1,5 @@
 package com.petpals.application.entrypoints;
 
-import com.petpals.application.dto.AddPalRequest;
 import com.petpals.application.dto.NewOwnerRequest;
 import com.petpals.application.mappers.NewOwnerRequestMapper;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
