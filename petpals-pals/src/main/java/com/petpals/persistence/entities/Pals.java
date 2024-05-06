@@ -58,7 +58,7 @@ public class Pals {
     @Column(name="next_vaccine")
     private Date nextVaccine;
     @Column(name="next_planned_app")
-    private Date nextPlannedApp;
+    private Date nextPlannedVetApp;
 
     @Column(name="reference",columnDefinition = "bpchar(36)")
     private String reference;
@@ -72,7 +72,7 @@ public class Pals {
     public Pals() {
     }
     
-    public Pals(String name, String shortname, String icadIdentifier, Owners owner, Date birthDate, String specie, String breed, boolean hasPassport, boolean isMale, boolean isSterilized, boolean isVaccinated, Date nextVaccine, Date nextPlannedApp, String reference) {
+    public Pals(String name, String shortname, String icadIdentifier, Owners owner, Date birthDate, String specie, String breed, boolean hasPassport, boolean isMale, boolean isSterilized, boolean isVaccinated, Date nextVaccine, Date nextPlannedVetApp, String reference) {
         this.name = name;
         this.shortname = shortname;
         this.icadIdentifier = icadIdentifier;
@@ -85,7 +85,7 @@ public class Pals {
         this.isSterilized = isSterilized;
         this.isVaccinated = isVaccinated;
         this.nextVaccine = nextVaccine;
-        this.nextPlannedApp = nextPlannedApp;
+        this.nextPlannedVetApp = nextPlannedVetApp;
         this.reference = reference;
     }
     
@@ -185,12 +185,12 @@ public class Pals {
         this.nextVaccine = nextVaccine;
     }
 
-    public Date getNextPlannedApp() {
-        return nextPlannedApp;
+    public Date getNextPlannedVetApp() {
+        return nextPlannedVetApp;
     }
 
-    public void setNextPlannedApp(Date nextPlannedApp) {
-        this.nextPlannedApp = nextPlannedApp;
+    public void setNextPlannedVetApp(Date nextPlannedApp) {
+        this.nextPlannedVetApp = nextPlannedApp;
     }
 
     public String getShortname() {
@@ -245,7 +245,7 @@ public class Pals {
                        ", isSterilized=" + isSterilized +
                        ", isVaccinated=" + isVaccinated +
                        ", nextVaccine=" + nextVaccine +
-                       ", nextPlannedApp=" + nextPlannedApp +
+                       ", nextPlannedApp=" + nextPlannedVetApp +
                        ", reference='" + reference + '\'' +
                        ", weight=" + weight +
                        ", height=" + height +
@@ -257,11 +257,11 @@ public class Pals {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pals pals = (Pals) o;
-        return hasPassport == pals.hasPassport && isMale == pals.isMale && isSterilized == pals.isSterilized && isVaccinated == pals.isVaccinated && Objects.equals(id, pals.id) && Objects.equals(name, pals.name) && Objects.equals(shortname, pals.shortname) && Objects.equals(icadIdentifier, pals.icadIdentifier) && Objects.equals(owner, pals.owner) && Objects.equals(birthDate, pals.birthDate) && Objects.equals(specie, pals.specie) && Objects.equals(breed, pals.breed) && Objects.equals(nextVaccine, pals.nextVaccine) && Objects.equals(nextPlannedApp, pals.nextPlannedApp) && Objects.equals(reference, pals.reference) && Objects.equals(weight, pals.weight) && Objects.equals(height, pals.height);
+        return hasPassport == pals.hasPassport && isMale == pals.isMale && isSterilized == pals.isSterilized && isVaccinated == pals.isVaccinated && Objects.equals(id, pals.id) && Objects.equals(name, pals.name) && Objects.equals(shortname, pals.shortname) && Objects.equals(icadIdentifier, pals.icadIdentifier) && Objects.equals(owner, pals.owner) && Objects.equals(birthDate, pals.birthDate) && Objects.equals(specie, pals.specie) && Objects.equals(breed, pals.breed) && Objects.equals(nextVaccine, pals.nextVaccine) && Objects.equals(nextPlannedVetApp, pals.nextPlannedVetApp) && Objects.equals(reference, pals.reference) && Objects.equals(weight, pals.weight) && Objects.equals(height, pals.height);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, shortname, icadIdentifier, owner, birthDate, specie, breed, hasPassport, isMale, isSterilized, isVaccinated, nextVaccine, nextPlannedApp, reference, weight, height);
+        return Objects.hash(id, name, shortname, icadIdentifier, owner, birthDate, specie, breed, hasPassport, isMale, isSterilized, isVaccinated, nextVaccine, nextPlannedVetApp, reference, weight, height);
     }
 }

@@ -24,9 +24,9 @@ public interface AddPalRequestMapper {
 																					"(request" +
 																					".nextVaccine" +
 																					"()))")
-	@Mapping( target = "nextPlannedApp", dateFormat = "yyyy-MM-dd", expression = "java(toDate" +
+	@Mapping( target = "nextPlannedVetApp", dateFormat = "yyyy-MM-dd", expression = "java(toDate" +
 																					  "(request" +
-																					  ".nextPlannedApp" +
+																					  ".nextPlannedVetApp" +
 																					  "()))")
 	Pals toEntity(AddPalRequest request) throws ParseException;
 	

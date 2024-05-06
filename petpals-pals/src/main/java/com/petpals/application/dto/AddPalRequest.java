@@ -4,6 +4,8 @@ import com.petpals.shared.enums.Species;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 
 public record AddPalRequest(
 		@NotBlank @Length(min= 2) String name,
@@ -16,8 +18,9 @@ public record AddPalRequest(
 		@NotNull boolean isMale,
 		@NotNull Boolean isSterilized,
 		@NotNull Boolean isVaccinated,
+		List<String> medicalHistory,
 		String nextVaccine,
-		String nextPlannedApp,
+		String nextPlannedVetApp,
 		@NotBlank @Length(min = 36, max = 36) String reference,
 		@DecimalMin(value = "0.1") @DecimalMax(value = "50.0") double weight,
 		@DecimalMin(value = "0.1") @DecimalMax(value = "150.0") double height) {

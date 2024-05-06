@@ -28,6 +28,7 @@ public class CreateOwner implements CreateOwnerIn {
 		try {
 			return ownersRepository.save(owner);
 		} catch (ConstraintViolationException e){
+			LOG.info(e.getErrorMessage());
 			throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_KEY_OWNER_MAIL_CONSTRAINT_VIOLATION);
 		}
 	}

@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import java.util.Date;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -39,7 +38,7 @@ class CreateOwnerResourceTest {
 										 new AddPalRequest("Ashe", "Ashe", "250221212121212", "2022-04-28",
 														   Species.DOG, "Husky",
 														   true
-												 , true, false, true, null, null,
+												 , true, false, true, null, null,null,
 														   UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,""),
 														   29.0,
 														   53.0)
@@ -73,8 +72,8 @@ class CreateOwnerResourceTest {
 		Assertions.assertEquals(owner.pals().get(0).isSterilized(),ownerCaptor.getValue().getPals().get(0).isSterilized());
 		Assertions.assertNull(owner.pals().get(0).nextVaccine());
 		Assertions.assertNull(ownerCaptor.getValue().getPals().get(0).getNextVaccine());
-		Assertions.assertNull(owner.pals().get(0).nextPlannedApp());
-		Assertions.assertNull(ownerCaptor.getValue().getPals().get(0).getNextPlannedApp());
+		Assertions.assertNull(owner.pals().get(0).nextPlannedVetApp());
+		Assertions.assertNull(ownerCaptor.getValue().getPals().get(0).getNextPlannedVetApp());
 		Assertions.assertEquals(owner.pals().get(0).weight(),ownerCaptor.getValue().getPals().get(0).getWeight());
 		Assertions.assertEquals(owner.pals().get(0).height(),ownerCaptor.getValue().getPals().get(0).getHeight());
 		Mockito.verifyNoMoreInteractions(createOwnerIn);
