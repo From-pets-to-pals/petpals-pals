@@ -1,13 +1,18 @@
 package com.petpals.persistence.ports.in;
 
-import com.petpals.application.dto.responses.CreateCaregiverOptions;
+import com.petpals.persistence.entities.Breeds;
+import com.petpals.persistence.entities.Countries;
+import com.petpals.persistence.entities.Species;
 
 import java.util.List;
 
+
 public interface MenuOptionsIn {
 	
-	List<CreateCaregiverOptions> getCreateCaregiverOptions();
+	List<Countries> getCountries();
 	
-	List<CreateOwnerOptions> getCreateOwnerOptions();
+	List<Breeds> getBreeds();
+	
+	List<Species> getSpecies();
 	
 }

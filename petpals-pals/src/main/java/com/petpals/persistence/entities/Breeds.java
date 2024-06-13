@@ -13,16 +13,16 @@ import java.util.Objects;
 public class Breeds {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "breeds_generator")
-	@SequenceGenerator(name = "breeds_generator", sequenceName = "breeds_id_seq", allocationSize = 1 )
+	@SequenceGenerator(name = "breeds_generator", sequenceName = "breeds_seq", allocationSize = 1 )
 	@Column(name="id")
-	private Long id;
+	private Short id;
 	
 	@NotBlank
 	@Column(name = "name",columnDefinition = "varchar(100)")
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "specie_id", referencedColumnName = "id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "specie_id", insertable=false, updatable=false)
 	private Species species;
 	
 	@Override
@@ -38,11 +38,11 @@ public class Breeds {
 		return Objects.hash(id, name, species);
 	}
 	
-	public Long getId() {
+	public Short getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 	
@@ -62,5 +62,12 @@ public class Breeds {
 		this.species = species;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Breeds{" +
+					   "id=" + id +
+					   ", name='" + name + '\'' +
+					   ", species=" + species +
+					   '}';
+	}
 }

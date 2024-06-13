@@ -7,7 +7,7 @@ import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA, uses = {SpeciesMapper.class})
 public interface BreedsMapper {
 	Breed fromEntity(Breeds breed);
 	List<Breed> fromEntities(List<Breeds> breed);
