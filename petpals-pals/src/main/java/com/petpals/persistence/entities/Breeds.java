@@ -21,21 +21,21 @@ public class Breeds {
 	@Column(name = "name",columnDefinition = "varchar(100)")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "specie_id", insertable=false, updatable=false)
-	private Species species;
+	private Species specie;
 	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Breeds breeds = (Breeds) o;
-		return Objects.equals(id, breeds.id) && Objects.equals(name, breeds.name) && Objects.equals(species, breeds.species);
+		return Objects.equals(id, breeds.id) && Objects.equals(name, breeds.name) && Objects.equals(specie, breeds.specie);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, species);
+		return Objects.hash(id, name, specie);
 	}
 	
 	public Short getId() {
@@ -54,12 +54,12 @@ public class Breeds {
 		this.name = name;
 	}
 	
-	public Species getSpecies() {
-		return species;
+	public Species getSpecie() {
+		return specie;
 	}
 	
-	public void setSpecies(Species species) {
-		this.species = species;
+	public void setSpecie(Species species) {
+		this.specie = species;
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public class Breeds {
 		return "Breeds{" +
 					   "id=" + id +
 					   ", name='" + name + '\'' +
-					   ", species=" + species +
+					   ", species=" + specie +
 					   '}';
 	}
 }

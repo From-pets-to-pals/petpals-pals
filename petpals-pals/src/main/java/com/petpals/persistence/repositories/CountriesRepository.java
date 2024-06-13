@@ -9,6 +9,6 @@ import java.util.List;
 @ApplicationScoped
 public class CountriesRepository  implements PanacheRepository<Countries> {
 	public List<Countries> getAllCountries() {
-		return listAll();
+		return list("name", "France");
 	}
 }

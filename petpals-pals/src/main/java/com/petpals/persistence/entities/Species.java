@@ -17,7 +17,7 @@ public class Species {
 	@Column(name = "name", columnDefinition = "bpchar(3)")
 	private String name;
 	
-	@OneToMany(mappedBy = "species", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "specie", fetch = FetchType.LAZY)
 	private List<Breeds> breed;
 	
 	@Override
