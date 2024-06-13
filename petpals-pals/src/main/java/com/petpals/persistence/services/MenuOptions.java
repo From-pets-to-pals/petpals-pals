@@ -40,7 +40,6 @@ public class MenuOptions implements MenuOptionsIn {
 	
 	@Override
 	public List<Breeds> getBreeds() {
-		Logger.getLogger(MenuOptions.class.getName()).info(breedsRepository.getAllBreeds());
 		return breedsRepository.getAllBreeds();
 	}
 	
@@ -61,8 +60,6 @@ public class MenuOptions implements MenuOptionsIn {
 	
 	@Override
 	public List<Species> getSpecies() {
-		Logger.getLogger(MenuOptions.class.getName()).info(speciesRepository.getAllSpecies());
-		
 		return speciesRepository.getAllSpecies();
 	}
 }

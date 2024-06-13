@@ -8,7 +8,7 @@ import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.shared.entities.uuid.UUIDFormatter;
 import com.petpals.shared.entities.uuid.UUIDGenerator;
-import com.petpals.shared.enums.SpeciesEnum;
+import com.petpals.shared.model.enums.SpeciesEnum;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.ws.rs.core.MediaType;

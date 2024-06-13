@@ -1,7 +1,7 @@
 package com.petpals.application.mappers;
 
 import com.petpals.persistence.entities.Countries;
-import com.petpals.shared.model.Country;
+import com.petpals.shared.model.dto.Country;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

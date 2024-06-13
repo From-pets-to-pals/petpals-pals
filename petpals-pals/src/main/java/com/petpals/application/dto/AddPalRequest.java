@@ -1,6 +1,6 @@
 package com.petpals.application.dto;
 
-import com.petpals.shared.enums.SpeciesEnum;
+import com.petpals.shared.model.enums.SpeciesEnum;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 

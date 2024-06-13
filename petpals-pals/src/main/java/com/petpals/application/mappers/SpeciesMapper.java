@@ -1,7 +1,7 @@
 package com.petpals.application.mappers;
 
 import com.petpals.persistence.entities.Species;
-import com.petpals.shared.model.Specie;
+import com.petpals.shared.model.dto.Specie;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

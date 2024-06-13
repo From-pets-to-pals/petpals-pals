@@ -4,10 +4,9 @@ import com.petpals.persistence.entities.Breeds;
 import com.petpals.persistence.entities.CatBreeds;
 import com.petpals.persistence.entities.DogBreeds;
 import com.petpals.persistence.entities.NacBreeds;
-import com.petpals.shared.model.Breed;
-import com.petpals.shared.model.BreedWithoutSpecie;
+import com.petpals.shared.model.dto.Breed;
+import com.petpals.shared.model.dto.BreedWithoutSpecie;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
@@ -19,7 +18,6 @@ public interface BreedsMapper {
 	BreedWithoutSpecie fromDogBreedEntity(DogBreeds breed);
 	List<BreedWithoutSpecie> fromDogBreedEntities(List<DogBreeds> breed);
 	BreedWithoutSpecie fromCatBreedEntity(CatBreeds breed);
-	
 	List<BreedWithoutSpecie> fromCatBreedEntities(List<CatBreeds> breed);
 	BreedWithoutSpecie fromNacBreedEntity(NacBreeds breed);
 	List<BreedWithoutSpecie> fromNacBreedEntities(List<NacBreeds> breed);
