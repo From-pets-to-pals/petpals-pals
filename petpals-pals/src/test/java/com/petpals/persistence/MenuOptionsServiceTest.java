@@ -17,18 +17,18 @@ import java.util.List;
 class MenuOptionsServiceTest {
 	
 	@InjectMock
-	public BreedsRepository breedsRepository;
+	private BreedsRepository breedsRepository;
 	@InjectMock
-	public CountriesRepository countriesRepository;
+	private CountriesRepository countriesRepository;
 	@InjectMock
-	public SpeciesRepository speciesRepository;
+	private SpeciesRepository speciesRepository;
 	@InjectMock
-	public DogBreedsRepository dogBreedsRepository;
+	private DogBreedsRepository dogBreedsRepository;
 	@InjectMock
-	public CatBreedsRepository catBreedsRepository;
+	private CatBreedsRepository catBreedsRepository;
 	
 	@InjectMock
-	public NacBreedsRepository nacBreedsRepository;
+	private NacBreedsRepository nacBreedsRepository;
 	@Inject
 	MenuOptionsIn menuOptionsIn;
 	
@@ -97,7 +97,24 @@ class MenuOptionsServiceTest {
 		Mockito.verify(speciesRepository).getAllSpecies();
 		Mockito.verifyNoMoreInteractions(speciesRepository);
 	}
-	
+	@Test
+	void shouldRetrieveCountries(){
+		var france = new Countries();
+		france.setId((short) 1);
+		france.setName("France");
+		france.setCode("FR");
+		france.setNumber("250");
+		List<Countries> countries = List.of(france);
+		Mockito.when(countriesRepository.getAllCountries()).thenReturn(countries);
+		var fromRepository  = menuOptionsIn.getCountries();
+		Assertions.assertEquals(1, fromRepository.size());
+		Assertions.assertEquals(france.getId(), fromRepository.get(0).getId());
+		Assertions.assertEquals(france.getName(), fromRepository.get(0).getName());
+		Assertions.assertEquals(france.getCode(), fromRepository.get(0).getCode());
+		Assertions.assertEquals(france.getNumber(), fromRepository.get(0).getNumber());
+		Mockito.verify(countriesRepository).getAllCountries();
+		Mockito.verifyNoMoreInteractions(countriesRepository);
+	}
 	@Test
 	void shouldRetrieveBreeds(){
 		var catSpecies = new Species();
