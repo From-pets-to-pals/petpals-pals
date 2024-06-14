@@ -26,7 +26,7 @@ import java.util.List;
 class CreateOwnersServiceTest {
 
     @InjectMock
-    public OwnersRepository ownersRepository;
+    private OwnersRepository ownersRepository;
     @Inject
     CreateOwnerIn createOwnerIn;
 

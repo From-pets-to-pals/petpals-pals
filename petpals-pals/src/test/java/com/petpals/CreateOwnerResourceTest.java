@@ -8,7 +8,7 @@ import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.shared.entities.uuid.UUIDFormatter;
 import com.petpals.shared.entities.uuid.UUIDGenerator;
-import com.petpals.shared.enums.Species;
+import com.petpals.shared.model.enums.SpeciesEnum;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.ws.rs.core.MediaType;
@@ -36,9 +36,9 @@ class CreateOwnerResourceTest {
 										 "FRANCE",
 										List.of(
 										 new AddPalRequest("Ashe", "Ashe", "250221212121212", "2022-04-28",
-														   Species.DOG, "Husky",
+														   SpeciesEnum.DOG, "Husky",
 														   true
-												 , true, false, true, null, null,null,
+												 , true, false, true, null, null, null,
 														   UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,""),
 														   29.0,
 														   53.0)
