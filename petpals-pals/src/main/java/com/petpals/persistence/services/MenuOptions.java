@@ -4,7 +4,6 @@ import com.petpals.persistence.entities.*;
 import com.petpals.persistence.ports.in.MenuOptionsIn;
 import com.petpals.persistence.repositories.*;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.jboss.logging.Logger;
 
 import java.util.List;
 
