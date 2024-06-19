@@ -17,6 +17,9 @@ public class Owners {
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @Column(name = "device", nullable = false)
     private String deviceId;
     
@@ -36,8 +39,9 @@ public class Owners {
     public Owners() {
     }
     
-    public Owners(String email, String deviceId, String reference, String location, String username) {
+    public Owners(String email, String password, String deviceId, String reference, String location, String username) {
         this.email = email;
+        this.password = password;
         this.deviceId = deviceId;
         this.reference = reference;
         this.location = location;
@@ -124,5 +128,13 @@ public class Owners {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

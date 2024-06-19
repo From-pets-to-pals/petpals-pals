@@ -21,6 +21,7 @@ public class AzureConfigSourceFactory implements ConfigSourceFactory {
 		final ConfigValue caregiversApiKey = context.getValue(PALS_API_KEY);
 		Map<String,String> conf = new HashMap<>();
 		if (caregiversApiKey == null || caregiversApiKey.getValue() == null) {
+
 			String clientId = context.getValue("azure.clientid").getValue();
 			String tenantId = context.getValue("azure.tenantid").getValue();
 			String secret = context.getValue("azure.tenant.token").getValue();
@@ -33,11 +34,14 @@ public class AzureConfigSourceFactory implements ConfigSourceFactory {
 																	.clientId(clientId)
 																	.build())
 												.buildClient();
+
+			// Afficher les valeurs récupérées
+
 			conf.put(PALS_API_KEY,secretClient.getSecret("PALS-API-KEY").getValue());
 			return Collections.singletonList(new PropertiesConfigSource(conf,null, getPriority().getAsInt()));
 		}
 		conf.put(PALS_API_KEY,caregiversApiKey.getValue());
-		
+
 		return Collections.singletonList(new PropertiesConfigSource(conf,caregiversApiKey.getSourceName(), getPriority().getAsInt()));
 	}
 	

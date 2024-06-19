@@ -31,7 +31,7 @@ class CreateOwnerResourceTest {
 	void testHelloEndpoint() throws JsonProcessingException {
 		Mockito.when(createOwnerIn.createOwnerWithFirstPal(Mockito.any(Owners.class))).thenReturn(1L);
 		ObjectMapper mapper = new ObjectMapper();
-		var owner = new NewOwnerRequest("sa.bennaceur@gmail.com", "Sidou", "OPPO C9",
+		var owner = new NewOwnerRequest("sa.bennaceur@gmail.com", "test", "Sidou", "OPPO C9",
 										UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(), true, ""),
 										 "FRANCE",
 										List.of(
