@@ -61,8 +61,9 @@ class CreateOwnerResourceTest {
 		Assertions.assertEquals(owner.pals().get(0).name(),ownerCaptor.getValue().getPals().get(0).getName());
 		Assertions.assertEquals(owner.pals().get(0).shortname(),ownerCaptor.getValue().getPals().get(0).getShortname());
 		Assertions.assertEquals(owner.pals().get(0).reference(),ownerCaptor.getValue().getPals().get(0).getReference());
-		Assertions.assertEquals(owner.pals().get(0).breed(),ownerCaptor.getValue().getPals().get(0).getBreed());
-		Assertions.assertEquals(owner.pals().get(0).specie().name(),ownerCaptor.getValue().getPals().get(0).getSpecie());
+		Assertions.assertEquals(owner.pals().get(0).breed(),ownerCaptor.getValue().getPals().get(0).getBreed().getName());
+		Assertions.assertEquals(owner.pals().get(0).specie().name(),
+								ownerCaptor.getValue().getPals().get(0).getSpecie().getName());
 		Assertions.assertEquals(owner.pals().get(0).birthDate(),
 								ownerCaptor.getValue().getPals().get(0).getBirthDate().toString());
 		Assertions.assertEquals(owner.pals().get(0).icadIdentifier(),ownerCaptor.getValue().getPals().get(0).getIcadIdentifier());
