@@ -5,6 +5,7 @@ import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.entities.Species;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
+import com.petpals.persistence.repositories.BreedsRepository;
 import com.petpals.persistence.repositories.OwnersRepository;
 import com.petpals.shared.entities.uuid.UUIDFormatter;
 import com.petpals.shared.entities.uuid.UUIDGenerator;
@@ -30,6 +31,8 @@ class CreateOwnersServiceTest {
 
     @InjectMock
     private OwnersRepository ownersRepository;
+    @InjectMock
+    private BreedsRepository breedsRepository;
     @Inject
     CreateOwnerIn createOwnerIn;
 
@@ -57,6 +60,8 @@ class CreateOwnersServiceTest {
     void testAddOwnerWithPals() {
         var toReturn = owners;
         toReturn.setId(1L);
+        Mockito.when(ownersRepository.save(owners)).thenCallRealMethod();
+        Mockito.when(breedsRepository.getBreedIdFromItsName(SpeciesEnum.DOG.name())).thenReturn((short) 1);
         Mockito.when(ownersRepository.save(owners)).thenCallRealMethod();
         Mockito.doNothing().when(ownersRepository).persistAndFlush(owners);
         var res = createOwnerIn.createOwnerWithFirstPal(owners);
