@@ -1,12 +1,15 @@
 package com.petpals.persistence;
 
+import com.petpals.persistence.entities.Breeds;
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
+import com.petpals.persistence.entities.Species;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.persistence.repositories.OwnersRepository;
 import com.petpals.shared.entities.uuid.UUIDFormatter;
 import com.petpals.shared.entities.uuid.UUIDGenerator;
 import com.petpals.shared.errorhandling.PetPalsExceptions;
+import com.petpals.shared.model.enums.SpeciesEnum;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
@@ -38,10 +41,13 @@ class CreateOwnersServiceTest {
     public void init() {
         var ownerUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
         var palUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
-
+        var species = new Species();
+        species.setName(SpeciesEnum.DOG.name());
+        var breed = new Breeds();
+        breed.setName("Berger Américain");
         owners = new Owners("sa.bennaceur@gmail.com", "OPPO XC9" , ownerUUID, "FRANCE", "sidou");
-        Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), "DOG", "Berger " +
-                "Américain", true,
+        Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), species
+                , breed, true,
                 true,
                 true, true, null, null, palUUID);
         owners.setPals(List.of(pals));
