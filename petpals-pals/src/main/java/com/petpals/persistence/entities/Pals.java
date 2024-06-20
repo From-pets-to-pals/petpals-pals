@@ -36,12 +36,12 @@ public class Pals {
 
     @Column(name = "birthdate")
     private Date birthDate;
-    @NotNull
-    @Column(name="specie", nullable = false)
-    private String specie;
-    @NotNull
-    @Column(name="breed", nullable = false)
-    private String breed;
+    @OneToOne
+    @JoinColumn(name="specie")
+    private Species specie;
+    @OneToOne
+    @JoinColumn(name="breed")
+    private Breeds breed;
 
     @Column(name="has_passport")
     private Boolean hasPassport;
@@ -72,7 +72,9 @@ public class Pals {
     public Pals() {
     }
     
-    public Pals(String name, String shortname, String icadIdentifier, Owners owner, Date birthDate, String specie, String breed, boolean hasPassport, boolean isMale, boolean isSterilized, boolean isVaccinated, Date nextVaccine, Date nextPlannedVetApp, String reference) {
+    public Pals(String name, String shortname, String icadIdentifier, Owners owner, Date birthDate, Species specie,
+                Breeds breed, boolean hasPassport, boolean isMale, boolean isSterilized, boolean isVaccinated,
+                Date nextVaccine, Date nextPlannedVetApp, String reference) {
         this.name = name;
         this.shortname = shortname;
         this.icadIdentifier = icadIdentifier;
@@ -126,23 +128,47 @@ public class Pals {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-
-    public String getSpecie() {
+    
+    public Species getSpecie() {
         return specie;
     }
-
-    public void setSpecie(String specie) {
+    
+    public void setSpecie(Species specie) {
         this.specie = specie;
     }
-
-    public String getBreed() {
+    
+    public Breeds getBreed() {
         return breed;
     }
-
-    public void setBreed(String breed) {
+    
+    public void setBreed(Breeds breed) {
         this.breed = breed;
     }
-
+    
+    public Boolean getHasPassport() {
+        return hasPassport;
+    }
+    
+    public void setMale(boolean male) {
+        isMale = male;
+    }
+    
+    public Boolean getSterilized() {
+        return isSterilized;
+    }
+    
+    public void setSterilized(Boolean sterilized) {
+        isSterilized = sterilized;
+    }
+    
+    public Boolean getVaccinated() {
+        return isVaccinated;
+    }
+    
+    public void setVaccinated(Boolean vaccinated) {
+        isVaccinated = vaccinated;
+    }
+    
     public Boolean isHasPassport() {
         return hasPassport;
     }
