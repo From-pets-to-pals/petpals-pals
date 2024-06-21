@@ -13,13 +13,13 @@ public class BreedsRepository implements PanacheRepository<Breeds> {
 		return listAll(Sort.by("specie"));
 	}
 	public List<Breeds> getAllDogBreeds(){
-		return list("specie", 1, Sort.by("specie"));
+		return list("specie.id", (short) 1);
 	}
 	public List<Breeds> getAllCatBreeds(){
-		return list("specie", 1, Sort.by("specie"));
+		return list("specie.id", (short) 2);
 	}
 	public List<Breeds> getAllNacBreeds(){
-		return list("specie", 1, Sort.by("specie"));
+		return list("specie.id", (short) 3);
 	}
 	public Short getBreedIdFromItsName(String breedName){
 		return find("name",breedName).firstResult().getId();
