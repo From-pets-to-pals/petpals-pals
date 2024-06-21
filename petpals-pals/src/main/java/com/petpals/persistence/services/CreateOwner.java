@@ -1,6 +1,7 @@
 package com.petpals.persistence.services;
 
 import com.petpals.persistence.entities.Owners;
+import com.petpals.persistence.entities.compositekeys.BreedsPk;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.persistence.repositories.BreedsRepository;
 import com.petpals.persistence.repositories.OwnersRepository;
@@ -30,16 +31,9 @@ public class CreateOwner implements CreateOwnerIn {
 		LOG.info("Creating owner with first pal");
 		try {
 			for(var pal: owner.getPals()) {
-				if(pal.getSpecie().getName().equals(SpeciesEnum.DOG.name())){
-					pal.getSpecie().setId((short) 1);
-				} else if(pal.getSpecie().getName().equals(SpeciesEnum.CAT.name())){
-					pal.getSpecie().setId((short) 2);
-					
-				} else {
-					pal.getSpecie().setId((short) 3);
-				}
-				
-				pal.getBreed().setId(breedsRepository.getBreedIdFromItsName(pal.getBreed().getName()));
+				var breedKey = new BreedsPk();
+				breedKey.setId(breedsRepository.getBreedIdFromItsName(pal.getBreed().getName()));
+				pal.getBreed().setIdo(breedKey);
 			}
 			return ownersRepository.save(owner);
 		} catch (ConstraintViolationException e){

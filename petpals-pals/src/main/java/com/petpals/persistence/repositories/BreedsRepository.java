@@ -13,6 +13,6 @@ public class BreedsRepository implements PanacheRepository<Breeds> {
 		return listAll(Sort.by("specie"));
 	}
 	public Short getBreedIdFromItsName(String breedName){
-		return find("name",breedName).firstResult().getId();
+		return find("name",breedName).firstResult().getKey().id;
 	}
 }
