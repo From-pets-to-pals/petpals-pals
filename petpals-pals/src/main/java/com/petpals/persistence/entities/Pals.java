@@ -38,8 +38,7 @@ public class Pals {
     @Column(name = "birthdate")
     private Date birthDate;
     @OneToOne
-    @JoinColumn(name= "id")
-    @JoinColumn(name= "specie_id")
+    @JoinColumn(name= "breed")
     private Breeds breed;
     
     @Column(name = "has_passport")

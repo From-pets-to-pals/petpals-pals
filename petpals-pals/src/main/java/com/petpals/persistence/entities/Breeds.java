@@ -1,6 +1,5 @@
 package com.petpals.persistence.entities;
 
-import com.petpals.persistence.entities.compositekeys.BreedsPk;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -8,17 +7,43 @@ import java.util.Objects;
 
 @Entity
 @Table(name="breeds")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="specie_id",
-		discriminatorType = DiscriminatorType.INTEGER)
 public class Breeds {
 	@NotBlank
-	@Column(name = "name",columnDefinition = "varchar(100)")
+	@Column(name = "name", columnDefinition = "varchar(100)")
 	private String name;
 	
-	@EmbeddedId
-	public BreedsPk ido;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "breeds_generator")
+	@SequenceGenerator(name = "breeds_generator", sequenceName = "breeds_seq", allocationSize = 1)
+	@Column(name = "id")
+	public Short id;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "specie_id", insertable = false, updatable = false, foreignKey = @ForeignKey(name = "breeds_species_id_fk", value = ConstraintMode.PROVIDER_DEFAULT))
+	private Species specie;
+	
+	@Override
+	public String toString() {
+		return "Breeds{" +
+					   "name='" + name + '\'' +
+					   ", id=" + id +
+					   ", specie=" + specie +
+					   '}';
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Breeds breeds = (Breeds) o;
+		return Objects.equals(name, breeds.name) && Objects.equals(id, breeds.id) && Objects.equals(specie, breeds.specie);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, id, specie);
+	}
 	
 	public String getName() {
 		return name;
@@ -28,32 +53,19 @@ public class Breeds {
 		this.name = name;
 	}
 	
-	public BreedsPk getKey() {
-		return ido;
+	public Short getId() {
+		return id;
 	}
 	
-	public void setIdo(BreedsPk id) {
-		this.ido = id;
+	public void setId(Short id) {
+		this.id = id;
 	}
 	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Breeds breeds = (Breeds) o;
-		return Objects.equals(name, breeds.name) && Objects.equals(ido, breeds.ido);
+	public Species getSpecie() {
+		return specie;
 	}
 	
-	@Override
-	public int hashCode() {
-		return Objects.hash(name, ido);
-	}
-	
-	@Override
-	public String toString() {
-		return "Breeds{" +
-					   "name='" + name + '\'' +
-					   ", id=" + ido.id +
-					   '}';
+	public void setSpecie(Species specie) {
+		this.specie = specie;
 	}
 }

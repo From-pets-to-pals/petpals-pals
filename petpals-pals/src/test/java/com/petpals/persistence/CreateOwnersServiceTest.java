@@ -4,7 +4,6 @@ import com.petpals.persistence.entities.Breeds;
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
 import com.petpals.persistence.entities.Species;
-import com.petpals.persistence.entities.compositekeys.BreedsPk;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.persistence.repositories.BreedsRepository;
 import com.petpals.persistence.repositories.OwnersRepository;
@@ -49,10 +48,8 @@ class CreateOwnersServiceTest {
         species.setName(SpeciesEnum.DOG.name());
         var breed = new Breeds();
         breed.setName("Berger Américain");
-        var pk = new BreedsPk();
-        pk.setId((short)1);
-        pk.setSpecie(species);
-        breed.setIdo(pk);
+        breed.setId((short)1);
+        breed.setSpecie(species);
         owners = new Owners("sa.bennaceur@gmail.com", "OPPO XC9" , ownerUUID, "FRANCE", "sidou");
         Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), breed, true,
                 true,

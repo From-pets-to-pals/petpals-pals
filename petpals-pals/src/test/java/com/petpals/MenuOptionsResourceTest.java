@@ -3,7 +3,6 @@ package com.petpals;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.petpals.persistence.entities.*;
-import com.petpals.persistence.entities.compositekeys.BreedsPk;
 import com.petpals.persistence.ports.in.MenuOptionsIn;
 import com.petpals.shared.model.dto.Breed;
 import com.petpals.shared.model.dto.BreedWithoutSpecie;
@@ -71,12 +70,10 @@ class MenuOptionsResourceTest {
 		var dogSpecies = new Species();
 		dogSpecies.setId((short) 1);
 		dogSpecies.setName("DOG");
-		var dogBreedPk = new BreedsPk();
-		dogBreedPk.setId((short) 1);
-		dogBreedPk.setSpecie(dogSpecies);
 		var dogBreed = new Breeds();
-		dogBreed.setIdo(dogBreedPk);
+		dogBreed.setId((short) 1);
 		dogBreed.setName("Husky");
+		dogBreed.setSpecie(dogSpecies);
 		Mockito.when(menuOptionsIn.getBreeds()).thenReturn(List.of(dogBreed));
 		var specieToReturn  = new Specie("DOG");
 		var breedToReturn = new Breed("Husky", specieToReturn);
@@ -96,12 +93,10 @@ class MenuOptionsResourceTest {
 		var dogSpecies = new Species();
 		dogSpecies.setId((short) 1);
 		dogSpecies.setName("DOG");
-		var dogBreedPk = new BreedsPk();
-		dogBreedPk.setId((short) 1);
-		dogBreedPk.setSpecie(dogSpecies);
-		var dogBreed = new DogBreeds();
-		dogBreed.setIdo(dogBreedPk);
+		var dogBreed = new Breeds();
+		dogBreed.setId((short) 1);
 		dogBreed.setName("Husky");
+		dogBreed.setSpecie(dogSpecies);
 		Mockito.when(menuOptionsIn.getDogBreeds()).thenReturn(List.of(dogBreed));
 		var breedToReturn = new BreedWithoutSpecie("Husky");
 		var json = mapper.writeValueAsString(List.of(breedToReturn));
@@ -117,15 +112,13 @@ class MenuOptionsResourceTest {
 	
 	@Test
 	void testGetCatBreedsEndpoint() throws JsonProcessingException {
-		var catBreeds = new CatBreeds();
+		var catBreeds = new Breeds();
+		catBreeds.setId((short) 1);
 		catBreeds.setName("Birman");
 		var species = new Species();
 		species.setId((short) 2);
 		species.setName(SpeciesEnum.CAT.name());
-		var pk = new BreedsPk();
-		pk.setId((short) 1);
-		pk.setSpecie(species);
-		catBreeds.setIdo(pk);
+		catBreeds.setSpecie(species);
 				Mockito.when(menuOptionsIn.getCatBreeds()).thenReturn(List.of(catBreeds));
 		var breedToReturn = new BreedWithoutSpecie("Birman");
 		var json = mapper.writeValueAsString(List.of(breedToReturn));

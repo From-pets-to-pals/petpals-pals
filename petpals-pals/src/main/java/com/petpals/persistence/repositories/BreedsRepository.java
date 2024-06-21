@@ -12,7 +12,16 @@ public class BreedsRepository implements PanacheRepository<Breeds> {
 	public List<Breeds> getAllBreeds(){
 		return listAll(Sort.by("specie"));
 	}
+	public List<Breeds> getAllDogBreeds(){
+		return list("specie", 1, Sort.by("specie"));
+	}
+	public List<Breeds> getAllCatBreeds(){
+		return list("specie", 1, Sort.by("specie"));
+	}
+	public List<Breeds> getAllNacBreeds(){
+		return list("specie", 1, Sort.by("specie"));
+	}
 	public Short getBreedIdFromItsName(String breedName){
-		return find("name",breedName).firstResult().getKey().id;
+		return find("name",breedName).firstResult().getId();
 	}
 }
