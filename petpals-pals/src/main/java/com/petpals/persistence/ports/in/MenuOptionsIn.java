@@ -11,9 +11,9 @@ public interface MenuOptionsIn {
 	
 	List<Breeds> getBreeds();
 	
-	List<DogBreeds> getDogBreeds();
-	List<CatBreeds> getCatBreeds();
-	List<NacBreeds> getNacBreeds();
+	List<Breeds> getDogBreeds();
+	List<Breeds> getCatBreeds();
+	List<Breeds> getNacBreeds();
 	
 	List<Species> getSpecies();
 	

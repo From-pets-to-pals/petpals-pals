@@ -48,9 +48,10 @@ class CreateOwnersServiceTest {
         species.setName(SpeciesEnum.DOG.name());
         var breed = new Breeds();
         breed.setName("Berger Américain");
+        breed.setId((short)1);
+        breed.setSpecie(species);
         owners = new Owners("sa.bennaceur@gmail.com", "OPPO XC9" , ownerUUID, "FRANCE", "sidou");
-        Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), species
-                , breed, true,
+        Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), breed, true,
                 true,
                 true, true, null, null, palUUID);
         owners.setPals(List.of(pals));
