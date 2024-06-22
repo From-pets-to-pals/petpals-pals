@@ -73,8 +73,32 @@ class CreateOwnersServiceTest {
 
     @Test
     @TestTransaction
-    void testAddOwnerShouldThrowPetPalsException() {
-        Mockito.when(ownersRepository.save(owners)).thenThrow(ConstraintViolationException.class);
+    void testAddOwnerShouldThrowPetPalsExceptionOnUniqueICAD() {
+        ConstraintViolationException constraintViolationException = new ConstraintViolationException("Invalid", null,
+                                                                                                     "unique_icad");
+        Mockito.when(ownersRepository.save(owners)).thenThrow(constraintViolationException);
+        Assertions.assertThrows(PetPalsExceptions.class, () -> createOwnerIn.createOwnerWithFirstPal(owners));
+        Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
+        Assertions.assertEquals(owners.getReference(),ownersArgumentCaptor.getValue().getReference());
+    }
+    
+    @Test
+    @TestTransaction
+    void testAddOwnerShouldThrowPetPalsExceptionOnUniqueEmail() {
+        ConstraintViolationException constraintViolationException = new ConstraintViolationException("Invalid", null,
+                                                                                                     "unique_email");
+        Mockito.when(ownersRepository.save(owners)).thenThrow(constraintViolationException);
+        Assertions.assertThrows(PetPalsExceptions.class, () -> createOwnerIn.createOwnerWithFirstPal(owners));
+        Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
+        Assertions.assertEquals(owners.getReference(),ownersArgumentCaptor.getValue().getReference());
+    }
+    
+    @Test
+    @TestTransaction
+    void testAddOwnerShouldThrowPetPalsExceptionOnNullConstraintnameEmail() {
+        ConstraintViolationException constraintViolationException = new ConstraintViolationException("Invalid", null,
+                                                                                                     null);
+        Mockito.when(ownersRepository.save(owners)).thenThrow(constraintViolationException);
         Assertions.assertThrows(PetPalsExceptions.class, () -> createOwnerIn.createOwnerWithFirstPal(owners));
         Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
         Assertions.assertEquals(owners.getReference(),ownersArgumentCaptor.getValue().getReference());
