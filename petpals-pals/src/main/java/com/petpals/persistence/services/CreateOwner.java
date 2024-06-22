@@ -33,8 +33,15 @@ public class CreateOwner implements CreateOwnerIn {
 			}
 			return ownersRepository.save(owner);
 		} catch (ConstraintViolationException e){
-			LOG.info(e.getErrorMessage());
-			throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_KEY_OWNER_MAIL_CONSTRAINT_VIOLATION);
+			LOG.info(e.getConstraintName());
+			if(e.getConstraintName() != null){
+				if(e.getConstraintName().equals("unique_email")){
+					throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_KEY_OWNER_MAIL_CONSTRAINT_VIOLATION);
+				} else if(e.getConstraintName().equals("unique_icad")){
+					throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_PAL_IDENTIFIER);
+				}
+			}
+			throw new PetPalsExceptions(ExceptionsEnum.DB_UNKNOWN_ERROR);
 		}
 	}
 }
