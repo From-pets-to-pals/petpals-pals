@@ -12,7 +12,7 @@ public record AddPalRequest(
 		@NotBlank @Length(min=2) String shortname,
 		@Pattern(regexp = "^[250(26|22)\\d{10}]{15}$", message = "Identifier format invalid") String icadIdentifier,
 		@Past String birthDate,
-		@NotNull SpeciesEnum specie,
+		@Size(min = 3, max = 30) String specie,
 		@Size(min = 5, max = 25) String breed,
 		@NotNull Boolean hasPassport,
 		@NotNull boolean isMale,
