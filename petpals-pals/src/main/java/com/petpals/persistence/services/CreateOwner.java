@@ -5,6 +5,7 @@ import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.persistence.repositories.OwnersRepository;
 import com.petpals.shared.errorhandling.ExceptionsEnum;
 import com.petpals.shared.errorhandling.PetPalsExceptions;
+import com.petpals.shared.utils.PasswordUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.hibernate.exception.ConstraintViolationException;
@@ -26,10 +27,14 @@ public class CreateOwner implements CreateOwnerIn {
 	public Long createOwnerWithFirstPal(Owners owner) {
 		LOG.info("Creating owner with first pal");
 		try {
+			owner.setSalt(PasswordUtils.generateSalt());
+			owner.setPassword(PasswordUtils.hashPassword(
+					owner.getPassword(), owner.getSalt()
+					));
 			return ownersRepository.save(owner);
 		} catch (ConstraintViolationException e){
 			LOG.info(e.getErrorMessage());
-			throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_KEY_OWNER_MAIL_CONSTRAINT_VIOLATION);
+			throw new PetPalsExceptions(ExceptionsEnum.CAREGIVERS_OFFLINE_REST_CLIENT_EXCEPTION);
 		}
 	}
 }

@@ -23,11 +23,12 @@ public class AuthOwner implements AuthOwnerIn {
     @Transactional(rollbackOn = {PetPalsExceptions.class}, value = Transactional.TxType.REQUIRED)
     @Override
     public String authOwner(AuthOwnerDto authOwner) {
-        String reference = ownersRepository.authUser(authOwner);
+
+        String reference = ownersRepository.authOwner(authOwner);
         if (reference != null) {
             return reference;
         } else {
-            throw new PetPalsExceptions(ExceptionsEnum.CAREGIVERS_SERVICE_INVALID_COMMAND);
+            throw new PetPalsExceptions(ExceptionsEnum.OWNERS_WRONG_CREDENTIALS);
         }
     }
 }

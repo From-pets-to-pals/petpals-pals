@@ -36,12 +36,14 @@ public class Pals {
 
     @Column(name = "birthdate")
     private Date birthDate;
-    @NotNull
-    @Column(name="specie", nullable = false)
-    private String specie;
-    @NotNull
-    @Column(name="breed", nullable = false)
-    private String breed;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specie")
+    private Species specie;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "breed")
+    private Breeds breed;
 
     @Column(name="has_passport")
     private Boolean hasPassport;
@@ -72,7 +74,7 @@ public class Pals {
     public Pals() {
     }
     
-    public Pals(String name, String shortname, String icadIdentifier, Owners owner, Date birthDate, String specie, String breed, boolean hasPassport, boolean isMale, boolean isSterilized, boolean isVaccinated, Date nextVaccine, Date nextPlannedVetApp, String reference) {
+    public Pals(String name, String shortname, String icadIdentifier, Owners owner, Date birthDate, Species specie, Breeds breed, boolean hasPassport, boolean isMale, boolean isSterilized, boolean isVaccinated, Date nextVaccine, Date nextPlannedVetApp, String reference) {
         this.name = name;
         this.shortname = shortname;
         this.icadIdentifier = icadIdentifier;
@@ -127,19 +129,19 @@ public class Pals {
         this.birthDate = birthDate;
     }
 
-    public String getSpecie() {
+    public Species getSpecie() {
         return specie;
     }
 
-    public void setSpecie(String specie) {
+    public void setSpecie(Species specie) {
         this.specie = specie;
     }
 
-    public String getBreed() {
+    public Breeds getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
+    public void setBreed(Breeds breed) {
         this.breed = breed;
     }
 

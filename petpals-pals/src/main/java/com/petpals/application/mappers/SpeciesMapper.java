@@ -18,5 +18,10 @@ public interface SpeciesMapper {
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "name", target = "name")
 	List<Specie> fromEntities(List<Species> speciesEntity);
-	
+
+	@Mapping(source = "id", target = "id")
+	@Mapping(source = "name", target = "name")
+	Species toEntity(Specie specie);
+
+
 }
