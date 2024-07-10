@@ -1,12 +1,16 @@
 package com.petpals.persistence;
 
+import com.petpals.persistence.entities.Breeds;
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.entities.Pals;
+import com.petpals.persistence.entities.Species;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
+import com.petpals.persistence.repositories.BreedsRepository;
 import com.petpals.persistence.repositories.OwnersRepository;
 import com.petpals.shared.entities.uuid.UUIDFormatter;
 import com.petpals.shared.entities.uuid.UUIDGenerator;
 import com.petpals.shared.errorhandling.PetPalsExceptions;
+import com.petpals.shared.model.enums.SpeciesEnum;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
@@ -27,6 +31,8 @@ class CreateOwnersServiceTest {
 
     @InjectMock
     private OwnersRepository ownersRepository;
+    @InjectMock
+    private BreedsRepository breedsRepository;
     @Inject
     CreateOwnerIn createOwnerIn;
 
@@ -38,10 +44,14 @@ class CreateOwnersServiceTest {
     public void init() {
         var ownerUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
         var palUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
-
+        var species = new Species();
+        species.setName(SpeciesEnum.DOG.name());
+        var breed = new Breeds();
+        breed.setName("Berger Américain");
+        breed.setId((short)1);
+        breed.setSpecie(species);
         owners = new Owners("sa.bennaceur@gmail.com", "OPPO XC9" , ownerUUID, "FRANCE", "sidou");
-        Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), "DOG", "Berger " +
-                "Américain", true,
+        Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), breed, true,
                 true,
                 true, true, null, null, palUUID);
         owners.setPals(List.of(pals));
@@ -52,6 +62,8 @@ class CreateOwnersServiceTest {
         var toReturn = owners;
         toReturn.setId(1L);
         Mockito.when(ownersRepository.save(owners)).thenCallRealMethod();
+        Mockito.when(breedsRepository.getBreedIdFromItsName(SpeciesEnum.DOG.name())).thenReturn((short) 1);
+        Mockito.when(ownersRepository.save(owners)).thenCallRealMethod();
         Mockito.doNothing().when(ownersRepository).persistAndFlush(owners);
         var res = createOwnerIn.createOwnerWithFirstPal(owners);
         Mockito.verify(ownersRepository).persistAndFlush(ownersArgumentCaptor.capture());
@@ -61,8 +73,32 @@ class CreateOwnersServiceTest {
 
     @Test
     @TestTransaction
-    void testAddOwnerShouldThrowPetPalsException() {
-        Mockito.when(ownersRepository.save(owners)).thenThrow(ConstraintViolationException.class);
+    void testAddOwnerShouldThrowPetPalsExceptionOnUniqueICAD() {
+        ConstraintViolationException constraintViolationException = new ConstraintViolationException("Invalid", null,
+                                                                                                     "unique_icad");
+        Mockito.when(ownersRepository.save(owners)).thenThrow(constraintViolationException);
+        Assertions.assertThrows(PetPalsExceptions.class, () -> createOwnerIn.createOwnerWithFirstPal(owners));
+        Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
+        Assertions.assertEquals(owners.getReference(),ownersArgumentCaptor.getValue().getReference());
+    }
+    
+    @Test
+    @TestTransaction
+    void testAddOwnerShouldThrowPetPalsExceptionOnUniqueEmail() {
+        ConstraintViolationException constraintViolationException = new ConstraintViolationException("Invalid", null,
+                                                                                                     "unique_email");
+        Mockito.when(ownersRepository.save(owners)).thenThrow(constraintViolationException);
+        Assertions.assertThrows(PetPalsExceptions.class, () -> createOwnerIn.createOwnerWithFirstPal(owners));
+        Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
+        Assertions.assertEquals(owners.getReference(),ownersArgumentCaptor.getValue().getReference());
+    }
+    
+    @Test
+    @TestTransaction
+    void testAddOwnerShouldThrowPetPalsExceptionOnNullConstraintnameEmail() {
+        ConstraintViolationException constraintViolationException = new ConstraintViolationException("Invalid", null,
+                                                                                                     null);
+        Mockito.when(ownersRepository.save(owners)).thenThrow(constraintViolationException);
         Assertions.assertThrows(PetPalsExceptions.class, () -> createOwnerIn.createOwnerWithFirstPal(owners));
         Mockito.verify(ownersRepository).save(ownersArgumentCaptor.capture());
         Assertions.assertEquals(owners.getReference(),ownersArgumentCaptor.getValue().getReference());

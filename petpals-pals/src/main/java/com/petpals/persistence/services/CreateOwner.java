@@ -2,6 +2,7 @@ package com.petpals.persistence.services;
 
 import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
+import com.petpals.persistence.repositories.BreedsRepository;
 import com.petpals.persistence.repositories.OwnersRepository;
 import com.petpals.shared.errorhandling.ExceptionsEnum;
 import com.petpals.shared.errorhandling.PetPalsExceptions;
@@ -17,9 +18,10 @@ public class CreateOwner implements CreateOwnerIn {
 
 
 	private final OwnersRepository ownersRepository;
-
-	public CreateOwner(OwnersRepository ownersRepository) {
+	private final BreedsRepository breedsRepository;
+	public CreateOwner(OwnersRepository ownersRepository, BreedsRepository breedsRepository) {
 		this.ownersRepository = ownersRepository;
+		this.breedsRepository = breedsRepository;
 	}
 
 	@Transactional(rollbackOn = {PetPalsExceptions.class}, value = Transactional.TxType.REQUIRED)

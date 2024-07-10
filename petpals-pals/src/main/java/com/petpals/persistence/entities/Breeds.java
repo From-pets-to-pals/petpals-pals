@@ -7,43 +7,42 @@ import java.util.Objects;
 
 @Entity
 @Table(name="breeds")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="specie_id",
-		discriminatorType = DiscriminatorType.INTEGER)
 public class Breeds {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "breeds_generator")
-	@SequenceGenerator(name = "breeds_generator", sequenceName = "breeds_seq", allocationSize = 1 )
-	@Column(name="id")
-	private Short id;
-	
 	@NotBlank
-	@Column(name = "name",columnDefinition = "varchar(100)")
+	@Column(name = "name", columnDefinition = "varchar(100)")
 	private String name;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "breeds_generator")
+	@SequenceGenerator(name = "breeds_generator", sequenceName = "breeds_seq", allocationSize = 1)
+	@Column(name = "id")
+	public Short id;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "specie_id", insertable=false, updatable=false)
+	@JoinColumn(name = "specie_id", insertable = false, updatable = false, foreignKey = @ForeignKey(name = "breeds_species_id_fk", value = ConstraintMode.PROVIDER_DEFAULT))
 	private Species specie;
 	
 	@Override
+	public String toString() {
+		return "Breeds{" +
+					   "name='" + name + '\'' +
+					   ", id=" + id +
+					   ", specie=" + specie +
+					   '}';
+	}
+	
+	@Override
 	public boolean equals(Object o) {
+		
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Breeds breeds = (Breeds) o;
-		return Objects.equals(id, breeds.id) && Objects.equals(name, breeds.name) && Objects.equals(specie, breeds.specie);
+		return Objects.equals(name, breeds.name) && Objects.equals(id, breeds.id) && Objects.equals(specie, breeds.specie);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, specie);
-	}
-	
-	public Short getId() {
-		return id;
-	}
-	
-	public void setId(Short id) {
-		this.id = id;
+		return Objects.hash(name, id, specie);
 	}
 	
 	public String getName() {
@@ -54,20 +53,19 @@ public class Breeds {
 		this.name = name;
 	}
 	
+	public Short getId() {
+		return id;
+	}
+	
+	public void setId(Short id) {
+		this.id = id;
+	}
+	
 	public Species getSpecie() {
 		return specie;
 	}
 	
-	public void setSpecie(Species species) {
-		this.specie = species;
-	}
-	
-	@Override
-	public String toString() {
-		return "Breeds{" +
-					   "id=" + id +
-					   ", name='" + name + '\'' +
-					   ", species=" + specie +
-					   '}';
+	public void setSpecie(Species specie) {
+		this.specie = specie;
 	}
 }
