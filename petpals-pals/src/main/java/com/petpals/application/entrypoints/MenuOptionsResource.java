@@ -52,21 +52,21 @@ public class MenuOptionsResource {
 	@Path("/breeds/dogs")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<BreedWithoutSpecie> getDogBreeds() {
-		return breedsMapper.fromDogBreedEntities(menuOptionsIn.getDogBreeds());
+		return breedsMapper.FromEntitiesWithoutSpecies(menuOptionsIn.getDogBreeds());
 	}
 	
 	@GET
 	@Path("/breeds/cats")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<BreedWithoutSpecie> getCatBreeds() {
-		return breedsMapper.fromCatBreedEntities(menuOptionsIn.getCatBreeds());
+		return breedsMapper.FromEntitiesWithoutSpecies(menuOptionsIn.getCatBreeds());
 	}
 	
 	@GET
 	@Path("/breeds/nacs")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<BreedWithoutSpecie> getNacBreeds() {
-		return breedsMapper.fromNacBreedEntities(menuOptionsIn.getNacBreeds());
+		return breedsMapper.FromEntitiesWithoutSpecies(menuOptionsIn.getNacBreeds());
 	}
 	
 	@GET

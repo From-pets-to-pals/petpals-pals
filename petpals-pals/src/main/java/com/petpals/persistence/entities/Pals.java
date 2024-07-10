@@ -3,6 +3,7 @@ package com.petpals.persistence.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.jboss.resteasy.spi.touri.MappedBy;
 
 import java.sql.Date;
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class Pals {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private Owners owner;
-
+    
     @Column(name = "birthdate")
     private Date birthDate;
 

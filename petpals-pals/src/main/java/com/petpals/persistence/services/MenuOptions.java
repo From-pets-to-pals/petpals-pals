@@ -13,21 +13,13 @@ public class MenuOptions implements MenuOptionsIn {
 	
 	BreedsRepository breedsRepository;
 	
-	CatBreedsRepository catBreedsRepository;
-	
-	DogBreedsRepository dogBreedsRepository;
-	
-	NacBreedsRepository nacBreedsRepository;
 	
 	SpeciesRepository speciesRepository;
 	
 	CountriesRepository countriesRepository;
 	
-	public MenuOptions(BreedsRepository breedsRepository, CatBreedsRepository catBreedsRepository, DogBreedsRepository dogBreedsRepository, NacBreedsRepository nacBreedsRepository, SpeciesRepository speciesRepository, CountriesRepository countriesRepository) {
+	public MenuOptions(BreedsRepository breedsRepository, SpeciesRepository speciesRepository, CountriesRepository countriesRepository) {
 		this.breedsRepository = breedsRepository;
-		this.catBreedsRepository = catBreedsRepository;
-		this.dogBreedsRepository = dogBreedsRepository;
-		this.nacBreedsRepository = nacBreedsRepository;
 		this.speciesRepository = speciesRepository;
 		this.countriesRepository = countriesRepository;
 	}
@@ -43,18 +35,20 @@ public class MenuOptions implements MenuOptionsIn {
 	}
 	
 	@Override
-	public List<DogBreeds> getDogBreeds() {
-		return dogBreedsRepository.listAll();
+	public List<Breeds> getDogBreeds() {
+		return breedsRepository.getAllDogBreeds();
 	}
 	
 	@Override
-	public List<CatBreeds> getCatBreeds() {
-		return catBreedsRepository.listAll();
+	public List<Breeds> getCatBreeds() {
+		return breedsRepository.getAllCatBreeds();
+		
 	}
 	
 	@Override
-	public List<NacBreeds> getNacBreeds() {
-		return nacBreedsRepository.listAll();
+	public List<Breeds> getNacBreeds() {
+		return breedsRepository.getAllNacBreeds();
+		
 	}
 	
 	@Override

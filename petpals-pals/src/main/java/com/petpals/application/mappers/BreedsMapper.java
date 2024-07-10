@@ -1,6 +1,9 @@
 package com.petpals.application.mappers;
 
-import com.petpals.persistence.entities.*;
+import com.petpals.persistence.entities.Breeds;
+import com.petpals.persistence.entities.CatBreeds;
+import com.petpals.persistence.entities.DogBreeds;
+import com.petpals.persistence.entities.NacBreeds;
 import com.petpals.shared.model.dto.Breed;
 import com.petpals.shared.model.dto.BreedWithoutSpecie;
 import com.petpals.shared.model.dto.Specie;

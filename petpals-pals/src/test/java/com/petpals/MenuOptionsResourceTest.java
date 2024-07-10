@@ -8,6 +8,7 @@ import com.petpals.shared.model.dto.Breed;
 import com.petpals.shared.model.dto.BreedWithoutSpecie;
 import com.petpals.shared.model.dto.Country;
 import com.petpals.shared.model.dto.Specie;
+import com.petpals.shared.model.enums.SpeciesEnum;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.ws.rs.core.MediaType;
@@ -92,7 +93,7 @@ class MenuOptionsResourceTest {
 		var dogSpecies = new Species();
 		dogSpecies.setId((short) 1);
 		dogSpecies.setName("DOG");
-		var dogBreed = new DogBreeds();
+		var dogBreed = new Breeds();
 		dogBreed.setId((short) 1);
 		dogBreed.setName("Husky");
 		dogBreed.setSpecie(dogSpecies);
@@ -111,14 +112,14 @@ class MenuOptionsResourceTest {
 	
 	@Test
 	void testGetCatBreedsEndpoint() throws JsonProcessingException {
-		var catSpecies = new Species();
-		catSpecies.setId((short) 1);
-		catSpecies.setName("CAT");
-		var catBreed = new CatBreeds();
-		catBreed.setId((short) 1);
-		catBreed.setName("Birman");
-		catBreed.setSpecie(catSpecies);
-		Mockito.when(menuOptionsIn.getCatBreeds()).thenReturn(List.of(catBreed));
+		var catBreeds = new Breeds();
+		catBreeds.setId((short) 1);
+		catBreeds.setName("Birman");
+		var species = new Species();
+		species.setId((short) 2);
+		species.setName(SpeciesEnum.CAT.name());
+		catBreeds.setSpecie(species);
+				Mockito.when(menuOptionsIn.getCatBreeds()).thenReturn(List.of(catBreeds));
 		var breedToReturn = new BreedWithoutSpecie("Birman");
 		var json = mapper.writeValueAsString(List.of(breedToReturn));
 		given()

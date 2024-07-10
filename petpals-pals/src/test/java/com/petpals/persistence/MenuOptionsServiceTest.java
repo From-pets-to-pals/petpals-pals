@@ -22,59 +22,51 @@ class MenuOptionsServiceTest {
 	private CountriesRepository countriesRepository;
 	@InjectMock
 	private SpeciesRepository speciesRepository;
-	@InjectMock
-	private DogBreedsRepository dogBreedsRepository;
-	@InjectMock
-	private CatBreedsRepository catBreedsRepository;
-	
-	@InjectMock
-	private NacBreedsRepository nacBreedsRepository;
 	@Inject
 	MenuOptionsIn menuOptionsIn;
 	
 	@Test
 	void shouldRetrieveDogBreeds(){
-		var doggoA = new DogBreeds();
+		var doggoA = new Breeds();
 		doggoA.setId((short) 1);
 		doggoA.setName("Husky de Sibérie");
-		var doggoB = new DogBreeds();
-		doggoA.setId((short) 2);
-		
+		var doggoB = new Breeds();
+		doggoB.setId((short) 2);
 		doggoB.setName("Pinscher")	;
-		List<DogBreeds> dogBreeds = List.of(doggoA, doggoB);
-		Mockito.when(dogBreedsRepository.listAll()).thenReturn(dogBreeds);
+		List<Breeds> dogBreeds = List.of(doggoA, doggoB);
+		Mockito.when(breedsRepository.getAllDogBreeds()).thenReturn(dogBreeds);
 		var fromRepository  = menuOptionsIn.getDogBreeds();
 		Assertions.assertEquals(2, fromRepository.size());
 		Assertions.assertEquals(doggoA.getName(), dogBreeds.get(0).getName());
 		Assertions.assertEquals(doggoA.getId(), dogBreeds.get(0).getId());
-		Mockito.verify(dogBreedsRepository).listAll();
-		Mockito.verifyNoMoreInteractions(dogBreedsRepository);
+		Mockito.verify(breedsRepository).getAllDogBreeds();
+		Mockito.verifyNoMoreInteractions(breedsRepository);
 	}
 	
 	@Test
 	void shouldRetrieveCatBreeds(){
-		var catA = new CatBreeds();
+		var catA = new Breeds();
 		catA.setName("Sacré de Birmanie");
-		var catB = new CatBreeds();
+		var catB = new Breeds();
 		catB.setName("Bleu russe")	;
-		List<CatBreeds> catBreeds = List.of(catA, catB);
-		Mockito.when(catBreedsRepository.listAll()).thenReturn(catBreeds);
+		List<Breeds> catBreeds = List.of(catA, catB);
+		Mockito.when(breedsRepository.getAllCatBreeds()).thenReturn(catBreeds);
 		var fromRepository  = menuOptionsIn.getCatBreeds();
 		Assertions.assertEquals(2, fromRepository.size());
 		Assertions.assertEquals(catA.getName(), catBreeds.get(0).getName());
-		Mockito.verify(catBreedsRepository).listAll();
-		Mockito.verifyNoMoreInteractions(catBreedsRepository);
+		Mockito.verify(breedsRepository).getAllCatBreeds();
+		Mockito.verifyNoMoreInteractions(breedsRepository);
 	}
 	
 	
 	@Test
 	void shouldRetrieveNacBreeds(){
-		List<NacBreeds> nacBreeds = new ArrayList<>();
-		Mockito.when(nacBreedsRepository.listAll()).thenReturn(nacBreeds);
+		List<Breeds> nacBreeds = new ArrayList<>();
+		Mockito.when(breedsRepository.getAllNacBreeds()).thenReturn(nacBreeds);
 		var fromRepository  = menuOptionsIn.getNacBreeds();
 		Assertions.assertEquals(0, fromRepository.size());
-		Mockito.verify(nacBreedsRepository).listAll();
-		Mockito.verifyNoMoreInteractions(nacBreedsRepository);
+		Mockito.verify(breedsRepository).getAllNacBreeds();
+		Mockito.verifyNoMoreInteractions(breedsRepository);
 	}
 	
 	@Test
@@ -117,33 +109,21 @@ class MenuOptionsServiceTest {
 	}
 	@Test
 	void shouldRetrieveBreeds(){
-		var catSpecies = new Species();
-		catSpecies.setId((short) 2);
-		catSpecies.setName("CAT");
-		var dogSpecies = new Species();
-		dogSpecies.setId((short) 1);
-		dogSpecies.setName("DOG");
 		var dogBreed = new Breeds();
 		dogBreed.setId((short) 1);
 		dogBreed.setName("Husky");
-		dogBreed.setSpecie(dogSpecies);
 		var catBreed = new Breeds();
-		catBreed.setId((short) 2);
+		catBreed.setId((short)2);
 		catBreed.setName("Sacré de birmanie");
-		catBreed.setSpecie(catSpecies);
 		List<Breeds> breeds = List.of(dogBreed, catBreed);
 		Mockito.when(breedsRepository.getAllBreeds()).thenReturn(breeds);
 		var fromRepository  = menuOptionsIn.getBreeds();
 		Assertions.assertEquals(2, fromRepository.size());
-		Assertions.assertEquals(dogBreed.getId(), fromRepository.get(0).getId());
 		Assertions.assertEquals(dogBreed.getName(), fromRepository.get(0).getName());
-		Assertions.assertEquals(dogBreed.getSpecie().getId(), fromRepository.get(0).getSpecie().getId());
-		Assertions.assertEquals(dogBreed.getSpecie().getName(), fromRepository.get(0).getSpecie().getName());
-		Assertions.assertEquals(catBreed.getId(), fromRepository.get(1).getId());
+		Assertions.assertEquals(dogBreed.getId(), fromRepository.get(0).getId());
 		Assertions.assertEquals(catBreed, fromRepository.get(1));
 		Assertions.assertEquals(catBreed.getName(), fromRepository.get(1).getName());
-		Assertions.assertEquals(catBreed.getSpecie().getId(), fromRepository.get(1).getSpecie().getId());
-		Assertions.assertEquals(catBreed.getSpecie().getName(), fromRepository.get(1).getSpecie().getName());
+		Assertions.assertEquals(catBreed.getId(), fromRepository.get(1).getId());
 		Mockito.verify(breedsRepository).getAllBreeds();
 		Mockito.verifyNoMoreInteractions(speciesRepository);
 	}

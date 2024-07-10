@@ -28,6 +28,7 @@ public interface AddPalRequestMapper {
 																					  "(request" +
 																					  ".nextPlannedVetApp" +
 																					  "()))")
+	@Mapping(source="breed", target = "breed.name")
 	Pals toEntity(AddPalRequest request) throws ParseException;
 	
 	
