@@ -53,7 +53,7 @@ class MenuOptionsResourceTest {
 		dogs.setId((short) 1);
 		dogs.setName("DOG");
 		Mockito.when(menuOptionsIn.getSpecies()).thenReturn(List.of(dogs));
-		var toReturn  = new Specie("DOG");
+		var toReturn  = new Specie((short) 1, "DOG");
 		var json = mapper.writeValueAsString(List.of(toReturn));
 		given()
 				.headers("API-KEY","pals-0.1.0")
@@ -71,12 +71,12 @@ class MenuOptionsResourceTest {
 		dogSpecies.setId((short) 1);
 		dogSpecies.setName("DOG");
 		var dogBreed = new Breeds();
-		dogBreed.setId((short) 1);
-		dogBreed.setName("Husky");
+		dogBreed.setId((short) 144);
+		dogBreed.setName("German Shepherd");
 		dogBreed.setSpecie(dogSpecies);
 		Mockito.when(menuOptionsIn.getBreeds()).thenReturn(List.of(dogBreed));
-		var specieToReturn  = new Specie("DOG");
-		var breedToReturn = new Breed("Husky", specieToReturn);
+		var specieToReturn  = new Specie((short) 1, "DOG");
+		var breedToReturn = new Breed((short) 144,"German Shepherd", specieToReturn);
 		var json = mapper.writeValueAsString(List.of(breedToReturn));
 		given()
 				.headers("API-KEY","pals-0.1.0")
@@ -87,60 +87,5 @@ class MenuOptionsResourceTest {
 				.body(is(json));
 		
 	}
-	
-	@Test
-	void testGetDogBreedsEndpoint() throws JsonProcessingException {
-		var dogSpecies = new Species();
-		dogSpecies.setId((short) 1);
-		dogSpecies.setName("DOG");
-		var dogBreed = new Breeds();
-		dogBreed.setId((short) 1);
-		dogBreed.setName("Husky");
-		dogBreed.setSpecie(dogSpecies);
-		Mockito.when(menuOptionsIn.getDogBreeds()).thenReturn(List.of(dogBreed));
-		var breedToReturn = new BreedWithoutSpecie("Husky");
-		var json = mapper.writeValueAsString(List.of(breedToReturn));
-		given()
-				.headers("API-KEY","pals-0.1.0")
-				.header("Content-Type", MediaType.APPLICATION_JSON)
-				.when().get("/options/breeds/dogs")
-				.then()
-				.statusCode(200)
-				.body(is(json));
-		
-	}
-	
-	@Test
-	void testGetCatBreedsEndpoint() throws JsonProcessingException {
-		var catBreeds = new Breeds();
-		catBreeds.setId((short) 1);
-		catBreeds.setName("Birman");
-		var species = new Species();
-		species.setId((short) 2);
-		species.setName(SpeciesEnum.CAT.name());
-		catBreeds.setSpecie(species);
-				Mockito.when(menuOptionsIn.getCatBreeds()).thenReturn(List.of(catBreeds));
-		var breedToReturn = new BreedWithoutSpecie("Birman");
-		var json = mapper.writeValueAsString(List.of(breedToReturn));
-		given()
-				.headers("API-KEY","pals-0.1.0")
-				.header("Content-Type", MediaType.APPLICATION_JSON)
-				.when().get("/options/breeds/cats")
-				.then()
-				.statusCode(200)
-				.body(is(json));
-	}
-	
-	@Test
-	void testGetNacBreedsEndpoint() throws JsonProcessingException {
-		Mockito.when(menuOptionsIn.getNacBreeds()).thenReturn(new ArrayList<>());
-		var json = mapper.writeValueAsString(new ArrayList<>());
-		given()
-				.headers("API-KEY","pals-0.1.0")
-				.header("Content-Type", MediaType.APPLICATION_JSON)
-				.when().get("/options/breeds/cats")
-				.then()
-				.statusCode(200)
-				.body(is(json));
-	}
+
 }

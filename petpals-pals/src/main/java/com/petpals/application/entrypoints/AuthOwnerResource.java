@@ -3,6 +3,8 @@ package com.petpals.application.entrypoints;
 import com.petpals.application.dto.AuthOwnerRequest;
 import com.petpals.application.mappers.AuthOwnerRequestMapper;
 import com.petpals.persistence.ports.in.AuthOwnerIn;
+import com.petpals.shared.errorhandling.ExceptionsEnum;
+import com.petpals.shared.errorhandling.PetPalsExceptions;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -33,6 +35,8 @@ public class AuthOwnerResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String authOwner(@Valid AuthOwnerRequest authOwnerRequest) throws ParseException {
         LOGGER.info("Calling authOwner");
-        return authOwnerIn.authOwner(authOwnerRequestMapper.toEntity(authOwnerRequest)); //TODO vérifier l'archi
+        String reference = authOwnerIn.authOwner(authOwnerRequestMapper.toEntity(authOwnerRequest));
+        if(reference == null) { throw new PetPalsExceptions(ExceptionsEnum.OWNERS_WRONG_CREDENTIALS); }
+        return reference;
     }
 }

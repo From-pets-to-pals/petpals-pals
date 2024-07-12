@@ -47,27 +47,7 @@ public class MenuOptionsResource {
 	public List<Breed> getBreeds() {
 		return breedsMapper.fromEntities(menuOptionsIn.getBreeds());
 	}
-	
-	@GET
-	@Path("/breeds/dogs")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<BreedWithoutSpecie> getDogBreeds() {
-		return breedsMapper.FromEntitiesWithoutSpecies(menuOptionsIn.getDogBreeds());
-	}
-	
-	@GET
-	@Path("/breeds/cats")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<BreedWithoutSpecie> getCatBreeds() {
-		return breedsMapper.FromEntitiesWithoutSpecies(menuOptionsIn.getCatBreeds());
-	}
-	
-	@GET
-	@Path("/breeds/nacs")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<BreedWithoutSpecie> getNacBreeds() {
-		return breedsMapper.FromEntitiesWithoutSpecies(menuOptionsIn.getNacBreeds());
-	}
+
 	
 	@GET
 	@Path("/species")

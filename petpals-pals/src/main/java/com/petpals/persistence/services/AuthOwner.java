@@ -24,11 +24,7 @@ public class AuthOwner implements AuthOwnerIn {
     @Override
     public String authOwner(AuthOwnerDto authOwner) {
 
-        String reference = ownersRepository.authOwner(authOwner);
-        if (reference != null) {
-            return reference;
-        } else {
-            throw new PetPalsExceptions(ExceptionsEnum.OWNERS_WRONG_CREDENTIALS);
-        }
+        return ownersRepository.authOwner(authOwner);
+
     }
 }

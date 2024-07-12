@@ -28,10 +28,10 @@ public interface AddPalRequestMapper {
 																					  "(request" +
 																					  ".nextPlannedVetApp" +
 																					  "()))")
-	@Mapping(source="breed", target = "breed.name")
+	@Mapping(source="specie", target = "specie")
+	@Mapping(source="breed", target = "breed")
 	Pals toEntity(AddPalRequest request) throws ParseException;
-	
-	
+
 	default Date toDate(String stringDate) throws ParseException {
 		if(stringDate == null){
 			return null;
