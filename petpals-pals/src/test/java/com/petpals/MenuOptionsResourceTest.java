@@ -53,7 +53,7 @@ class MenuOptionsResourceTest {
 		dogs.setId((short) 1);
 		dogs.setName("DOG");
 		Mockito.when(menuOptionsIn.getSpecies()).thenReturn(List.of(dogs));
-		var toReturn  = new Specie((short) 1, "DOG");
+		var toReturn  = new Specie((Short.valueOf("1")), "DOG");
 		var json = mapper.writeValueAsString(List.of(toReturn));
 		given()
 				.headers("API-KEY","pals-0.1.0")
