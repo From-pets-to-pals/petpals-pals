@@ -11,7 +11,6 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA)
 public interface SpeciesMapper {
 
-	@Mapping(source = "id", target = "id")
 	@Mapping(source = "name", target = "name")
 	Specie fromEntity(Species speciesEntity);
 
@@ -19,7 +18,6 @@ public interface SpeciesMapper {
 	@Mapping(source = "name", target = "name")
 	List<Specie> fromEntities(List<Species> speciesEntity);
 
-	@Mapping(source = "id", target = "id")
 	@Mapping(source = "name", target = "name")
 	Species toEntity(Specie specie);
 

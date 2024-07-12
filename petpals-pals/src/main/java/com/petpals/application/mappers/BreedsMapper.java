@@ -14,7 +14,6 @@ public interface BreedsMapper {
 	Breed fromEntity(Breeds breed);
 	List<Breed> fromEntities(List<Breeds> breed);
 
-	@Mapping(source = "id", target = "id")
 	@Mapping(source = "name", target = "name")
 	Breeds toEntity(BreedWithoutSpecie speciesEntity);
 
