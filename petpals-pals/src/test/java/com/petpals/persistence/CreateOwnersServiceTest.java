@@ -45,13 +45,14 @@ class CreateOwnersServiceTest {
         var ownerUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
         var palUUID = UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,"");
         var species = new Species();
+        species.setId((short) 1);
         species.setName(SpeciesEnum.DOG.name());
         var breed = new Breeds();
-        breed.setName("Berger Américain");
-        breed.setId((short)1);
+        breed.setName("German Sheperd");
+        breed.setId((short)144);
         breed.setSpecie(species);
-        owners = new Owners("sa.bennaceur@gmail.com", "OPPO XC9" , ownerUUID, "FRANCE", "sidou");
-        Pals pals = new Pals("Tobby", "Tobby", "152356545784512", owners, new Date(Instant.now().getEpochSecond()), breed, true,
+        owners = new Owners("sa.bennaceur@gmail.com", "Aa123456", "", "OPPO XC9" , ownerUUID, "FRANCE", "sidou");
+        Pals pals = new Pals("Tobby", "Tobby", "250266545784512", owners, new Date(Instant.now().getEpochSecond()), species, breed, true,
                 true,
                 true, true, null, null, palUUID);
         owners.setPals(List.of(pals));

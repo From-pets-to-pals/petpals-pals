@@ -11,5 +11,6 @@ import java.text.ParseException;
 @Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA, uses = {AddPalRequestMapper.class})
 public interface NewOwnerRequestMapper {
 	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "salt", ignore = true)
 	Owners toEntity(NewOwnerRequest request) throws ParseException;
 }

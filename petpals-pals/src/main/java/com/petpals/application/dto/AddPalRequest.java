@@ -1,5 +1,8 @@
 package com.petpals.application.dto;
 
+import com.petpals.shared.model.dto.Breed;
+import com.petpals.shared.model.dto.BreedWithoutSpecie;
+import com.petpals.shared.model.dto.Specie;
 import com.petpals.shared.model.enums.SpeciesEnum;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
@@ -12,8 +15,8 @@ public record AddPalRequest(
 		@NotBlank @Length(min=2) String shortname,
 		@Pattern(regexp = "^[250(26|22)\\d{10}]{15}$", message = "Identifier format invalid") String icadIdentifier,
 		@Past String birthDate,
-		@NotNull SpeciesEnum specie,
-		@Size(min = 5, max = 25) String breed,
+		@NotNull Specie specie,
+		@NotNull BreedWithoutSpecie breed,
 		@NotNull Boolean hasPassport,
 		@NotNull boolean isMale,
 		@NotNull Boolean isSterilized,

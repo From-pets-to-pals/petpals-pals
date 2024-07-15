@@ -3,6 +3,7 @@ package com.petpals.application.entrypoints;
 import com.petpals.application.dto.NewOwnerRequest;
 import com.petpals.application.mappers.NewOwnerRequestMapper;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
+import com.petpals.shared.errorhandling.PetPalsExceptions;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -34,6 +35,7 @@ public class CreateOwnerResource {
 	public Long createOwner(@Valid NewOwnerRequest newOwnerRequest) throws ParseException {
 		LOGGER.info("Calling createFirstPalWithOwner");
 		LOGGER.info("Received new payload for newPal : $newPal");
-		return createOwnerIn.createOwnerWithFirstPal(newOwnerRequestMapper.toEntity(newOwnerRequest));// (3)
-	}
+        return createOwnerIn.createOwnerWithFirstPal(newOwnerRequestMapper.toEntity(newOwnerRequest));// (3)
+
+    }
 }

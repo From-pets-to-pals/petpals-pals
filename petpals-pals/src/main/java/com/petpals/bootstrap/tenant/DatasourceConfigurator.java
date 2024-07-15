@@ -62,8 +62,10 @@ public class DatasourceConfigurator implements TenantConnectionResolver {
                         .build())
                 .buildClient();
         LOG.info("Retrieving secrets from Azure key vault");
+
         final String url = secretClient.getSecret("DB-URL").getValue() + "/" + secretClient.getSecret("DB-NAME").getValue() + "?currentSchema=" + secretClient.getSecret("DB-NAME").getValue();
         LOG.info("Secrets successfully retrieved");
+        System.out.println(url);
         AgroalDataSourceConfigurationSupplier dataSourceConfiguration = new AgroalDataSourceConfigurationSupplier();
 
         AgroalConnectionPoolConfigurationSupplier poolConfiguration = dataSourceConfiguration.connectionPoolConfiguration();
@@ -83,6 +85,8 @@ public class DatasourceConfigurator implements TenantConnectionResolver {
                 .jdbcUrl(String.format("jdbc:postgresql://%s",url))
                 .credential(new NamePrincipal((secretClient.getSecret("DB-ADMIN").getValue())))
                 .credential(new SimplePassword((secretClient.getSecret("DB-PASSWORD").getValue())));
+        System.out.println(secretClient.getSecret("DB-PASSWORD").getValue());
+
     try{
         LOG.info("Building Datasource from secrets");
         return AgroalDataSource.from(dataSourceConfiguration.get());

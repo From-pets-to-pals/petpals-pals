@@ -8,6 +8,8 @@ import com.petpals.persistence.entities.Owners;
 import com.petpals.persistence.ports.in.CreateOwnerIn;
 import com.petpals.shared.entities.uuid.UUIDFormatter;
 import com.petpals.shared.entities.uuid.UUIDGenerator;
+import com.petpals.shared.model.dto.BreedWithoutSpecie;
+import com.petpals.shared.model.dto.Specie;
 import com.petpals.shared.model.enums.SpeciesEnum;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
@@ -31,12 +33,12 @@ class CreateOwnerResourceTest {
 	void testHelloEndpoint() throws JsonProcessingException {
 		Mockito.when(createOwnerIn.createOwnerWithFirstPal(Mockito.any(Owners.class))).thenReturn(1L);
 		ObjectMapper mapper = new ObjectMapper();
-		var owner = new NewOwnerRequest("sa.bennaceur@gmail.com", "Sidou", "OPPO C9",
+		var owner = new NewOwnerRequest("sa.bennaceur@gmail.com", "test", "Sidou", "OPPO C9",
 										UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(), true, ""),
 										 "FRANCE",
 										List.of(
 										 new AddPalRequest("Ashe", "Ashe", "250221212121212", "2022-04-28",
-														   SpeciesEnum.DOG, "Husky",
+												 new Specie((short) 1, "DOG"), new BreedWithoutSpecie((short) 144, "German Shepherd"),
 														   true
 												 , true, false, true, null, null, null,
 														   UUIDFormatter.formatUUIDSequence(UUIDGenerator.generateUUID(),true,""),
@@ -61,7 +63,6 @@ class CreateOwnerResourceTest {
 		Assertions.assertEquals(owner.pals().get(0).name(),ownerCaptor.getValue().getPals().get(0).getName());
 		Assertions.assertEquals(owner.pals().get(0).shortname(),ownerCaptor.getValue().getPals().get(0).getShortname());
 		Assertions.assertEquals(owner.pals().get(0).reference(),ownerCaptor.getValue().getPals().get(0).getReference());
-		Assertions.assertEquals(owner.pals().get(0).breed(),ownerCaptor.getValue().getPals().get(0).getBreed().getName());
 		Assertions.assertEquals(owner.pals().get(0).birthDate(),
 								ownerCaptor.getValue().getPals().get(0).getBirthDate().toString());
 		Assertions.assertEquals(owner.pals().get(0).icadIdentifier(),ownerCaptor.getValue().getPals().get(0).getIcadIdentifier());

@@ -17,6 +17,12 @@ public class Owners {
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "salt", nullable = false)
+    private String salt;
+
     @Column(name = "device", nullable = false)
     private String deviceId;
     
@@ -29,6 +35,7 @@ public class Owners {
 
     @Column(name = "location", nullable = false)
     private String location;
+
     @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private List<Pals> pals;
@@ -36,8 +43,10 @@ public class Owners {
     public Owners() {
     }
     
-    public Owners(String email, String deviceId, String reference, String location, String username) {
+    public Owners(String email, String password, String salt, String deviceId, String reference, String location, String username) {
         this.email = email;
+        this.password = password;
+        this.salt = salt;
         this.deviceId = deviceId;
         this.reference = reference;
         this.location = location;
@@ -124,5 +133,21 @@ public class Owners {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

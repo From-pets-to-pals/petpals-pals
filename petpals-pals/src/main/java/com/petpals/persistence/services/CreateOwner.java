@@ -6,6 +6,7 @@ import com.petpals.persistence.repositories.BreedsRepository;
 import com.petpals.persistence.repositories.OwnersRepository;
 import com.petpals.shared.errorhandling.ExceptionsEnum;
 import com.petpals.shared.errorhandling.PetPalsExceptions;
+import com.petpals.shared.utils.PasswordUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.hibernate.exception.ConstraintViolationException;
@@ -28,20 +29,14 @@ public class CreateOwner implements CreateOwnerIn {
 	public Long createOwnerWithFirstPal(Owners owner) {
 		LOG.info("Creating owner with first pal");
 		try {
-			for(var pal: owner.getPals()) {
-				pal.getBreed().setId(breedsRepository.getBreedIdFromItsName(pal.getBreed().getName()));
-			}
+			owner.setSalt(PasswordUtils.generateSalt());
+			owner.setPassword(PasswordUtils.hashPassword(
+					owner.getPassword(), owner.getSalt()
+					));
 			return ownersRepository.save(owner);
 		} catch (ConstraintViolationException e){
-			LOG.info(e.getConstraintName());
-			if(e.getConstraintName() != null){
-				if(e.getConstraintName().equals("unique_email")){
-					throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_KEY_OWNER_MAIL_CONSTRAINT_VIOLATION);
-				} else if(e.getConstraintName().equals("unique_icad")){
-					throw new PetPalsExceptions(ExceptionsEnum.DB_UNIQUE_PAL_IDENTIFIER);
-				}
-			}
-			throw new PetPalsExceptions(ExceptionsEnum.DB_UNKNOWN_ERROR);
+			LOG.info(e.getErrorMessage());
+			throw new PetPalsExceptions(ExceptionsEnum.CAREGIVERS_OFFLINE_REST_CLIENT_EXCEPTION);
 		}
 	}
 }
